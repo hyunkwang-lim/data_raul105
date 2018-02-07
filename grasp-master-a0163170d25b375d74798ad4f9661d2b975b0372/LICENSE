@@ -1,0 +1,127 @@
+GRASP Open Source License V1.0
+ 
+Copyright (c) <2015> < CNRS & Université Lille 1 >
+All rights reserved.
+ 
+The GRASP software has been registered with the Software Protection Agency: N°IDDN.FR.001.490016.000.S.P.2015.000.31235
+GRASP (Generalized Retrieval of Aerosol and Surface Properties) version 1.0 dated 9 April 2015
+
+GRASP SAS manages the software license under agreement with CNRS & Université Lille 1.
+For more information on commercial use or interest in a specific research project, please contact office@grasp-sas.com
+
+
+
+PREAMBLE:
+
+This software is open and free for non-funded research activities. GRASP SAS 
+possesses the right to all commercial activities. Commercial activities related 
+to the use of this code can only be done through prior agreement with the 
+copyright holders. Contact GRASP SAS for business activities related with the 
+code at office@grasp-sas.com
+
+Any publication, presentation, or other derivative work based on the results 
+obtained using GRASP software shall acknowledge the use of GRASP code.
+Example of acknowledgment:    	
+
+   	The authors acknowledge the use of GRASP inversion algorithm
+        software (http://www.grasp-open.com) in this work
+
+
+
+                         TERMS AND CONDITIONS
+
+
+ARTICLE 1: Basic Permissions
+ 
+  The distribution of GRASP software is open and free for non-funded research 
+  activities only. For information about specific user conditions contact 
+  GRASP SAS at office@grasp-sas.com.
+ 
+ 
+ARTICLE 2: Copyright
+ 
+  The current copyright and license information must be retained in the source 
+  code or in any derivative works. CNRS & Université Lille 1 hold the copyright 
+  for GRASP software and any code modifications. Both organizations reserve the 
+  right to modify the present license. Contributors grant the copyright of their
+  contribution and they recognize their contribution as an original work, free 
+  of known bugs and legally usable under this license.
+ 
+ 
+ARTICLE 3: Exploitation of the code and products
+ 
+  No marketing or use of products obtained through the GRASP software for 
+  commercial purposes is allowed.  GRASP SAS has the right to commercial 
+  exploitation of the software and the products resulting from it. GRASP SAS 
+  reserves the right to license third parties with rights to commercial software
+  utilization.
+ 
+ 
+ARTICLE 4: Distribution of the code and compiled objects
+ 
+  The official distribution is provided by GRASP SAS. Any redistribution of this
+  software (code or binary) or products obtained by the use of GRASP software 
+  requires a specific prior agreement with copyright holders (contact office@grasp-sas.com).
+ 
+ 
+ARTICLE 5: Products
+ 
+  Public distribution of products obtained using GRASP software requires an 
+  explicit prior agreement with the copyright holders (contact office@grasp-sas.com).
+ 
+ 
+ARTICLE 6: Limitation of Liability and Warranty
+ 
+  The copyright holders or GRASP SAS distribute this code without any warranty 
+  or responsibility. The code can contain bugs and the products can be erroneous.
+ 
+ 
+  THIS SOFTWARE IS PROVIDED BY CNRS & Université Lille 1 & GRASP SAS ''AS IS'' 
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL CNRS & Université Lille 1 BE LIABLE FOR ANY 
+  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+  Copyright holders are not obligated to provide any support, consulting, 
+  training, or assistance. GRASP SAS can offer this support free or as 
+  commercial activity. For more information contact office@grasp-sas.com
+ 
+ 
+ARTICLE 7: Licensing and sublicensing
+ 
+  Any specific commercial use of GRASP software can be licensed by GRASP SAS 
+  under agreement with copyright holders. Other sublicensing is forbidden.
+ 
+ 
+ARTICLE 8: Derivative work
+ 
+  The right to create derivative works is one of the exclusive rights of the 
+  copyright holders. This license is applied to this work and all derivative works.
+ 
+ 
+ARTICLE 9: Citation
+ 
+  Any publication, presentation, or other derivative work based on the result 
+  obtained using GRASP software shall acknowledge the use of GRASP code.
+ 
+  Example of acknowledgment:    	
+
+    	The authors acknowledge the use of GRASP inversion algorithm 
+        software (http://www.grasp-open.com) in this work.
+ 
+ 
+ARTICLE 10: Severability
+ 
+  If a provision of this Agreement is or becomes illegal, invalid or unenforceable
+  in any jurisdiction, that shall not affect:
+
+    1. the validity or enforceability in that jurisdiction of any other provision of this Agreement; or
+    2. the validity or enforceability in other jurisdictions of that or any other provision of this Agreement.
+
+
+

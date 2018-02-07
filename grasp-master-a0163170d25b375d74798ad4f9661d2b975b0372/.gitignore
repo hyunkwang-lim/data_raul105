@@ -1,0 +1,106 @@
+# Copyright 2016 CNRS & Universite Lille 1. All rights reserved.
+# Licensed under the GRASP Open Source License V1.0 (see LICENSE file)
+
+# USER FOLDERS
+home/*
+!home/README.md
+local/
+build/
+grasp-manager.yml
+.dockerignore
+
+# Shorted grasp-manager.sh name
+gm
+grasp-manager
+
+# Object files of documentation
+doc/overview/doc/
+doc/overview/website/
+doc/technical/Doxyfile
+doc/technical/Doxyfile-e
+doc/technical/markdown-doxygen/
+doc/technical/website/
+
+
+# CUSTOM CONSTANTS SET
+src/retrieval/mo_par_OS.inc.custom
+src/retrieval/mo_par_inv.inc.custom
+src/retrieval/mo_par_DLS.inc.custom
+
+# IGNORING ALL "EXTENSIONS" EXCEPT THE OFFICIALS 
+# For modules
+/dependencies
+/src/retrieval/gpgpu
+/src/retrieval/kernels_modifier
+/src/retrieval/models/
+/internal_examples
+
+# For kernels
+src/retrieval/internal_files/*
+!src/retrieval/internal_files/ABS_GAS_DATA
+!src/retrieval/internal_files/KERNELS_BASE
+!src/retrieval/internal_files/input_edge.dat
+!src/retrieval/internal_files/input_iguess.dat
+ 
+#For constants sets
+src/retrieval/constants_set/*
+!src/retrieval/constants_set/generic
+!src/retrieval/constants_set/valgrind
+!src/retrieval/constants_set/mod_globals.inc
+!src/retrieval/constants_set/mod_globals.f90
+
+# For extensions
+src/input/drivers/*
+!src/input/drivers/CMakeLists.txt
+!src/input/drivers/sdata
+
+src/input/transformers/*
+!src/input/transformers/CMakeLists.txt
+!src/input/transformers/none
+!src/input/transformers/segment_imagedat
+
+src/output/segment_functions/*
+!src/output/segment_functions/CMakeLists.txt
+!src/output/segment_functions/ascii
+!src/output/segment_functions/classic
+!src/output/segment_functions/classic_plot
+!src/output/segment_functions/none
+
+src/output/current_functions/*
+!src/output/current_functions/CMakeLists.txt
+!src/output/current_functions/none
+
+src/output/tile_functions/*
+!src/output/tile_functions/CMakeLists.txt
+!src/output/tile_functions/ascii
+!src/output/tile_functions/none
+
+# IDEs FILES
+nbproject
+.project
+.cproject
+
+# MacOS files
+.DS_Store
+*.dSYM
+
+# Linux files
+*~
+
+# CMake build dir
+/build*
+
+# in-tree libprefix
+/libprefix*
+
+# VIM swap files
+.*.sw?
+
+# CTags
+tags
+
+# YouCompleteMe
+.ycm_extra_conf.pyc
+
+# timings
+timings.txt

@@ -1,0 +1,63 @@
+<!-- entities common to the whole document 
+     Fabrice Ducos <fabrice.ducos@univ-lille1.fr>
+     19 nov 2012
+  -->
+
+<!-- one includes isogrk3 entities for mathematical symbols. While the official entity markup
+is available from the W3C website, one prefers to rely on a local copy to make it possible
+to build the documentation offline.
+-->
+
+<!--
+<!ENTITY % isogrk3 PUBLIC
+         "ISO 8879:1986//ENTITIES Greek Symbols//EN//XML"
+         "http://www.w3.org/2003/entities/iso8879/isogrk3.ent"
+	 >
+-->
+
+<!ENTITY % isogrk3 SYSTEM "standard_entities/isogrk3.ent">
+%isogrk3;
+
+<!ENTITY DRAFT "<warning xmlns='http://docbook.org/ns/docbook'><para><emphasis>This document is a draft and may contain errors or missing informations. It will be subject to corrections and further developments.</emphasis></para></warning>">
+<!ENTITY PROPOSAL "<warning xmlns='http://docbook.org/ns/docbook'><para><emphasis>This section is a proposal and must yet be approved by the development team members</emphasis></para></warning>">
+
+<!ENTITY EBAUCHE "<warning xmlns='http://docbook.org/ns/docbook'><para><emphasis>Ce document est une ébauche et fera l'objet d'un développement à venir.</emphasis></para></warning>">
+<!ENTITY PROPOSITION "<warning xmlns='http://docbook.org/ns/docbook'><para><emphasis>Cette section est une proposition et ne fait pas encore l'objet d'un consensus au sein de l'équipe de développement</emphasis></para></warning>">
+
+<!ENTITY chap01 '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink"  xl:href="#chap01">Chapter 1</link>'>
+<!ENTITY chap02 '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink"  xl:href="#chap02">Chapter 2</link>'>
+<!ENTITY chap03 '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink"  xl:href="#chap03">Chapter 3</link>'>
+<!ENTITY chap04 '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink"  xl:href="#chap04">Chapter 4</link>'>
+
+<!ENTITY CATALYSTS '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" xl:href="http://www.catalysts.cc/en/">Catalysts</link>'>
+<!ENTITY GRASP '<acronym xmlns="http://docbook.org/ns/docbook">GRASP</acronym>'>
+<!ENTITY CGTD '<acronym xmlns="http://docbook.org/ns/docbook">CGTD</acronym> Icare'>
+<!ENTITY ICARE '<acronym xmlns="http://docbook.org/ns/docbook">ICARE</acronym> '>
+<!ENTITY LOA '<acronym xmlns="http://docbook.org/ns/docbook">LOA</acronym>'>
+<!ENTITY PARASOL '<acronym xmlns="http://docbook.org/ns/docbook">PARASOL</acronym>'>
+<!ENTITY POLDER '<acronym xmlns="http://docbook.org/ns/docbook">POLDER</acronym>'>
+<!ENTITY MERIS '<acronym xmlns="http://docbook.org/ns/docbook">MERIS</acronym>'>
+<!ENTITY AERONET '<acronym xmlns="http://docbook.org/ns/docbook">AERONET</acronym>'>
+<!ENTITY NASA '<acronym xmlns="http://docbook.org/ns/docbook">NASA</acronym>'>
+<!ENTITY DUBOVIK2011 '<link xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink"  xl:href="http://www.atmos-meas-tech.net/4/975/2011/amt-4-975-2011.html">Dubovik et al. 2011</link>'>
+<!ENTITY SDATA '<acronym xmlns="http://docbook.org/ns/docbook">SDATA</acronym>'>
+
+<!ENTITY NOTSTARTED "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: Not started</title></note>">
+<!ENTITY INPROGRESS10 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 10&#37;</title></note>">
+<!ENTITY INPROGRESS20 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 20&#37;</title></note>">
+<!ENTITY INPROGRESS30 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 30&#37;</title></note>">
+<!ENTITY INPROGRESS40 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 40&#37;</title></note>">
+<!ENTITY INPROGRESS50 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 50&#37;</title></note>">
+<!ENTITY INPROGRESS60 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 60&#37;</title></note>">
+<!ENTITY INPROGRESS70 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 70&#37;</title></note>">
+<!ENTITY INPROGRESS80 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 80&#37;</title></note>">
+<!ENTITY INPROGRESS90 "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: In progress: 90&#37;</title></note>">
+<!ENTITY COMPLETED "<note xmlns='http://docbook.org/ns/docbook'><title>Task status: Completed</title></note>">
+
+<!ENTITY true '<computeroutput xmlns="http://docbook.org/ns/docbook">true</computeroutput>'>
+<!ENTITY t '<computeroutput xmlns="http://docbook.org/ns/docbook">t</computeroutput>' >
+<!ENTITY false '<computeroutput xmlns="http://docbook.org/ns/docbook">false</computeroutput>' >
+<!ENTITY f '<computeroutput xmlns="http://docbook.org/ns/docbook">f</computeroutput>' >
+<!ENTITY boolean '<computeroutput xmlns="http://docbook.org/ns/docbook">boolean</computeroutput>' >
+
+<!ENTITY Nabla "&#x02207;" ><!--Nabla (gradient symbol) -->

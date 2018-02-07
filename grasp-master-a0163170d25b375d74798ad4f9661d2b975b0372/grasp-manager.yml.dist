@@ -1,0 +1,65 @@
+# You can use this file like a template for defining your own grasp-manager.yml file
+# In compilation section you can define many compilation environments and you will be able to choose what to use easily
+# The symbol '#' is used for comment a line
+# After the type of extension you have to define extension_name:git_url
+# You can use the symbol '~' for defining default values
+#
+#
+# The simplest environment is "release" (created below). It uses all options with the default value (~). It means, it is the code 
+# as it is released without any addition. 
+#
+release: ~
+#
+#default:
+#    compilation:
+#        compile_dependencies: true
+#        use_sudo: true
+#        constants_set: generic
+#        build: Release
+#        mpi: off
+#        f90: gfortran
+#        prefix: /usr/local
+#        build_dir: build
+#        cc: cc
+#        cxx: c++
+#        cmake_flags: "" # By default 
+#    modules:
+#        dependencies: false # Dependencies module add the capability to install easily GRASP in a shared host environment. You have to have access to that specific module
+#        gpgpu: false # Allow GRASP to run under gpgpu cores. Much faster. You have to have access to that specific module
+#        kernels_modifier: false # It helps the users to create new kernels derivate from KERNELS_BASE. You have to have access to that specific module
+#        internal_examples: false # Internal examples of GRASP developer team. Only GRASP developers are allow to download it.
+#        models: false # This module is necessary to enable the retrieval based on models approach.
+#    kernels:
+#       kernel-name: git@github.org:username/kernels-example.git
+#       parasol_ang35_bin5_wl6: ~
+#    constants_sets:
+#       example: git@server.com:username/constants-set-example.git
+#    extensions:
+#        input:
+#            drivers: 
+#                example: git@github.org:username/example-driver.git
+#                example2: ~
+#            transformers: ~
+#        output:
+#            segment_functions: ~
+#            current_functions: ~
+#            tile_functions: ~
+#your_own_environment:
+#    compilation:
+#        constants_set: satellite
+#        build: Release
+#        mpi: off
+#        f90: gfortran
+#        prefix: /usr/local
+#        build_dir: build
+#    extensions:
+#        input:
+#            drivers: 
+#                example: git@github.org:username/example-driver.git
+#                example2: ~
+#            transformers: ~
+#        output:
+#            segment_functions: ~
+#            current_functions: ~
+#            tile_functions: ~
+

@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd" >
+
+<chapter xmlns="http://docbook.org/ns/docbook"
+         xmlns:xl="http://www.w3.org/1999/xlink"
+         xml:id="chap03">
+    <title>Installation</title>
+    <sect1>
+        <title>Introduction</title>
+        <para>
+            This section describes how to download, compile and install the &GRASP; Open software from the user's perspective.
+            Basic knowledge of the terminal and some tools such as GIT are necessary to complete this process.
+        </para>
+    </sect1>
+
+    <sect1>
+        <title>Hardware requirements</title>
+        The system has been tested on modern Intel architectures only (PC compatible, Macintoshes).
+        It should work on any 32-bit and 64-bit platform. A minimum of 2 GB of RAM is recommended.
+        GRASP is a very hardware demanding software because math calculations are very time-consuming. In
+        a multicore scenarios GRASP is able to parallelize the entire process using MPI technology. Additionally, 
+        GRASP offers a GPGPU module (as extension, not installed by default) that allows to parallelize
+        a single segment retrieval using graphics cards.
+    </sect1>
+
+    <sect1>
+        <title>Operating Systems</title>
+        <para>
+            The code has been widely tested under Linux machines and <trademark>MacOSX</trademark> systems.
+            The installation process in old operating systems is usually more complex so we suggest to always use 
+            the lastest version of operating system. Ubuntu systems have shown the easiest installation process
+            so we recommend it for regular users.
+        </para>
+        <para>
+            For windows users some test under <trademark>Microsoft Windows</trademark> has been also performed successfully using Cygwin,
+            but we do not offer official support of this solution. Some tricks are needed depending on exact version of Windows and
+            Cygwin so, even knowing that it is possible, it is not straightforward and we do not recommend it. There is one exception:
+            Last version of <trademark>Microsoft Windows 10</trademark> offers the feature <emphasis role="bold">Windows Subsystem for 
+            Linux</emphasis> which allows the users to set up an Ubuntu environment over Windows. This unestable but very promissing
+            feature can really help to install GRASP on Windows. You can start with this solution following this article of 
+            <link xl:href="https://msdn.microsoft.com/commandline/wsl/about">MSDN</link>. Once you have your Ubuntu environment configured
+            you can follow this guide as Linux user.
+        </para>
+    </sect1>
+
+    <sect1 id="access-repository">
+        <title>Access to &GRASP; Open repository</title>
+        <para>
+            To access the code, the users have to register their account on GRASP Open web page.
+            There are different ways to download the code (direct download link, clone over HTTP...) but
+            we recommend to clone the code over GIT protocol. This method has the benefit of being manageable by
+            grasp-manager (see <xref linkend="grasp-manager" />) which is the easiest way to keep the code up-to-date
+            and manage GRASP extensions. Following steps show the process of getting the access to the repository
+            and setting up your access via GIT protocol.
+            <orderedlist>
+                <listitem>
+                    Go to <link xl:href="http://www.grasp-open.com/code">GRASP-Open web page code section</link>.
+                </listitem>
+                <listitem>
+                    Fill all fields of the registration form (last section of that page) accepting the conditions and press SIGNUP button. 
+                </listitem>
+                <listitem>
+                    If registration was successfully a message will inform you. Click in "Initialize password" button.
+                </listitem>
+                <listitem>
+                    The GitLab system, which is the system used to manage the code will ask you for your email to reset the password (initialize it). Introduce your email and click in "Reset Password" button.
+                </listitem>
+                <listitem>
+                    You'll receive an email for resetting the password. Follow the link in the email and set up you new password.
+                </listitem>
+                <listitem>
+                    Next window will show the main page of the GitLab system. You can sign in using your email and your password. Remember that you
+                    can access that web page when you want using the button "GITLAB REPOSITORY" in <link xl:href="http://www.grasp-open.com/code">GRASP-Open web page code section</link>.
+                </listitem>
+                <listitem>
+                    On the main page of the GitLab system you can see different repositories you can access. Go to the GRASP repository or
+                    use this <link xl:href="http://code.grasp-open.com/open/grasp">link</link>
+                </listitem>
+                <listitem>
+                    There you can explore many things: you can see the code, see the changes, open an issue to get in touch with the developer team ... 
+                    To download the code there are three alternatives: a) direct download, b) cloning repository over http or c) cloning repository
+                    over git protocol. The last solution is recommended so we'll continue explaining this process.
+                </listitem>
+                <listitem>
+                    Set up your ssh-key in GitLab. It allows you to access the code via GIT protocol whitout a need of typing passwords. To set up
+                    a ssh-key you have to go to you-profile>edit>ssh-keys section or using this <link xl:href="http://code.grasp-open.com/profile/keys">link</link>.
+                </listitem>
+                <listitem>
+                    Follow <link xl:href="http://code.grasp-open.com/help/ssh/README">this guide</link> to create a ssh-key if you don't have one. If you already have a
+                    ssh-key you can follow same guide but skip first steps of a key creation, just copy it to the clipboard.
+                </listitem>
+                <listitem>
+                    Paste your ssh-key in the GitLab system and click the button "Add key"
+                </listitem>
+                <listitem>
+                    Now your system is properly configured and you can download the code over git protocol. The section <xref linkend="basic-installation" />
+                    explains how to download the code, compile and install it.
+                </listitem>
+            </orderedlist>
+        </para>
+    </sect1>
+
+    <sect1>
+        <title xml:id="build_and_install" xreflabel="building and installing">Building and installing &GRASP;</title>
+        <para>
+            The &GRASP; software makes a heavy use of a number of libraries for data preparation and numerical computations.
+            As for the &GRASP; software itself, it relies on the following libraries
+            <link xl:href="http://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</link> or belong to the public domain.
+        </para>
+
+        <para>
+            We are very focused on keeping the whole system free and depending only on non-commercial libraries. That does not
+            mean that non-open source software can't be linked to &GRASP;
+            (certainly closed-source, or even open-source, but restricted
+            <footnote>
+                <para>
+                    For the distinction between the <emphasis>free</emphasis> and
+                    <emphasis>open source</emphasis> movements, see
+                    <link xl:href="http://www.gnu.org/philosophy/free-software-for-freedom.en.html" />.
+                </para>
+            </footnote>
+            solutions
+            are sometimes better than the free ones for certain purposes), but the system should always be able to run only with 
+            free, open-source alternatives.
+        </para>
+
+        <sect2>
+            <title>Dependencies</title>
+
+            <para>
+                Following list shows the GRASP core dependencies. Some extensions can require extra dependencies,
+                in that case, please, follow the documentation of the extension to know the installation process.
+                <itemizedlist>
+                    <listitem>a C compiler (recommended gcc).</listitem>
+                    <listitem>a Fortran compiler (known to work with <link xl:href="http://gcc.gnu.org/wiki/GFortranBinaries">gfortran</link> and ifort).</listitem>
+                    <listitem>a make command (provided on any POSIX system).</listitem>
+                    <listitem>the <link xl:href="http://www.cmake.org">cmake</link> building software.</listitem>
+                    <listitem>
+                        One of the four numerical packages:
+                        <para>
+                            <itemizedlist>
+                                <listitem>
+                                    <link xl:href="http://crd-legacy.lbl.gov/~xiaoye/SuperLU/">SuperLU_4.3</link>
+                                </listitem>
+                                <listitem>
+                                    <link xl:href="http://crd-legacy.lbl.gov/~xiaoye/SuperLU/">SuperLU_MT</link> (not included in the framework yet)</listitem>
+                                <listitem>
+                                    <link xl:href="http://graal.ens-lyon.fr/MUMPS/">MUMPS</link>
+                                </listitem>
+                                <listitem>
+                                    <link xl:href="http://viennacl.sourceforge.net">ViennaCL</link>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        a BLAS library (Netlib <link xl:href="http://www.netlib.org/blas/">BLAS</link>, <link xl:href="http://math-atlas.sourceforge.net">ATLAS</link>, <link xl:href="http://www.tacc.utexas.edu/tacc-projects/gotoblas2/">GotoBLAS</link>). Actually, BLAS is not used directly by &GRASP;, but some numerical packages
+                        (SuperLU, MUMPS) on which &GRASP; relies are built on it. BLAS will be necessary only if you build &GRASP; with these
+                        packages. Currently, Netlib BLAS is the default BLAS library for the &GRASP; but this may change over time.
+                        The &GRASP; code has currently been tested with the Netlib, BLAS and ATLAS.
+                    </listitem>
+                    <listitem>
+                        The <link xl:href="http://www.netlib.org/lapack/">LAPACK</link> library. As for the ATLAS, LAPACK is only necessary with
+                        the SuperLU and MUMPS packages, not with ViennaCL. Take note that ATLAS ships with a partial LAPACK implementation for its own purposes, but that
+                        is not sufficient for the numerical packages on which &GRASP; relies. You must install the full LAPACK package.
+                    </listitem>
+                    <listitem>
+                        <link xl:href="http://www.netlib.org/scalapack/">ScaLAPACK</link> (a requirement for the SuperLU and MUMPS numerical packages only).</listitem>
+                    <listitem>
+                        <link xl:href="http://glaros.dtc.umn.edu/gkhome/metis/parmetis/overview">ParMETIS</link> (a requirement for the MUMPS numerical package only).</listitem>
+                    <listitem>
+                        <link xl:href="http://www.open-mpi.org">OpenMPI</link> (optional). This package is needed to work with the MUMPS. The GRASP software can also be compiled using MPI adding it
+                        the capability to process many segments at same time.</listitem>
+                    <listitem>The Gnome Library <link xl:href="https://developer.gnome.org/glib/">GLib</link> (mostly used by the configuration manager).</listitem>
+                    <listitem>The <link xl:href="http://pyyaml.org/wiki/LibYAML">LibYAML</link> library (YAML is the chosen format for &GRASP; configuration).</listitem>
+                    <listitem>The C Unit Testing Framework: <link xl:href="http://cunit.sourceforge.net">CUnit</link>.</listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                These dependencies can be installed in an Ubuntu system with the following command:
+                <screen>        
+<?db-font-size 90% ?>
+sudo apt-get install build-essential cmake git libsuperlu4 libsuperlu-dev \
+gfortran libyaml-dev libglib2.0-dev libcunit1-dev 
+                </screen>
+            </para>
+
+        </sect2>
+
+        <sect2 id="basic-installation">
+            <title>Basic installation of &GRASP;</title>
+
+            <para>
+                One assumes that now your system is ready for the installation. If it is not, please refer to the previous section. 
+                Also it is assumed that the user has access to the git repository, otherwise please check <xref linkend="access-repository" />.
+            </para>
+
+            <para>
+                The steps to download and install are the same for all platforms (Windows/Cygwin, MacOSX, Linux). Depending on your system, 
+                you may or may not have the <command>sudo</command> command. It is used for running a command with administrative rights. In that 
+                case, you can try without <command>sudo</command> (e.g. on Cygwin), or use the <command>su</command> instead for logging as administrator. You can also perform a custom installation (see the next section) so you don't need to be administrator. If none of this makes sense for you, ask your local Unix guru.
+            </para>
+
+            <para>
+                <screen>        
+<?db-font-size 90% ?>
+$ git clone git@code.grasp-open.com:open/grasp.git 
+$ cd grasp # you should now be in the master branch of the project (developers of the project may need to checkout the dev branch)
+$ make # build the project using the default build settings
+$ sudo make install # install grasp. Administrative privileges are needed.
+                </screen>
+            </para>
+        </sect2>
+
+        <sect2>
+            <title>Advanced compilation</title>
+            <para>GRASP uses cmake system to compile the code. You can compile the code using CMAKE following these steps:</para>
+            <para>
+                <screen>        
+<?db-font-size 90% ?>
+$ # Place a terminal in GRASP root folder
+$ mkdir build
+$ cd build
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DADDITIONAL_DEPENDENCIES_PATH=/usr/local/grasp-deps -DCONSTANTS_SET=generic
+$ make -j12
+$ sudo make install
+$ grasp # test the command
+                </screen>
+            </para>
+            <para>You can use a different compilation configuration. All configuration options are defined in <xref linkend="custom-installation-cmake" /></para>
+            <para>For users that are not familiar with cmake there is a Makefile which wraps cmake system and is placed in root folder. 
+                This Makefile simplify the use of cmake via make script. Internally, the Makefile creates cmake structure and call it. 
+                You can compile using this system like it is defined in <xref linkend="basic-installation" /> thanks to it. Addionally, this Makefile also
+                allows you to use some extra configuration parameters that are explained in <xref linkend="custom-installation-make" />
+            </para>
+            <para>Finally, last way to compile the code is via grasp-manager. Grasp-manager is described in next section: <xref linkend="grasp-manager" /></para>
+        
+
+            <sect3 id="custom-installation-make">
+                <title>Custom installation using make</title>
+                <para>
+                    If you have compiled the code following the rules explained in <xref linkend="basic-installation" /> you have compiled the code with default options. 
+                    The options and theirs possible values are listed below (the default value is written in italic):
+                    <itemizedlist>
+                        <listitem>
+                            <emphasis role="bold">CONSTANTS_SET: </emphasis> 
+                            <emphasis>generic</emphasis> or see <xref linkend="constants-set" />
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">BUILD: </emphasis> 
+                            <emphasis>Release</emphasis> or Debug, RelWithDebInfo or Fast</listitem>
+                        <listitem>
+                            <emphasis role="bold">MPI: </emphasis> 
+                            <emphasis>off</emphasis> or on</listitem>
+                        <listitem>
+                            <emphasis role="bold">DEBUG_MPI: </emphasis> 
+                            <emphasis>off</emphasis> or on</listitem>
+                        <listitem>
+                            <emphasis role="bold">F90: </emphasis> 
+                            <emphasis>gfortran</emphasis> or ifort</listitem>
+                        <listitem>
+                            <emphasis role="bold">PREFIX: </emphasis> 
+                            <emphasis>/usr/local</emphasis> or other valid path where dependencies are available</listitem>
+                        <listitem>
+                            <emphasis role="bold">BUILD_DIR: </emphasis> 
+                            <emphasis>build</emphasis> or other name but build is ignored by git</listitem>
+                        <listitem>
+                            <emphasis role="bold">CC: </emphasis> 
+                            <emphasis>cc</emphasis> or another valid c compiler</listitem>
+                        <listitem>
+                            <emphasis role="bold">CCX: </emphasis> 
+                            <emphasis>c++</emphasis> or another valid c++ compiler</listitem>
+                    </itemizedlist>
+                    An example of use is:
+                    <screen>        
+<?db-font-size 90% ?>
+$ make CONSTANTS_SET=polder MPI=on
+                    </screen>        
+                </para>
+            </sect3>
+
+            <sect3 id="custom-installation-cmake">
+                <title>Custom installation using cmake</title>
+
+                <para>
+                    By default, the resources and dependencies will be installed in the
+                    following directories:
+                    <simplelist>
+                        <member>
+                            <filename>/usr/local/share/grasp</filename> (resources that are internal databases or files used by &GRASP;)</member>
+                        <member>
+                            <filename>/usr/local/grasp-deps</filename> (for general-purpose, utility libraries)</member>
+                    </simplelist>
+                </para>
+
+                <para>
+                    For some reason, you may not wish (or may not be able) to install &GRASP; under default system directories.
+                    It is perfectly possible, and very easy, to change these paths of installation with the <envar>PREFIX</envar> variable.
+                </para>
+
+                <para>
+                    Here is the way to install the project under your HOME directory instead of <filename>/usr/local</filename> (now you don't need administrative rights anymore). In this case, we will use cmake compilation system instead of the Makefile placed in root folder, which wraps it.
+                </para>
+
+                <para>
+                    <screen>        
+<?db-font-size 90% ?>
+$ cd ~/grasp/dependencies
+$ sudo make PREFIX=$HOME/local install # build and install the third-parties dependencies under /home/your_name/local, instead of /usr/local
+$ cd ..
+$ mkdir build
+$ cd build
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DADDITIONAL_DEPENDENCIES_PATH=$HOME/local -DCONSTANTS_SET=generic # To generate a Makefile with custom parameters
+$ make -j12 # build the project
+$ sudo make install # install grasp under $HOME/local/bin
+$ $HOME/local/bin/grasp # test the command (of course, it is then recommended to add $HOME/local/bin to your PATH)
+                    </screen>
+                </para>
+
+                <para>
+                    Another possible customization is to change the numerical solver for &GRASP;. By default, it is set to <link xl:href="http://crd-legacy.lbl.gov/~xiaoye/SuperLU/">SUPERLU_43</link>. If you wish to try another solver
+                    <footnote>
+                        <para>
+                            That it is possible doesn't mean that it is recommended. In the current status of the project, &GRASP; has not been tested extensively with other solvers than SuperLU 4.3 and the support for other solvers is still quite sloppy.
+                        </para>
+                    </footnote>, you may use:
+                </para>
+
+                <para>
+                    <command>cmake SPARSE_SOLVER=</command>
+                    <emphasis>your_chosen_solver</emphasis>
+                </para>
+
+
+                <table frame="all" xml:id="tablesolvers">
+                    <title>SPARSE_SOLVER's
+                        valid values</title>
+                    <tgroup cols="1" align="left" colsep="1" rowsep="1" >
+                        <colspec colnum="1" colwidth="1*" />
+                        <tbody>
+                            <row>
+                                <entry>SUPERLU_43 (default)</entry>
+                            </row>
+                            <row>
+                                <entry>SUPERLU_MT (not supported yet)</entry>
+                            </row>
+                            <row>
+                                <entry>VIENNA_CL</entry>
+                            </row>
+                            <row>
+                                <entry>MUMPS</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+
+                <para>
+                    You may also want to link the project to the BLAS implementation of
+                    your choice. This is possible with:
+                </para>
+
+                <para>
+                    <command>cmake BLAS=</command>
+                    <emphasis>your_chosen_blas_library</emphasis>
+                </para>
+
+                <table frame="all" xml:id="tableblas">
+                    <title>BLAS valid values</title>
+                    <tgroup cols="1" align="left" colsep="1" rowsep="1" >
+                        <colspec colnum="1" colwidth="1*" />
+                        <tbody>
+                            <row>
+                                <entry>netlib-blas (default)</entry>
+                            </row>
+                            <row>
+                                <entry>atlas</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+
+                <para>
+                    The CONSTANTS_SET setting can be used for performing memory optimizations with
+                    a specific set of data, e.g. <command>cmake CONSTANTS_SET=polder</command>. When not sure,
+                    stick to the default. See <xref linkend="constants-set" />
+                </para>
+
+                <table frame="all" xml:id="tableconstset">
+                    <title>main CONSTANTS_SET values (installed by default)</title>
+                    <tgroup cols="1" align="left" colsep="1" rowsep="1" >
+                        <colspec colnum="1" colwidth="1*" />
+                        <tbody>
+                            <row>
+                                <entry>generic (default)</entry>
+                            </row>
+                            <row>
+                                <entry>valgrind</entry>
+                            </row>
+                            <row>
+                                <entry>(you can install external constants set and use them)</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+
+                <para>
+                    The <envar>BUILD</envar> setting can be used to switch between debug (non optimized, with debug information), dev (partially optimized)
+                    and prod (optimized) modes at build time,
+                    e.g. <command>cmake BUILD=prod</command>. The default is <computeroutput>dev</computeroutput>.
+                </para>
+
+                <table frame="all" xml:id="tablebuild">
+                    <title>BUILD valid values</title>
+                    <tgroup cols="1" align="left" colsep="1" rowsep="1" >
+                        <colspec colnum="1" colwidth="1*" />
+                        <tbody>
+                            <row>
+                                <entry>Debug</entry>
+                            </row>
+                            <row>
+                                <entry>Release (default)</entry>
+                            </row>
+                            <row>
+                                <entry>RelWithDebInfo</entry>
+                            </row>
+                            <row>
+                                <entry>Fast</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+
+                <para>
+                    Of course, there is no limitation to the number of settings that the <command>cmake</command> command can accept:
+                </para>
+
+                <para>
+                    <command>cmake PREFIX=$HOME/local BUILD=prod SPARSE_SOLVER=SUPERLU_43 CONSTANTS_SET=generic</command>
+                </para>
+
+            </sect3>
+
+            <sect3 id="constants-set">
+                <title>Constants sets</title>
+                <para>
+                    GRASP is a very memory- and time-consuming software, which is heavily optimized. Usually in software development, 
+                    time can be optimized using more memory and memory can be saved using more calculation time. In software 
+                    development has to be a balance between the time consumption and the memory cost. GRASP has found this balance 
+                    using many static arrays to optimize time performance and defining the size of these arrays like a constant 
+                    values. This method allows to choose during compilation time the size of these arrays allowing the user to optimize 
+                    the software depending on the use. For example, GRASP will take more memory if it is compiled to use a maximum 
+                    of eight wavelengths instead of four. We have created some standard constants sets for the most common uses and 
+                    in general you can use "generic" CONSTANTS_SET as one valid to test all instruments. If it is not valid 
+                    you can check if your application fits with another existing constants set or create your own. Constants sets are managed
+                    by grasp-manager as an extension of GRASP. It means that you can install an external definition of the constants set
+                    depending on your necessities or create your own. Constants set are placed in <filename>src/retrieval/constants_set/{CONSTANTS_SET_NAME}</filename> 
+                    and consist of four files:
+                    <itemizedlist>
+                        <listitem>mod_par_DLS.inc</listitem>
+                        <listitem>mod_par_OS.inc</listitem>
+                        <listitem>mod_par_DLS_bin.inc</listitem>
+                        <listitem>mod_par_inv.inc</listitem>
+                    </itemizedlist>   
+                    Where {CONSTANTS_SET_NAME} is the name of the constants set. If you want to define your own constants set to compile the code.
+                </para>
+            </sect3>
+        </sect2>
+
+
+    </sect1>
+
+    <sect1 id="running-code">
+        <title>Running the code</title>
+        <para>
+            Once the code is installed you can test it right away. Following examples will assume that the 
+            user has installed GRASP as wide system executable. Otherwise, the GRASP binary is placed in <filename>./build/bin/grasp</filename>.
+            When GRASP is executed without arguments it prints some general information about the version and
+            how it was compiled:
+        </para>
+        <para>
+            <screen>    
+<?db-font-size 90% ?>
+$ grasp
+
+GRASP core version: v0.7.0 (commit: c0bd56a ; branch_name: HEAD)
+Compiled on 2016-06-02 10:21:03 +0200 commit of 2016-05-24 18:17:11 +0200
+With C compiler: Apple LLVM version 7.3.0 (clang-703.0.31)
+With FORTRAN compiler: GNU Fortran (Homebrew gcc 5.3.0 --with-all-languages) 5.3.0
+Using generic constant set and build type Release
+Maximum segment size: nx=2 ; ny=2 ; nt=30
+Input drivers loaded: sdata
+Input transformers loaded: none
+Output segment functions loaded: ascii classic classic_plot none
+Output tile functions loaded: ascii none
+Output current functions loaded: none
+Path to resources: /usr/local/share/grasp/
+Sparse solver used: SuperLU
+Build System: Darwin-15.5.0
+Executable path: undefined absolute path (./build/bin/grasp_app)
+
+usage: grasp [OPTIONS] {settings_file.yml}|help
+
+OPTIONS:
+-V       use valgrind
+            </screen>
+        </para>
+        <para>
+            In examples folder there are some examples the user can use to verify that whole system is
+            working properly. To run an example you have to call GRASP followed 
+            by the settings file as the first argument:
+        </para>
+
+        <screen>    
+<?db-font-size 90% ?>
+$grasp examples/sunphotometer/settings_example_sunphotometer_inversion.yml
+Config file read successfully <co id="configok-co" linkends="configok" />
+The tile is divided in segments with 1 rows, 1 cols and 1 times. 1 inversions will be performed (sequential version) <co id="tiledivision-co" linkends="tiledivision" />
+Retrieval #0 (1/1): 100.00%: 1 pixel will be processed <co id="firstsegment-co" linkends="firstsegment" />
+
+... <co id="retrievalprocess-co" linkends="retrievalprocess" />
+
+826.69409    1:   0.76332E+00       84.82804 %    2:   0.47585E+00      119.16735 %      pixel # 1      Residual using INITIAL GUESS
+277.77368    1:   0.29931E+00       30.63890 %    2:   0.33364E+00       30.73591 %      pixel # 1      Residual after iteration # 1
+22.29646    1:   0.71556E-01        5.62210 %    2:   0.21300E-01        2.00627 %      pixel # 1      Residual after iteration # 2
+8.99939    1:   0.19544E-01        1.39876 %    2:   0.86748E-02        1.84197 %      pixel # 1      Residual after iteration # 3
+1.26664    1:   0.34922E-02        1.21845 %    2:   0.25801E-03        0.03841 %      pixel # 1      Residual after iteration # 4
+0.91952    1:   0.27402E-02        0.83636 %    2:   0.34244E-03        0.05860 %      pixel # 1      Residual after iteration # 5
+0.49750    1:   0.27118E-02        0.39311 %    2:   0.28940E-03        0.09854 %      pixel # 1      Residual after iteration # 6
+0.49593    1:   0.22867E-02        0.25629 %    2:   0.41266E-03        0.10136 %      pixel # 1      Residual after iteration # 7
+0.37954    1:   0.83430E-03        0.12501 %    2:   0.34994E-03        0.03372 %      pixel # 1      Residual after iteration # 8
+0.19446    1:   0.67640E-03        0.09489 %    2:   0.16508E-03        0.04304 %      pixel # 1      Residual after iteration # 9
+0.11306    1:   0.59844E-03        0.07205 %    2:   0.84066E-04        0.02038 %      pixel # 1      Residual after iteration # 10
+0.11299    1:   0.58013E-03        0.07008 %    2:   0.85618E-04        0.01960 %      pixel # 1      Residual after iteration # 11
+Retrieval #0 (1/1): 100.00%: 1 pixels processed in 15.478408 seconds (cpu time: 15.433357). Average per pixel: 15.478408 (cpu time: 15.433357)
+Retrieval #0 (1/1): 100.00%: finished
+
+... <co id="results-co" linkends="results" />
+
+Size Distribution dV/dlnr (normalized to 1) for 1 - fraction
+0.50000E-01   0.18937E-03
+0.65604E-01   0.25878E-01
+0.86077E-01   0.31692E+00
+0.11294E+00   0.46703E+00
+0.14818E+00   0.49857E+00
+0.19443E+00   0.31519E+00
+0.25510E+00   0.13060E+00
+0.33472E+00   0.37423E-01
+0.43917E+00   0.15058E-01
+0.57623E+00   0.21979E-01
+0.75605E+00   0.60639E-01
+0.99200E+00   0.12603E+00
+0.13016E+01   0.20535E+00
+0.17078E+01   0.31518E+00
+0.22407E+01   0.32588E+00
+0.29400E+01   0.32922E+00
+0.38575E+01   0.22504E+00
+0.50613E+01   0.15226E+00
+0.66407E+01   0.84118E-01
+0.87131E+01   0.25702E-01
+0.11432E+02   0.33366E-02
+0.15000E+02   0.15965E-03
+
+... <co id="endprocess-co" linkends="endprocess" />
+
+Total Time: 1 pixels processed in 15.573089 seconds (cpu time: 15.515442). Average per pixel: 15.573089 (cpu time: 15.515442)
+Algorithm Time: 1 pixels processed in 15.478408 seconds (cpu time: 15.433357). Average per pixel: 15.478408 (cpu time: 15.433357)
+Control Unit Time: 1 pixels processed in 0.094681 seconds (cpu time: 0.082085). Average per pixel: 0.094681 (cpu time: 0.139732)
+        </screen>
+
+        <calloutlist>
+            <callout arearefs="configok-co" id="configok" >
+                <para>
+                    First step of execution is to parse settings file and validate it. If everything is OK this line 
+                    will be printed, otherwise a list of errors will be produced. Please, pay attention to error messages because they
+                    should help you to understand what is going on and how to resolve the problem.
+                </para>
+            </callout>
+
+            <callout arearefs="tiledivision-co" id="tiledivision" >
+                <para>
+                    This line informs you how the data are going to be organized for retrieval. Data are organized as segments that will run inside
+                    the retrieval algorithm. Control unit will organize these segments into a tile as a bigger group of pixels.
+                </para>
+            </callout>
+            
+            <callout arearefs="firstsegment-co" id="firstsegment" >
+                <para>
+                    The first retrieval is launched and retrieval algorithm starts to process first segment (group of pixels)
+                </para>
+            </callout>
+      
+            <callout arearefs="retrievalprocess-co" id="retrievalprocess" >
+                <para>
+                    The retrieval can be in verbose mode or not. If it is in verbose mode many information of the process will be printed. The
+                    most important information are the next lines. The user can follow the fitting process and see how the errors decrease
+                    iteration by iteration.
+                </para>
+            </callout>
+      
+            <callout arearefs="results-co" id="results" >
+                <para>
+                    Finally results are processed. This example prints results on the screen. You can dump them to a file in different
+                    formats such as CSV, HDF ... Output functions are extensions that you can optionally install. In the settings file it is defined
+                    which functions are used and how (set up).
+                </para>
+            </callout>
+      
+            <callout arearefs="endprocess-co" id="endprocess" >
+                <para>
+                    The process finish with a small summary about how many data have been processed and how long it took.
+                </para>
+            </callout>
+      
+        </calloutlist>
+        <para>
+            It is also possible to add any number of arguments in the form of
+            <computeroutput>setting=value</computeroutput>.
+            They provide a quick and easy way to override the default settings in
+            the configuration file, for experimenting without editing this file.
+        </para>
+    
+        <table frame="all" role='customtable' >
+            <title>Some common settings</title>
+            <tgroup cols="4" align="left" colsep="1" rowsep="1">
+                <colspec colnum="1" colwidth="2*" />
+                <colspec colnum="2" colwidth="1*" />
+                <colspec colnum="1" colwidth="1*" />
+                <colspec colnum="4" colwidth="3*" />
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Default</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+	  
+                    <row>
+                        <entry>
+                            <computeroutput>help</computeroutput>
+                        </entry>
+                        <entry>&boolean;
+                            <footnote id="fnBoolean" >
+                                <para>
+                                    Boolean variables (also known as <emphasis>logical</emphasis> in the
+                                    FORTRAN community) can take the values &true; or
+		&false; (that can also be abbreviated as &t; and &f;)
+                                </para>
+                            </footnote>
+                        </entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, displays
+                            an exhaustive list of settings with their significance.
+                        </entry>
+                    </row>
+	
+                    <row>
+                        <entry>
+                            <computeroutput>input.debug.print_clean_segment</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, prints a segment that has just been cleaned
+                            from its non-significant data. (see also print_raw_segment)
+                        </entry>
+                    </row>
+	
+                    <row>
+                        <entry>
+                            <computeroutput>input.debug.print_raw_segment</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, prints a segment that has just been loaded
+                            from a driver (with possible non-significant data). (see also print_clean_segment)
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <computeroutput>input.sdata.dump</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, displays the input measurements
+                            in the form of a &SDATA; stream. Mostly useful for the 
+                            maintainers of the scientific subsystem.</entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <computeroutput>input.sdata_driver.debug</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, displays the actions of the sdata driver when
+                            a &SDATA; file is being read. This can be used for validating a new &SDATA;
+                            file (the contents of this file will be displayed in a readable form),
+                            and less commonly for debugging the &SDATA; driver.</entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <computeroutput>retrieval.debug.print_segment_information</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&false;</entry>
+                        <entry>When set to &true;, prints a segment with data that are actually passed
+                            to the retrieval library (unless there is a bug in the C/Fortran interface,
+                            the data should be the same as those from input.debug.print_clean_segment).
+                        </entry>
+                    </row>
+	
+                    <row>
+                        <entry>
+                            <computeroutput>retrieval.debug.verbose</computeroutput>
+                        </entry>
+                        <entry>&boolean;</entry>
+                        <entry>&true;</entry>
+                        <entry>When set to &true;, displays debugging information relative to the
+                            retrieval subsystem. Mostly useful for the maintainers of the
+                            scientific subsystem.</entry>
+                    </row>
+	
+                </tbody>
+            </tgroup>
+        </table> 
+    
+        <sect2>
+            <title>Usage of GRASP: The configuration file</title>
+    
+            <para>
+                The default behaviour of the system is defined in a configuration file, whose settings can
+                be overridden by command line arguments as described in the previous section.
+                A configuration manager (also known as the settings module) is responsible 
+                for loading the configuration file and for taking care of the overriding mechanism for
+                command line arguments, if necessary. It centralizes all the information needed 
+                for a processing and in that matter drives the actual behaviour of the framework.
+            </para>
+
+            <para>
+                When there is more than a few parameters to change, or when one
+                wishes to perform more persistent corrections, it is easier to
+                edit the configuration file than to set parameters in the command line.
+            </para>
+    
+            <para>
+                The chosen format for new &GRASP; configuration files is 
+                <link xl:href="http://en.wikipedia.org/wiki/YAML">YAML</link>,
+                a standard format perfectly adapted for complex configurations
+                such as the one needed by the &GRASP; project. It provides support
+                for simple values as well as for complex data structures, while
+                maintaining a high level of readability. YAML format is based on fixed indentation (the spaces
+                before an element define the level where it applies). Command line interface of GRASP proposes an easy system
+                to overwrite the main settings file with a "dot syntax" where each level of indentation is replaced
+                by a dot. For example, for &GRASP; is equivalent to be called with the argument <computeroutput>input.driver=sdata</computeroutput>
+                or to have defined in the settings file the following content:
+                <programlisting language="yml" >
+input:
+    driver: sdata
+                </programlisting>    
+    
+            </para>
+    
+            <para>
+                &GRASP; settings system allow to import external files into one.
+                Note that the standard YAML format doesn't support file
+                inclusion, but &GRASP; configuration files support this feature through
+                the <computeroutput>import</computeroutput> keyword that
+                expects a list of files to be included. It is, therefore, possible
+                to split large configuration files into smaller, easier to maintain
+                independent files (this is especially important since several
+                people will have to maintain different sections of the configuration).
+            </para>
+    
+            <figure>
+                <title>Excerpt of configuration file</title>
+                <programlisting language="yml" >
+import: [ ] <co id="import-co" linkends="import" />
+
+input: <co id="section-co" linkends="section" />
+    driver: sdata_driver
+    filename: bin/SDATA_NEW.dat
+
+retrieval:
+    # General retrieval parameters <co id="comment-co" linkends="comment" />
+    general:
+        minimization_convention: logarithm
+        threshold_for_stopping: 1.0e-5
+        number_layers: 50 <co id="setting-co" linkends="setting" />
+        shift_for_applying_logarithm_to_negative_values: 0.2
+        binning_method: logarithm
+        maximun_iterations_of_Levenberg-Marquardt: 15
+        stop_before_performing_retrieval: false
+        internal_file_path: "../retrieval/internal_files/"
+        external_file_path: "../../home/"
+        reference_plane_for_polarization:   meridian
+        regime_of_measures_fitting:     absolute_polarization_components
+        linearization_threshold:      0.03
+        IMQ:       2
+        use_internal_initial_guess:     false     
+        threshold_for_length_corrections:     -1.0e-2
+        threshold_for_stopping_Q_iterations:  1.0e-2
+        scale_for_finite_difference:          1.0e-3
+        irradiance_corrected: false # or no or 0
+        coeff_corr: 0.96
+        regime_of_multipixel_constraints: 
+            inversion_regime: multi_pixel_followed_by_single_pixel  
+            time-scale:   100.01
+            x-scale:   100.05
+            y-scale:   100.05
+        error_estimation: true   
+        number_of_characteristics_retrieved: 7	
+...     
+    noises:
+        noise[1]: <co id="tagindex-co" linkends="tagindex" />
+            standard_deviation: 0.0
+            error_type:  absolute
+            variation:  0.01
+            measure_type[1]:
+                type: I
+                wavelength_involved: [ 1, 2, 3, 4, 5, 6 ] <co id="list-co" linkends="list" />
+        noise[2]:
+            standard_deviation: 0.0
+            error_type:  absolute
+...
+                </programlisting>
+            </figure>
+  
+            <calloutlist>
+                <callout arearefs="import-co" id="import" >
+                    <para>The &GRASP; configuration file supports the file inclusion,
+                        with the <computeroutput>import</computeroutput> statement.
+                        The included files must be given in a comma-separated list,
+                        this can remain empty.
+                    </para>
+                </callout>
+    
+                <callout arearefs="section-co" id="section" >
+                    <para>
+                        The configuration is organized in sections. The structure is
+                        defined by the explicit indentation. The order of sections and
+                        elements in sections doesn't matter, as long as the
+                        structure and indentation are respected.
+                    </para>
+                </callout>
+    
+                <callout arearefs="comment-co" id="comment" >
+                    <para>
+                        Comments are supported: anything after a # sign is concidered as a comment.
+                    </para>
+                </callout>
+    
+                <callout arearefs="setting-co" id="setting" >
+                    <para>
+                        Access to fields from the command line (for overriding a setting, say)
+                        is straightforward, using the common dotted notation: for instance,
+                        the fully qualified name of <computeroutput>number_layers</computeroutput>
+                        is <computeroutput>retrieval.general.number_layers</computeroutput>
+                    </para>
+                </callout>
+    
+                <callout arearefs="tagindex-co" id="tagindex" >
+                    <para>
+                        Section and property tags can be indexed, with a simple
+                        bracket notation. A feature that is not supported by the
+                        standard YAML format. This makes it easy to define arrays of
+                        complex data structures.
+                    </para>
+                </callout>
+    
+                <callout arearefs="list-co" id="list" >
+                    <para>
+                        Simple lists of data are supported (a standard feature of
+                        YAML). The number of elements can be determined at runtime by
+                        the configuration manager.
+                    </para>
+                </callout>
+    
+            </calloutlist>
+  
+            <para>
+                All these qualities make the new configuration files very easy to read, maintain and extend.
+            </para>
+        </sect2>    
+    </sect1>
+
+
+    <sect1 id="multi-repository">
+        <title>Code repository and extensions</title>
+
+        <para>
+            The GRASP code is managed by GIT. If you have a version that doesn't use GIT (for example, by downloading it from a web server) we strongly recommend you
+            to look for a version downloaded via GIT (see <xref linkend="access-repository" />). It will allow you to 
+            be connected to the server to make updates of the code. Additionally, the GRASP code can be extended in different parts. You can extend the input 
+            module or output module. Extensions in input module are classified as drivers and transformers.
+            A driver is a module that is called to read input data. The most basic driver is the SDATA driver which reads a SDATA file (<xref linkend="sdata-format" />) but
+            many other drivers can be implemented to read raw databases and inject, without using intermediate text files, data directly in the GRASP algorithm. A good example is to process satellite data,
+            where the performance is a keystone to be able to process this kind of huge archives. Satellite data is not transformed to sdata format, instead of this, a specific
+            driver is developed to connect raw satellite archive with GRASP. Transformers are another type of input extensions which allow to modify input data after reading it.
+            An example of a transformer could be to load a climatology database to optimize input parameters. This action can be shared between different drivers and it is called after loading data by
+            a driver. Output module can be extended with output functions. There are three types of output functions:
+            <itemizedlist>
+                <listitem>
+                    <emphasis role="bold">segment output function:</emphasis> It will be called after processing each segment of a tile</listitem>
+                <listitem>
+                    <emphasis role="bold">tile output function:</emphasis> It will be called after processing entire tile</listitem>
+                <listitem>
+                    <emphasis role="bold">current output function:</emphasis> It will be called after processing each segment but it receives a partial tile as an argument. This function can print a tile with current processed information</listitem>
+            </itemizedlist>
+            Each extension is distributed separately of the core code (except if an extension is considered as a core, for example, sdata driver is essential). To install a new extension
+            you can place the source code in the specific place or you can use the grasp-manager, an extra tool which will help you to manage the code and its extensions. It is described below (<xref linkend="grasp-manager" />),
+            and here we will explain how to install manually an extension.
+        </para>
+        <para>
+            Extensions are the pieces of code that are detected and added during compilation. To install an extension you have to place the code inside the core repository in a
+            proper place and compile again. The corresponding places for each of the extensions are the following:
+            <itemizedlist>
+                <listitem>
+                    For input
+                    <itemizedlist>
+                        <listitem>drivers has to be placed in <filename>src/input/drivers</filename></listitem>
+                        <listitem>transformers has to be placed in <filename>src/input/transformers</filename></listitem>
+                    </itemizedlist>
+                </listitem>
+
+                <listitem>
+                    For output
+                    <itemizedlist>
+                        <listitem>segment functions has to be placed in <filename>src/output/segment_functions</filename></listitem>
+                        <listitem>tile functions has to be placed in <filename>src/output/tile_functions</filename></listitem>
+                        <listitem>current functions has to be placed in <filename>src/output/current_functions</filename></listitem>
+                    </itemizedlist>
+                </listitem>
+
+                <listitem>
+                    Kernels: They have to be placed in <filename>src/retrieval/internal_files</filename>
+                </listitem>
+
+                <listitem>
+                    Constants sets: They have to be placed in <filename>src/retrieval/src/constants_sets</filename>
+                </listitem>
+
+            </itemizedlist>
+
+            Following diagram shows how the GRASP repository integrate extension repositories inside itself. 
+            <imagedata fileref="figures/scheme-of-folder-and-repos.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+
+            Typing the command <command>grasp</command> without arguments you will obtain information about how the software was compiled including available extensions.
+            To know more details about extensions and write one by your own please, go to <link xl:href="http://www.grasp-open.com/tech-doc">technical documentation.</link>
+        </para>
+        <para>
+            <emphasis role="bold">Trick:</emphasis> Since the GRASP code files are tracked by GIT it is not recommended to modify them, except if you want to develop something.
+            If you want to place your tests and examples near the code use a folder called "home" (it is created during compilation but you can create by yourself if you want).
+            This folder will not be tracked by GIT allowing you to have your tests with the code without having conflicts with GIT.
+        </para>
+
+        <sect2 id="grasp-manager">
+            <title>GRASP Manager</title>
+            <para>
+                GRASP Manager is a script placed in the GRASP root folder which simplify (even more) update process. This script wraps Makefile system and it adds a 
+                mechanism to work with GIT and the multi-repository environment used by GRASP (see <xref linkend="multi-repository" />). Compilation of GRASP is always based on cmake. The make system wraps cmake helping with the creation of necessary folder structure and
+                grasp-manager script wraps make system helping with the use of GIT for users that don't feel comfortable using it. Also, it takes care of the extensions, 
+                downloading and installing them in correct places. GRASP Manager script is configured via <filename>grasp-manager.yml</filename> file. Since it is a configuration
+                file it is not tracked by GIT and instead of this a template called <filename>grasp-manager.yml.dist</filename> is offerred by the system. If there is no
+                <filename>grasp-manager.yml</filename> file, it will be created as a copy of <filename>grasp-manager.yml.dist</filename> file first time you run grasp-manager script.
+            </para>
+            <para>
+                To know the list of actions offered by this script, you can just type <command>./grasp-manager.sh</command>. A list of available actions will be printed. In these sections we will
+                explain the most interesting actions for users but there are more actions that can be interesting if you are a developer. Please, remember to have a look
+                at technical documentation to know more about this script.
+            </para>
+            <para>
+                Basic actions for regular users are <emphasis role="bold">update-grasp</emphasis> and <emphasis role="bold">update-grasp-to-dev</emphasis>. They allow you
+                to update the code and the extensions to the newest version. With <emphasis role="bold">update-grasp</emphasis> you will get the last stable version and with
+                <emphasis role="bold">update-grasp-to-dev</emphasis> you will get the last unstable version (next code to be released) which is not recommended to use
+                except if you know what you are doing ;-). These commands accept an argument that is called "environment". Environments are defined in <filename>grasp-manager.yml</filename>
+                and allow you to customize the way to compile the code and list extensions you want to have available. The documentation about how to write a configuration file
+                for grasp-manager is written in the file <filename>grasp-manager.yml.dist</filename>. Please, check that file to know all available options. Note: Remember that in 
+                YAML format lines which starts by # symbol are comments.
+            </para>
+            <para>
+                When you run grasp-manager script a backup of your code is created. This backup contains the information about the previous GIT commit and unsaved changed in 
+                the code. Take into account that the repository has to be "clear" before performing any update actions, otherwise the changes will be undone and saved in a backup.
+                You can find this backups in <filename>home/grasp-manager</filename> folder. They are organized by time (when grasp-manager was executed) and you can apply them
+                via <emphasis role="bold">rollback</emphasis> (applies last backup) or <emphasis role="bold">apply</emphasis> actions.
+            </para>
+            <para>
+                Finally, next code will show an example of use of grasp manager:
+                <screen>        
+    <?db-font-size 90% ?>
+$ # Following command will move the repository to dev branch using the environment defined as release in grasp-manager.yml
+$ # It will install/uninstall extension in order to have exactly the extensions release environment specify
+$ ./grasp-manager.sh checkout dev release 
+$ # Then, we can compile the code using the compilation settings defined in 'release' environment
+$ # Since release environment was the last used, we can omit it. When we omit the environment argument we use the constants used
+$ # in the last command but we didn't install/uninstall extensions, just already available extensions are used
+$ ./grasp-manager.sh make
+$ # Finally we are going to install the code with system in the last version. This is the most important action to regular users.
+$ # A user of GRASP can regularly update the system via following command:
+$ ./grasp-manager.sh update-grasp 
+                </screen>
+
+            </para>
+        </sect2>
+    </sect1>
+
+    <sect1>
+        <title>Known problems</title>
+        Here are listed common problems found during installations process. 
+        <itemizedlist>
+            <listitem>
+                In MacOS system some users receive fatal error: The remote end hung up unexpectedly; fatal: early EOF; fatal: index-pack failed
+                <para>  It can be necessary to increase Git buffer size using following command:git config --global http.postBuffer 1048576000</para>
+            </listitem>
+        </itemizedlist>
+
+
+    </sect1>
+
+</chapter>

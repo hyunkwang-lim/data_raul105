@@ -1,0 +1,2 @@
+add_library(input_transformer_segment_imagedat grasp_input_transformer_segment_imagedat.c)
+target_link_libraries(input_transformer_segment_imagedat grasp_settings)

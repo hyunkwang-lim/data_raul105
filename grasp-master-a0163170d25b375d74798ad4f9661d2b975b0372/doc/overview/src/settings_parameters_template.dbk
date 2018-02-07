@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This template is filled by grasp_settings_parameters_doc_generator.sh
+and then is used in chapter 5 to show all grasp settings parameters
+-->
+<!DOCTYPE chapter SYSTEM "common_entities.dtd" >
+
+
+<table frame="all"
+       xmlns="http://docbook.org/ns/docbook"
+       xmlns:xl="http://www.w3.org/1999/xlink"
+       xml:id="settings-parameters">
+    <title>The SDATA main structure</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+        <colspec colnum="1" colwidth="1*" />
+        <colspec colnum="2" colwidth="3*" />
+        <thead>
+            <row>
+                <entry>Field Name</entry>
+                <entry>Field Content</entry>
+            </row>
+        </thead>
+        <tbody>
+            {file_content} </entry></row>                              
+        </tbody>
+    </tgroup>
+</table>
+

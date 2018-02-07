@@ -1,0 +1,75 @@
+/* HTML Description List default style ( http://www.w3.org/TR/CSS21/sample.html ) */
+dl {
+  display: block;
+  unicode-bidi: embed;
+  margin: 5px 0;
+  page-break-before: avoid;
+}
+
+dt {
+  display: block;
+  unicode-bidi: embed;
+}
+
+dd {
+  display: block;
+  unicode-bidi: embed;
+  margin-left: 40px;
+}
+
+#content {
+    padding-top: 20px;
+}
+
+.title {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+}
+
+.author {
+  margin: 15px 0 0 0;
+  display: inline-block;
+  padding: 0px 20px 0px 0px;
+}
+
+.email {
+    margin-bottom: 10px;
+}
+
+div.table-contents table { 
+    border: none; 
+    border-collapse: collapse; 
+}
+
+div.table-contents code,
+div.table-contents pre {
+    padding: 0;
+    background: none;
+}
+
+div.table-contents table td,
+div.table-contents table th { 
+    border-right: 10px solid transparent;
+    vertical-align: middle;
+}
+
+div.table-contents table td:last-child,
+div.table-contents table th:last-child { 
+    border-right: none; 
+}
+
+div.table-contents table tr:nth-child(even) { 
+  background-color: #f0f0f0;
+}
+
+p + dl > dt:last-child {
+    margin-bottom: 20px;
+}
+
+p + dl {
+    margin-top: -20px;
+}
+
+.orderedlist ol[type="i"] {
+    list-style-type: lower-roman;
+ }

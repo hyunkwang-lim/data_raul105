@@ -1,0 +1,1880 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd" 
+[
+<!ENTITY thetas '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">s</subscript>'>
+<!ENTITY thetav '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">v</subscript>'>
+<!ENTITY dphi   '&#x0394;&#x03D5;'>
+<!ENTITY omega  '&#x03C9;'>
+<!ENTITY Omega  '&#x03A9;'>
+<!ENTITY PI     '&#x03C0;'>
+<!ENTITY star   '&#x22C6;'>
+<!ENTITY int    '&#x222B;'>
+<!ENTITY nwl '<computeroutput xmlns="http://docbook.org/ns/docbook">nwl</computeroutput>' >
+<!ENTITY iwl '<computeroutput xmlns="http://docbook.org/ns/docbook">iwl</computeroutput>' >
+<!ENTITY nip '<computeroutput xmlns="http://docbook.org/ns/docbook">nip</computeroutput>' >
+<!ENTITY ip '<computeroutput xmlns="http://docbook.org/ns/docbook">ip</computeroutput>' >
+<!ENTITY nbvm '<computeroutput xmlns="http://docbook.org/ns/docbook">nbvm</computeroutput>' >
+<!ENTITY ivm '<computeroutput xmlns="http://docbook.org/ns/docbook">ivm</computeroutput>' >
+<!ENTITY nsurf '<computeroutput xmlns="http://docbook.org/ns/docbook">nsurf</computeroutput>' >
+<!ENTITY ngas '<computeroutput xmlns="http://docbook.org/ns/docbook">ngas</computeroutput>' >
+<!ENTITY groundpar '<computeroutput xmlns="http://docbook.org/ns/docbook">groundpar</computeroutput>' >
+<!ENTITY gaspar '<computeroutput xmlns="http://docbook.org/ns/docbook">gaspar</computeroutput>' >
+<!ENTITY ifcov '<computeroutput xmlns="http://docbook.org/ns/docbook">ifcov</computeroutput>' >
+<!ENTITY cmtrx '<computeroutput xmlns="http://docbook.org/ns/docbook">cmtrx</computeroutput>' >
+<!ENTITY ifmp '<computeroutput xmlns="http://docbook.org/ns/docbook">ifmp</computeroutput>' >
+<!ENTITY mprof '<computeroutput xmlns="http://docbook.org/ns/docbook">mprof</computeroutput>' >
+<!ENTITY meas_type '<computeroutput xmlns="http://docbook.org/ns/docbook">meas_type</computeroutput>' >
+<!ENTITY meas '<computeroutput xmlns="http://docbook.org/ns/docbook">meas</computeroutput>' >
+<!ENTITY sza '<computeroutput xmlns="http://docbook.org/ns/docbook">sza</computeroutput>' >
+<!ENTITY vza '<computeroutput xmlns="http://docbook.org/ns/docbook">vza</computeroutput>' >
+<!ENTITY raa '<computeroutput xmlns="http://docbook.org/ns/docbook">raa</computeroutput>' >
+<!ENTITY wl1 '<computeroutput xmlns="http://docbook.org/ns/docbook">wl<subscript xmlns="http://docbook.org/ns/docbook">1</subscript></computeroutput>' >
+<!ENTITY wl2 '<computeroutput xmlns="http://docbook.org/ns/docbook">wl<subscript xmlns="http://docbook.org/ns/docbook">2</subscript></computeroutput>' >
+<!ENTITY wln '<computeroutput xmlns="http://docbook.org/ns/docbook">wl<subscript xmlns="http://docbook.org/ns/docbook">n</subscript></computeroutput>' >
+<!ENTITY ipix '<computeroutput xmlns="http://docbook.org/ns/docbook">ipix</computeroutput>' >
+
+<!ENTITY theta '&#x03B8;'>
+<!ENTITY thetamin '&#x03B8;<superscript xmlns="http://docbook.org/ns/docbook">min</superscript>'>
+<!ENTITY thetamax '&#x03B8;<superscript xmlns="http://docbook.org/ns/docbook">max</superscript>'>
+<!ENTITY thetas '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">s</subscript>'>
+<!ENTITY thetav '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">v</subscript>'>
+<!ENTITY thetagb '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">gb</subscript>'>
+<!ENTITY thetan '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">n</subscript>'>
+<!ENTITY thetaG '&#x03B8;<subscript xmlns="http://docbook.org/ns/docbook">G</subscript>'>
+<!ENTITY phi   '&#x03D5;'>
+<!ENTITY phigb '&#x03D5;<subscript xmlns="http://docbook.org/ns/docbook">gb</subscript>'>
+<!ENTITY phiG '&#x03D5;<subscript xmlns="http://docbook.org/ns/docbook">G</subscript>'>
+<!ENTITY phis '&#x03D5;<subscript xmlns="http://docbook.org/ns/docbook">s</subscript>'>
+<!ENTITY phiv '&#x03D5;<subscript xmlns="http://docbook.org/ns/docbook">v</subscript>'>
+<!ENTITY dphi   '&#x0394;&#x03D5;'>
+<!ENTITY omega  '&#x03C9;'>
+<!ENTITY Omega  '&#x03A9;'>
+<!ENTITY PI     '&#x03C0;'>
+<!ENTITY star   '&#x22C6;'>
+<!ENTITY degree '&#x00b0;'>
+]>
+
+<chapter xmlns="http://docbook.org/ns/docbook"
+         xmlns:xl="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:id="chap04">
+    <title>How to use GRASP</title>
+    
+    <sect1>
+        <title>How to run the code</title>
+        <para>
+            After the installation of &GRASP; software the <command>grasp</command> command will be
+            available. As it is explained in a previous section (see <xref linkend="running-code" />) just typing
+            <command>grasp</command> will print some general information about how the software was compiled.
+        </para>
+        <para>    
+            First arguments that <command>grasp</command> executable expects is a path to the settings file.
+            The settings file describes the inversion strategy and general behaviour of the process: where is
+            the input data, in which format is the input data, where to store the output results... Therefore, a deep knowledge
+            of settings parameters is the base to understand &GRASP;.
+        </para>
+        <sect2 id="settings-file">
+            <title>Settings file</title>
+            <para>
+                Settings file is written in <link xl:href="http://en.wikipedia.org/wiki/YAML">YAML</link>
+                format and that brings many benefits: easy to write, clear to read, self-explanatory names,
+                flexible and powerful. The concepts are organized in blocks that are translated to YAML
+                thanks to the fix indentation (we suggest 4 white-spaces). So, for example, first level defines
+                the different modules:
+            </para>
+            <screen>                    
+<?db-font-size 90% ?>
+input:
+    # Here settings related with input module
+    segment: # It define a description of input segment
+        x: 2 # It define the maximum size of x dimension of the segment to 2.
+output:
+    # Settings linked with the output
+    # ...
+retrieval:
+    # Definition of inversion strategy
+    # ...
+...
+            </screen>
+            <para>
+                When grasp is called, the first step is to read settings and the second is to prepare the environment
+                for the settings defined in the main structures. If the settings are not valid, a pretty clean 
+                error message will be printed. Please, read the first line of it carefully to understand the error.
+            </para>
+            <para>
+               The settings parameters can also be defined by the command line. In this case, after the first argument
+               (settings file name) extra settings parameters can be defined with the syntax key=value where key is the
+                parameter name in "dot syntax". For example, for &GRASP; is equivalent to be called with the argument <computeroutput>input.driver=sdata</computeroutput>
+                or to have defined in the settings file the following content:
+                <programlisting language="yml" >
+input:
+    driver: sdata
+                </programlisting> 
+            </para>
+            <para>
+                It is important to define clearly how the relative paths have to be defined in the settings files. Relative paths are always 
+                relative to the file that defines it. In the next section the reader will learn about how to include other settings file 
+                inside of a settings file, but this rule will keep valid: Relative paths are defined from settings file that define it.
+                In the case of usage of command line, relative paths are relative to the current working directory. In the case of absolute paths all
+                this complexity disappears but the results are less portables.
+            </para>
+            <sect3 id="help">
+                <title>HELP argument</title>
+                <para>
+                    The list of available parameters for &GRASP; is long. The "help" argument will help you to know the available
+                    parameters or to look for something specific. When <command>help</command> argument is present &GRASP; is not 
+                    executed normally, but instead, the help information will be printed into screen. Additionally, help can be followed
+                    by a search string to filter the results. For example <command>help=input</command> will print only the settings
+                    which contain "input" string in its definition and <command>help=input.segment</command> will print only the settings
+                    which will be under the block "segment" inside of the block "input" (because "dot" symbol defines block separator).
+                </para>
+
+                <xi:include href="settings_parameters.dbk" />
+            </sect3>
+            <sect3>
+                <title>Extending settings: command line, import and template statements </title>
+                <para>
+                    The first argument of &GRASP; has to be the settings file but this file can be modified by another
+                    mechanism proposed by the settings module. The main way is by the command line, which allows to replace every settings
+                    parameter with "dot" syntax (replacing indentation by "dot" symbol and colon symbol by equal). All parameters that have been defined before and being replaced in the command line will cause a "note" information during the execution of &GRASP;. 
+                    That sentence is just to inform the user that command line arguments always have higher priority than parameters in 
+                    settings files. The value from command line will be the value that will be used to run the code. The command line is a very
+                    powerful feature to be used in production scripts.
+                </para>
+                <para>
+                    But the command line is not the only way to modify &GRASP; settings files. Settings files accept "import" and "template" statement.
+                    This statements could look similar but theirs behaviour is a bit different. Both of them allow defining other settings files that are read before the current one, but in case of import the settings can not be overwritten. Template statement allows loading other settings files and then, modifying some settings to customize the loaded file. Take into account that these statements can be used in cascade, creating problems to debug the code. Please, use these statements carefully.
+                </para>
+            </sect3>
+            <sect3>
+                <title>Streams</title>
+                <para>
+                    Some of the settings parameters are defined as "streams". GRASP output streams
+                    allow users to create dynamic names avoiding overwriting files or having to change 
+                    the filenames each time they execute &GRASP;. When a description of a parameter is defined
+                    as "output stream" the user can set up as a regular output path, for example <command>./folder/file.extension</command>
+                    or use the "magic" behind the output streams by using a wildcard that will be replaced by dynamic values. For instance:
+                </para>
+     
+                <screen>                    
+<?db-font-size 90% ?>
+output:
+    segment:
+        function: hdf
+        stream: "GRASP_Banizoumbou_20080101_20080331_2x2+3286+1376.hdf"
+    tile:
+        function: [ ascii, hdf ] 
+        stream: [ "GRASP_Banizoumbou_20080101_20080331.txt",
+                "GRASP_Banizoumbou_20080101_20080331.hdf" ]
+                </screen>
+                <para> 
+                    That definition is ok for many cases but if many tiles or segments are going to be processed
+                    the fixed names will produce name collisions (the content of some files will be overwritten during the process).
+                    It would be tedious (and not always possible) for the user to change oneself the dates or other numeric substrings in
+                    the file names. For this reason, the configuration system provides some wildcards
+                    that will be automatically replaced with the given values depending on the state
+                    of the processing. These wildcards are marked with curly braces and
+                    their names are quite self-explanatory. The previous example can be rewritten in a more generic way using
+                    the stream wildcards:
+                </para>
+                <screen>                    
+<?db-font-size 80% ?>
+output:
+    segment:
+        function: hdf
+        stream: "GRASP_Banizoumbou_{tile_from(%Y%m%d)}_{tile_to(%Y%m%d)}_{segment_nx}x{segment_ny}+{segment_corner_column(4)}+{segment_corner_row(4)}.hdf"
+    tile:
+        function: [ ascii, hdf ] 
+        stream: [ "GRASP_Banizoumbou_{tile_from(%Y%m%d)}_{tile_to(%Y%m%d)}.txt",
+                "GRASP_Banizoumbou_{tile_from(%Y%m%d)}_{tile_to(%Y%m%d)}.hdf" ]
+                </screen>
+                <para>
+                    In addition wildcards will provide the user the capability to set some system
+                    streams. If you use the values "true" or "screen" the information will be printed
+                    in the terminal (stdout). If the stream is set to "false" or "none" nothing 
+                    will be printed (like redirect to /dev/null).
+                </para> 
+                <para>
+                    The following list show all available wildcards that can be used for
+                    creating dynamic output filenames:
+                    <itemizedlist>
+                        <listitem>
+                            <emphasis role="bold">auto(N):</emphasis> itime x icol x irow with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">icol(N):</emphasis> current column number with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">irow(N):</emphasis> current column number with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">itime(N):</emphasis> current column number with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">iinversion(N):</emphasis> current inversion id with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_nx(N):</emphasis> number of X elements per segment with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_ny(N):</emphasis> number of Y elements per segment with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_nt(N):</emphasis> number of T elements per segment with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_from(FORMAT):</emphasis> start tile date in FORMAT. By default FORMAT is %FT%H:%M:%SZ
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_to(FORMAT):</emphasis> final tile date in FORMAT. By default FORMAT is %FT%H:%M:%SZ
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_corner_column(N):</emphasis> number of the corner (column) of the segment defined in settings file. Requirement: Input data have to be defined using input.corner instead of input.center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_corner_row(N):</emphasis> number of the corner of (row) the segment defined in settings file. Requirement: Input data have to be defined using input.corner instead of input.center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_center_longitude(FORMAT):</emphasis> longitude of the center of the tile defined in settings file. Requirement: Input data have to be defined using input.center instead of input.corner
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_center_latitude(FORMAT):</emphasis> latitude of the center of the tile defined in settings file. Requirement: Input data have to be defined using input.center instead of input.corner
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_coordinate_x(I):</emphasis> x input reference of center of the tile defined in settings file. It can be defined by corner or latitude. If is N in case it was defined by corner or 0.I in case it was defined like center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_coordinate_y(I):</emphasis> y input reference of center of the tile defined in settings file. It can be defined by corner or latitude. If is N in case it was defined by corner or 0.I in case it was defined like center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_width(N):</emphasis> Number of X elements in tile with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">tile_height(N):</emphasis> Number of Y elements in tile with N zeros at the left
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_corner_column(N):</emphasis> number of column of the segment corner with N zeros at the left. Requirement: Input data have to be defined using input.corner instead of input.center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_corner_row(N):</emphasis> number of row of the segment corner with N zeros at the left Requirement: Input data have to be defined using input.corner instead of input.center
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_first_date(FORMAT):</emphasis> date of first pixel inside the segment in FORMAT. By default FORMAT is %FT%H:%M:%SZ
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">segment_last_date(FORMAT):</emphasis> date of last pixel inside the segment in FORMAT. By default FORMAT is %FT%H:%M:%SZ
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">settings_filename:</emphasis> the name of settings file used to run the retrieval
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">version:</emphasis> version of grasp if it is compiled with saving this information
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">branch:</emphasis> git branch of grasp if it is compiled with saving this information
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">commit:</emphasis> reference of git commit of grasp if it is compiled with saving this information
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">constants_set:</emphasis> constants set used in compilation time
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">pwd:</emphasis> this is replaced by current folder and is only valid at the beginning of the stream definition
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">yml:</emphasis> this is replaced by current folder of main configuration file and it is only valid at the beginning of the stream definition
+                        </listitem>
+                    </itemizedlist>
+                </para>         
+            </sect3>
+        </sect2>
+        <sect2 id="sect-iguess">
+            <title>Retrieved characteristics</title>
+            <para>
+                Understanding &GRASP; inversion procedure means understanding how the algorithm is starting from an initial guess and
+                obtains a results array. This is an iterative procedure explained in the literature and introduced in <xref linkend="scientific-algorithm" />.
+                The purpose of this section is to explain how initial guess is represented inside the code as an array which evolve in each
+                iteration until get the result array. Following diagram shows how initial guess is read from settings file and translated 
+                to an internal array in the code. This detail could look very technical and related with the development but understanding
+                of some internal concepts of the code helps to understand how it works. Following diagram shows this transformation:
+            </para>
+
+            <para role="Normal">
+              <figure xml:id="iguess-settings-file">
+                <title>Translation of settings file into initial guess array</title>
+                <imagedata fileref="figures/iguess_settings.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+              </figure>
+            </para>  
+            <para>
+                Once that the initial guess is loaded, it is set as first array of characteristics to be retrieved. Retrieval process iterates
+                over it until it gets the results. The results of &GRASP;
+                retrieval is the array with the same shape as the initial guess but containing the results of retrieval of these parameters 
+                to match them with SDATA file. Then, the GRASP forward model is called using this results array, &GRASP; obtains the rest 
+                of the derived results it provides. So, we can talk about two kinds of results: basic results and derived products.
+                Following diagram shows this process:
+            </para>
+            <para role="Normal">
+              <figure xml:id="iguess-evolution">
+                <title>Evolution of retrieved characteristics during GRASP processing</title>
+                <imagedata fileref="figures/iguess_evolution.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+              </figure>
+            </para>              
+            <para>
+                To know all details about the products obtained by &GRASP; please, see <xref linkend="grasp-output" />.
+            </para>             
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Input module</title>
+        <para>
+            The input module is responsible for reading the data and for setting the internal input data structures. &GRASP;
+            provides a very flexible way to inject the input data offering developers the capability to create the input drivers. 
+            An input driver is an extension of &GRASP; that is added during compilation and is selected in the settings file.
+            These generic drivers allow the developers to create a custom way to read a specific database and load it
+            into the &GRASP; scientific algorithm. Therefore, &GRASP; can read infinite kinds of input databases, as much as drivers
+            exist. Additionally, drivers can take the responsibility of performing some pre-processing actions (such as calibration
+            corrections) before retrieving the data. Finally, when &GRASP; is used for massive data processing, drivers
+            are extremely important since they help to prepare input data and load it into scientific module without the use
+            of any intermediate files, everything is performed in memory. For general use &GRASP; proposes a generic driver
+            called the SData driver, which reads files in SData format (Sensor-Data format). These files are not standard, they have a
+            specific format proposed by &GRASP; to start working with the code. This format is described in <xref linkend="sdata-format" />.
+        </para>
+        <para>
+            Transformers are the second kind of extensions that the input module offers to users (and developers). They are called
+            after getting input data for a segment, it means after calling the driver. The purpose of transformers is to add
+            the capability to modify the segment after obtaining the data. An example of transformation is to load a climatology database
+            and to modify the initial guess of each pixel to optimize the number of iterations needed to retrieve the data. Performing 
+            this action after getting the data allows reusing it between different drivers. Default installation of &GRASP; does not offer
+            any transformers. All of them are considered as optional extensions and have to be externally added manually or using
+            the grasp-manager.
+        </para>
+        <sect2 id="sdata-format">
+            <title>The SDATA format</title>
+            <para>
+                The &SDATA; (sensor data) format is the original input data format of the &GRASP; code. It is a simple text format designed by the 
+                science team at the early stages of the development of the scientific code and it's the easiest way to create
+                test data.
+            </para>
+            <para>
+                In the context of the &GRASP; project, the &SDATA; format has a number of pros:
+                <itemizedlist>
+                    <listitem>Designed by the scientific team at the origin of the &GRASP; project, it is well adapted to its needs.</listitem>
+                    <listitem>It is very simple to describe.</listitem>
+                    <listitem>It is a text format, and therefore portable, quite easy to check (for the accustomed eye!) and to edit and to make some quick experiments.</listitem>
+                    <listitem>It is a piece of cake to read in Fortran :-)</listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                It has also a number of cons:
+                <itemizedlist>
+                    <listitem>It is not standard (a by-product of the "not designed by a committee" approach).
+                        No off-the-shelf library is available to parse it and validate it (meaning outside of the &GRASP; project).</listitem>
+                    <listitem>It lacks of flexibility: the order and the number of values are fixed for one version
+                        and any change in the format to meet new requirements is likely to break the compatibility with
+                        the former versions.
+                    </listitem>
+                    <listitem>
+                        It is fragile: a malformed file may easily make the code crash or produce mysterious bugs. 
+                        The design of the format, while simple, makes it hard to develop a really reliable validator.
+                    </listitem>
+                    <listitem>Comments are expected only after values, on the same line (after a colon sign)</listitem>
+                    <listitem>While the format uses a text representation for the data, it contains lots of numeric
+                        values, with limited accuracy and with no comment. Large files are tedious to read and it's
+                        easy to make shift errors while reading and editing even for the experienced user.</listitem>
+                    <listitem>
+                        Being a text format, it becomes very inefficient for large data volumes. While it can be
+                        compressed for archiving, it must be uncompressed for processing, and only sequential access
+                        is possible. It is still possible to perform regional processings
+                        (several dozens of thousands of pixels that cover more than a few hundreds 
+                        of kilometres in both directions) with this format (it was actually done for the sake of
+                        necessity), but it stresses the computing system a lot and can't be scaled up to the global processing.
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                Whatever the number and seriousness of the cons, one of the design objectives is to keep the code simple and flexible
+                allowing scientific community to play with the code. It does not make sense to implement a driver for a single user who wants to do
+                some tests with &GRASP;. That's why this easy format is maintained by the developer team.
+            </para>    
+            <para>
+                In the following description elements in <computeroutput>fixed-width font</computeroutput> are the snippets of content. 
+                The numeric values in these snippets (e.g. in <computeroutput>2 2 2 : NX NY NT</computeroutput>) are given only as examples.
+            </para>
+            <figure>
+                <title>An example of SDATA file</title>
+                <screen>        
+<?db-font-size 80% ?>
+SDATA version 2.0
+2   2   2  : NX NY NT
+
+4       2008-01-04T13:15:00Z    70000.0   0   0   : NPIXELS  TIMESTAMP  HOBS_km  NSURF  IFGAS
+1	    1		1	 3286	     1377   2.599	13.528       252.0	 100.0      6  0.443   0.490   0.565 ...
+2	    1		1	 3287	     1377   2.657	13.528       242.0	 100.0      6  0.443   0.490   0.565 ...
+1	    2		1	 3286	     1376   2.601	13.583       241.0	 100.0      6  0.443   0.490   0.565 ...
+2	    2		1	 3287	     1376   2.658	13.583       239.0	 100.0      6  0.443   0.490   0.565 ...
+
+
+4       2008-01-06T13:02:41Z    70000.0   0   0   : NPIXELS  TIMESTAMP  HOBS_km  NSURF  IFGAS
+1	    1		1	 3286	     1377   2.599	13.528       252.0	 100.0      6  0.443   0.490   0.565 ...
+2	    1		1	 3287	     1377   2.657	13.528       242.0	 100.0      6  0.443   0.490   0.565 ...
+1	    2		1	 3286	     1376   2.601	13.583       241.0	 100.0      6  0.443   0.490   0.565 ...
+2	    2		1	 3287	     1376   2.658	13.583       239.0	 100.0      6  0.443   0.490   0.565 ...
+                </screen>
+            </figure>
+
+            <para>
+                A SDATA file has a simple structure: 
+
+                <orderedlist>
+                    <listitem>
+                        The first line is the FILE HEADER. It contains a magic identifier <computeroutput>SDATA</computeroutput>
+                        followed by a version number.
+                    </listitem>
+
+                    <listitem>
+                        The second line is the SEGMENT HEADER. It contains three numbers, <computeroutput>NX</computeroutput>,
+                        <computeroutput>NY</computeroutput> and <computeroutput>NT</computeroutput>, 
+                        the spatial and temporal dimensions of the segment that this SDATA file represents.
+                        You can notice a colon and names of fields after the values. This is the way how comments
+                        are written in the SDATA files. Everything starting from the colon will be ignored by
+                        the SDATA parser.
+                    </listitem>
+
+                    <listitem>
+                        An empty line follows the SEGMENT HEADER.
+                    </listitem>
+
+                    <listitem>
+                        Then comes the first CELL (group of neighbouring pixels) of the SEGMENT. Each CELL has at most
+                        NX*NY pixels (but it may have less, for various reasons: cloudy pixels that have been filtered,
+                        missing pixels, etc.). The number of CELLs in the SEGMENT is given by the NT number provided
+                        in the SEGMENT HEADER.
+                    </listitem>
+
+                </orderedlist>
+            </para>
+
+            <para>
+                <table frame="all">
+                    <title>The SDATA main structure</title>
+                    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colnum="1" colwidth="1*" />
+                        <colspec colnum="2" colwidth="3*" />
+                        <thead>
+                            <row>
+                                <entry>Field Name</entry>
+                                <entry>Field Content</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>FILE HEADER</entry>
+                                <entry>
+                                    <computeroutput>SDATA version 1.0</computeroutput>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>SEGMENT HEADER</entry>
+                                <entry>
+                                    <para>
+                                        <screen>2 2 2 : NX NY NT</screen>
+                                    </para>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>empty line</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>CELL 1</entry>
+                                <entry>cell content, look for CELL structure</entry>
+                            </row>
+                            <row>
+                                <entry>empty line</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>CELL 2</entry>
+                                <entry>cell content, look for CELL structure</entry>
+                            </row>
+                            <row>
+                                <entry>empty line</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>...</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>CELL it</entry>
+                                <entry>cell content, look for CELL structure</entry>
+                            </row>
+                            <row>
+                                <entry>empty line</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>...</entry>
+                                <entry></entry>
+                            </row>
+
+                            <row>
+                                <entry>CELL <computeroutput>NT</computeroutput></entry>
+                                <entry>cell content, look for CELL structure</entry>
+                            </row>
+                            <row>
+                                <entry>empty line</entry>
+                                <entry></entry>
+                            </row>
+
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>	
+
+            <para>
+                A CELL is a set of neighbouring pixels, that form the base of a SEGMENT. Each CELL has a HEADER
+                and a number of PIXELs, supposedly acquired at the same time.
+            </para>
+
+            <para>
+                The CELL HEADER contains:
+                <orderedlist>
+                    <listitem>
+                        The number of pixels in the CELL (<computeroutput>NPIXELS</computeroutput>). It may not be
+                        larger than <computeroutput>NX*NY</computeroutput>
+                    </listitem>
+
+                    <listitem>
+                        The timestamp of acquisition of the pixels, in the 
+                        <link xl:href="http://en.wikipedia.org/wiki/ISO_8601">ISO8601</link> time format.
+                    </listitem>
+
+                    <listitem>
+                        A "height" of observation, in metres. The value here is a bit weird (<computeroutput>70000</computeroutput>),
+                        and doesn't correspond to the satellite altitude (that is at least 10 times larger). 
+                        Actually the value doesn't really matter as long as it is large. Historically, the scientific
+                        team has used this value of <computeroutput>70000</computeroutput> in many SDATA files.
+                    </listitem>
+
+                    <listitem>
+                        Two values for the number of surface and gas parameters. These two values are currently not documented and can be set to 0 for the moment.
+                    </listitem>
+
+                    <listitem>
+                        Comments starting with a colon.
+                    </listitem>
+                </orderedlist>
+            </para>
+
+            <para>
+                <table frame="all">
+                    <title>The CELL structure</title>
+                    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colnum="1" colwidth="1*" />
+                        <colspec colnum="2" colwidth="3*" />
+                        <thead>
+                            <row>
+                                <entry>Field Name</entry>
+                                <entry>Field Content</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>CELL HEADER</entry>
+                                <entry>
+                                    <mediaobject>
+                                        <textobject role="html">
+                                            <screen>4 2008-01-04T13:15:00Z 70000.0 0 0 : NPIXELS TIMESTAMP HOBS NSURF IFGAS</screen>
+                                        </textobject>
+
+                                        <textobject role="fo">
+                                            <para>
+                                                <screen>4 2008-01-04T13:15:00Z 70000.0 0 0 : NPIXELS ...</screen>
+                                            </para>
+                                            <para>
+                                                <screen>   ... TIMESTAMP HOBS NSURF IFGAS</screen>
+                                            </para>
+                                        </textobject>
+                                    </mediaobject>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>PIXEL 1</entry>
+                                <entry>a line of values, look for PIXEL structure</entry>
+                            </row>
+                            <row>
+                                <entry>PIXEL 2</entry>
+                                <entry>a line of values, look for PIXEL structure</entry>
+                            </row>
+                            <row>
+                                <entry>...</entry>
+                            </row>
+                            <row>
+                                <entry>PIXEL <computeroutput>NPIXELS</computeroutput></entry>
+                                <entry>a line of values, look for PIXEL structure</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+
+            <para>
+                Each line of data after the CELL HEADER represents exactly one pixel, with all its fields. The <xref linkend="tablepixel" />
+                describes the order and type of these fields. For the types, the Fortran notation is used:
+                array types are described with the dimensions of arrays between parentheses, and the ordering is such that the
+                first index increases faster. Indices start from 1, not from 0 like in C. For instance, when one reads 
+                <computeroutput>real(nwl)</computeroutput> for wavelengths, that means that one has to read a list of 
+                <computeroutput>nwl</computeroutput> real values that represent wavelengths.
+            </para>
+
+            <para>
+                <table frame="all" xml:id="tablepixel">
+                    <title>The PIXEL structure</title>
+                    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colnum="1" colwidth="1*" />
+                        <colspec colnum="2" colwidth="2*" />
+                        <colspec colnum="3" colwidth="4*" />
+                        <thead>
+                            <row>
+                                <entry>Field Type</entry>
+                                <entry>Variable Name (in source code)</entry>
+                                <entry>Field Content</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>integer</entry>
+                                <entry>pixel[&ipix;].ix</entry>
+                                <entry>coordinate x in the current cell, starting at 1 (in the direction EW)</entry>
+                            </row>
+
+                            <row>
+                                <entry>integer</entry>
+                                <entry>pixel[&ipix;].iy</entry>
+                                <entry>coordinate y in the current cell, starting at 1 (in the direction NS)</entry>
+                            </row>
+
+                            <row>
+                                <footnote id="fncloud">
+                                    <para>
+                                        This fairly counter-intuitive coding has a reason: the cloud flag was at first intended to be
+                                        a general processing flag (0 = pixel not to be processed, 1 = to be processed), cloud contamination is only
+                                        one particular case. Now the flag is limited to cloud screening, but unfortunately
+                                        the coding couldn't be changed right away. Since the framework is still in development, it is
+                                        planned to correct this unnatural feature in the near future.
+                                    </para>
+                                </footnote>
+
+                                <entry>real</entry>
+                                <entry>pixel[&ipix;].icloudy</entry>
+                                <entry>cloud flag: 0 = cloud, 1 = clear <footnoteref linkend="fncloud" /></entry>
+                            </row>
+
+                            <row>
+
+                                <footnote id="fngridcoord">
+                                    <para>
+                                        These fields are actually not used by the processing and therefore the SDATA implementer is
+                                        free to put whatever he or she likes here (e.g. 0 for non-gridded data). They are intended mainly
+                                        for documentation and debugging. For satellite data, they make it possible to retrieve the
+                                        pixel original information in the original database.
+                                    </para>
+                                </footnote>
+
+                                <entry>integer</entry>
+                                <entry>pixel[&ipix;].icol</entry>
+                                <entry>line of the pixel in its original grid or database (can be set to 0 when not relevant)<footnoteref linkend="fngridcoord" /></entry>
+                            </row>
+
+                            <row>
+                                <entry>integer</entry>
+                                <entry>pixel[&ipix;].row</entry>
+                                <entry>column of the pixel in its original grid or database (can be set to 0 when not relevant)<footnoteref linkend="fngridcoord" /></entry>
+                            </row>
+
+                            <row>
+                                <entry>real</entry>
+                                <entry>pixel[&ipix;].x</entry>
+                                <entry>
+                                    <para>longitude of the pixel, in decimal degrees, in the range [-180..180]</para>
+                                    <para>0: Greenwich meridian, east of Greenwich: positive, west of Greenwich: negative</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real</entry>
+                                <entry>pixel[&ipix;].y</entry>
+                                <entry>
+                                    <para>latitude of the pixel, in decimal degrees, in the range [-90..90]</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real</entry>
+                                <entry>pixel[&ipix;].MASL</entry>
+                                <entry>altitude of the ground, in metres (MASL: metres above sea level)</entry>
+                            </row>
+
+                            <row>
+                                <entry>real</entry>
+                                <entry>pixel[&ipix;].land_percent</entry>
+                                <entry>percentage of land, in the range [0 (sea) .. 100 (land)]. Intermediate values correspond to coastal pixels</entry>
+                            </row>
+
+                            <row>
+                                <entry>integer</entry>
+                                <entry>pixel[&ipix;].nwl</entry>
+                                <entry>number of available wavelengths (&nwl;)</entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].wl</entry>
+                                <entry>list of wavelengths, in micrometers</entry>
+                            </row>
+
+                            <row>
+                                <entry>integer(&nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].nip</entry>
+                                <entry>number of types of measurements for each wavelength (&nip;)</entry>
+                            </row>
+
+                            <row>
+                                <entry>integer(&nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].meas_type[&nip;]</entry>
+                                <entry>
+                                    <para>list of types of measurements &meas_type; (see <xref linkend="tabletypesmeasurements" />)</para>
+                                    <para>The ordering is as follows: &meas_type;(1, &wl1;) &meas_type;(2, &wl1;) ... &meas_type;(&nip;, &wl1;) &meas_type;(1, &wl2;) ... &meas_type;(&nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>integer(&nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].nbvm[&nip;]</entry>
+                                <entry>
+                                    <para>number of valid measurements (&nbvm;), for each type of measurement and for each wavelength</para>
+                                    <para>The ordering is as follows: &nbvm;(1, &wl1;) &nbvm;(2, &wl1;) ... &nbvm;(&nip;, &wl1;) &nbvm;(1, &wl2;) ... meas_type(&nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].sza</entry>
+                                <entry>solar zenith angle (&sza; or &thetas;) in decimal degrees ([0..90]), for each wavelength</entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nbvm;, &nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].thetav[&nip;][&nbvm;]</entry>
+                                <entry>
+                                    <para>viewing zenith angle (&vza; or &thetav;) in decimal degrees ([0..90] for &PARASOL;, TBD for PHOTOMETERS)</para>
+                                    <para>The ordering is as follows: &vza;(1, 1, &wl1;) &vza;(2, 1, &wl1;) ... &vza;(&nbvm;, 1, &wl1;) &vza;(1, 2, &wl1;) ... &vza;(&nbvm;, &nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nbvm;, &nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].phi[&nip;][&nbvm;]</entry>
+                                <entry>
+                                    <para>relative azimuth angle (&raa; or &dphi;) in decimal degrees ([-180..180] or [0..360])</para>
+                                    <para>The ordering is as follows: &raa;(1, 1, &wl1;) &raa;(2, 1, &wl1;) ... &raa;(&nbvm;, 1, &wl1;) &raa;(1, 2, &wl1;) ... &raa;(&nbvm;, &nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nbvm;, &nip;, &nwl;)</entry>
+                                <entry>
+                                    <para>pixel[&ipix;].meas[&nwl;]</para>
+                                    <para>.tau[&nbvm;];...;.P[&nbvm;]</para>
+                                </entry>
+                                <entry>
+                                    <para>measurements (depending on &meas_type;), for each wavelength</para>
+                                    <para>The ordering is as follows: &meas;(1, 1, &wl1;) &meas;(2, 1, &wl1;) ... &meas;(&nbvm;, 1, &wl1;) &meas;(1, 2, &wl1;) ... &meas;(&nbvm;, &nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nsurf;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].groundpar[&nsurf;]</entry>
+                                <entry>
+                                    <para>ground parameters</para>
+                                    <para>This part can be ignored for now. The ordering is as follows: &groundpar;(1, &wl1;) &groundpar;(2, &wl1;) ... &groundpar;(&nsurf;, &wl1;) &groundpar;(1, &wl2;) ... &groundpar;(&nsurf;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>real(&nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].gaspar</entry>
+                                <entry>
+                                    <para>gas absorption (tau gases). This parameter has to be
+                                        provided only if the setting IFGAS (in the CELL HEADER) is set to 1.</para>
+                                    <para>The
+                                        ordering is as follows: &gaspar;(&wl1;) &gaspar;(&wl2;) ... &gaspar;(&wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>integer(&nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].ifcov[&nip;]</entry>
+                                <entry>
+                                    <para>&ifcov; (1 if a covariance matrix is available, 0 otherwise)</para>
+                                    <para>The ordering is as follows: &ifcov;(1, &wl1;) &ifcov;(2, &wl1;) ... &ifcov;(&nip;, &wl1;) &ifcov;(1, &wl2;) ... &ifcov;(&nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <footnote id="fncmtrx">
+                                    <para>
+        &nbvm; is actually to be multiplied by &ifcov;(&ip;, &iwl;). If this last number equals 0, the array reduces to an empty set and no value is to be read.
+                                    </para>
+                                </footnote>
+
+                                <entry>real(&nbvm;, &nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].cmtrx[&nip;][&nbvm;]</entry>
+                                <entry>
+                                    <para>&cmtrx; (diagonal of covariance matrix, also known as &Omega;). These values have to be skipped if ifcov=0</para>
+                                    <para>The ordering is as follows: &cmtrx;(1, 1, &wl1;) &cmtrx;(2, 1, &wl1;) ... 
+      &cmtrx;(&nbvm;<footnoteref linkend="fncmtrx" />, 1, &wl1;) &cmtrx;(1, 2, &wl2;) ... &cmtrx;(&nbvm;<footnoteref linkend="fncmtrx" />, &nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>integer(&nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].ifmp[&nip;]</entry>
+                                <entry>
+                                    <para>&ifmp; (1 if a vertical profile (&mprof;) is available, 0 otherwise)</para>
+                                    <para>The ordering is as follows: &ifmp;(1, &wl1;) &ifmp;(2, &wl1;) ... &ifmp;(&nip;, &wl1;) &ifmp;(1, &wl2;) ... &ifmp;(&nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <footnote id="fnmprof">
+                                    <para>
+        &nbvm; is actually to be multiplied by &ifmp;(&ip;, &iwl;). If this last number equals 0, the array reduces to an empty set and no value is to be read.
+                                    </para>
+                                </footnote>
+
+                                <entry>real(&nbvm;, &nip;, &nwl;)</entry>
+                                <entry>pixel[&ipix;].meas[&nwl;].mprof[&nip;][&nbvm;]</entry>
+                                <entry>
+                                    <para>&mprof; (vertical profile of Rayleigh backscattering). These values have to be skipped if ifmp=0</para>
+                                    <para>The ordering is as follows: &mprof;(1, 1, &wl1;) &mprof;(2, 1, &wl1;) ... 
+      &mprof;(&nbvm;<footnoteref linkend="fnmprof" />, 1, &wl1;) &mprof;(1, 2, &wl2;) ... &mprof;(&nbvm;<footnoteref linkend="fnmprof" />, &nip;, &wln;)</para>
+                                </entry>
+                            </row>
+
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            <para>
+                The field <command>pixel[ipix].meas[nwl].meas_type[nip]</command> of pixel structure is a special code which define
+                the type of measure. Following table describes the valid codes and its interpretation:
+            </para>
+            <para>
+                <table frame="all" xml:id="tabletypesmeasurements">
+                    <title>TYPES OF MEASUREMENTS</title>
+                    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                        <colspec colnum="1" colwidth="2*" />
+                        <colspec colnum="2" colwidth="1*" />
+                        <colspec colnum="4" colwidth="3*" />
+                        <thead>
+                            <row>
+                                <entry>CONSTANT NAME (used in source code)</entry>
+                                <entry>VALUE (SDATA 2.0)</entry>
+                                <entry>MEANING</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_UNKNOWN</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>0</computeroutput>
+                                </entry>
+                                <entry>The measurement type is invalid or not yet implemented</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_TOD</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>11</computeroutput>
+                                </entry>
+                                <entry>Total Optical Depth</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_AOD</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>12</computeroutput>
+                                </entry>
+                                <entry>Aerosol Optical Depth</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P11</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>21</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P11</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P12</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>22</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P12</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P22</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>23</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P22</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P33</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>24</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P33</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P34</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>25</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P34</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P44</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>26</computeroutput>
+                                </entry>
+                                <entry>Phase Matrix Element P44</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_LS</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>31</computeroutput>
+                                </entry>
+                                <entry>Lidar Signal</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_DP</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>32</computeroutput>
+                                </entry>
+                                <entry>Depolarization Ratio</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_RL</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>33</computeroutput>
+                                </entry>
+                                <entry>Raman Lidar Signal</entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_I</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>41</computeroutput>
+                                </entry>
+                                <entry>Normalized Radiance I
+                                    <footnote id="fnStokes">
+                                        <para>
+                                            All the Stokes Parameters are to be expressed
+                                            as reduced quantities, without dimension
+                                            <equation>
+                                                <title>Conversion from absolute radiances to normalized, reduced radiances</title>
+                                                I = radiance * &PI; / E0 
+                                            </equation>
+                                            where radiance is the radiance of the instrument, and E0 the solar
+                                            spectral flux, that may be both in mW / (m^2 * sr * nm) or
+                                            equivalent units
+                                        </para>
+                                    </footnote>
+                                </entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_Q</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>42</computeroutput>
+                                </entry>
+                                <entry>Polarized radiance Q<footnoteref linkend="fnStokes" /></entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_U</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>43</computeroutput>
+                                </entry>
+                                <entry>Polarized Radiance U<footnoteref linkend="fnStokes" /></entry>
+                            </row>
+
+                            <row>
+                                <entry>
+                                    <computeroutput>MEAS_TYPE_P</computeroutput>
+                                </entry>
+                                <entry>
+                                    <computeroutput>44</computeroutput>
+                                </entry>
+                                <entry>Polarization Rate: <mathphrase>P = sqrt(Q*Q + U*U)/I</mathphrase></entry>
+                            </row>
+
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>               
+        </sect2>
+        <sect2>
+            <title>Angle definition</title>
+            <para>
+                This chapter main goal is to describe how the angles should
+                be defined to be used inside of &GRASP; code. The universal spirit of &GRASP;, where 
+                many different instruments coexist (from satellite to ground based measurements)
+                creates challenges to define a homogeneous way to define the angles keeping an unique geometry.
+            </para>
+            <para>
+                &GRASP; angles are defined to be considered as "normal" for satellite reference, it provokes
+                some problems to define what we could call as an intuitive "ground based" reference system. It is 
+                why we are going to put special emphasis on definition of the angles to these less intuitive applications.
+                The intuitive reference for a "ground based" measurements, in spherical geometry, is given as follows:
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+&thetagb; zenith angle: with the zero established in the zenith
+                    </listitem>
+
+                    <listitem>
+&phigb; azimuth angle: with the zero considered in the sun position
+                    </listitem>
+                </itemizedlist>
+                where the sub index "gb" makes reference to "ground based".
+            </para>
+            <para>
+                The conversion to the &GRASP; geometry is done as follows:
+                <equation>
+                    <title>Conversion from &thetagb; (ground based) to &thetaG; (&GRASP;)</title>
+&thetaG; = 180&degree; - &thetagb;
+                </equation>
+                <equation>
+                    <title>Conversion from &phigb; (ground based) to &phiG; (&GRASP;)</title>
+&phiG; = 180&degree; + &phigb;
+                </equation>
+            </para>
+            <para>
+                Here we propose some examples for better understanding of the process. Before
+                defining the measurement angles introduced in the code, both "intuitive"
+                and "GRASP", we need first to consider the instrument viewing angle
+                for each scenario (&thetav;, &phiv;). Following figure and table will provide
+                some examples of angles defined for the ground based applications.
+            </para>
+            <para role="Normal">
+                <figure xml:id="ground-based">
+                  <title>Ground based angles definition example</title>
+                  <imagedata fileref="figures/AppendixB_AngleDefinition.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+            <table frame="all">
+                <title>Specific examples in ground based angle definition example</title>
+                <tgroup cols="8" align="center" colsep="1" rowsep="1">
+                    <thead>
+                        <row>
+                            <entry>Example</entry>
+                            <entry>&thetas;</entry>
+                            <entry>&thetav;</entry>
+                            <entry>&phiv;</entry>
+                            <entry>&thetagb;</entry>
+                            <entry>&phigb;</entry>
+                            <entry>&thetaG;</entry>
+                            <entry>&phiG;</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>1</entry>
+                            <entry>25&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>25&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>155&degree;</entry>
+                            <entry>180&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>2</entry>
+                            <entry>25&degree;</entry>
+                            <entry>12.5&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>12.5&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>167.5&degree;</entry>
+                            <entry>180&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>3</entry>
+                            <entry>25&degree;</entry>
+                            <entry>25&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>180&degree;</entry>
+                            <entry>180&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>4</entry>
+                            <entry>25&degree;</entry>
+                            <entry>37.5&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>12.5&degree;</entry>
+                            <entry>180&degree;</entry>
+                            <entry>167.5&degree;</entry>
+                            <entry>0&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>5</entry>
+                            <entry>25&degree;</entry>
+                            <entry>50&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>25&degree;</entry>
+                            <entry>180&degree;</entry>
+                            <entry>155&degree;</entry>
+                            <entry>0&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>6</entry>
+                            <entry>25&degree;</entry>
+                            <entry>90&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>65&degree;</entry>
+                            <entry>180&degree;</entry>
+                            <entry>115&degree;</entry>
+                            <entry>0&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>7</entry>
+                            <entry>25&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>30&degree;</entry>
+                            <entry>25&degree;</entry>
+                            <entry>30&degree;</entry>
+                            <entry>155&degree;</entry>
+                            <entry>210&degree;</entry>
+                        </row>
+                        <row>
+                            <entry>8</entry>
+                            <entry>25&degree;</entry>
+                            <entry>0&degree;</entry>
+                            <entry>90&degree;</entry>
+                            <entry>25&degree;</entry>
+                            <entry>90&degree;</entry>
+                            <entry>155&degree;</entry>
+                            <entry>270&degree;</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                Since sunphptometers are widely used with &GRASP; following table provides
+                information specifically about these instruments. Considering the instrument 
+                viewing angle for each scenario (&thetav;, &phiv;). They can be understood as the
+                "movements of the motors". The process will be as follows:
+            </para>
+            <para>
+                instrument viewing angle -> angle in (intuitive) ground based -> angle in GRASP
+            </para>
+
+            <table frame="all">
+                <title>Sunphotometer angle description</title>
+                <tgroup cols="8" align="center" colsep="1" rowsep="1">                   
+                    <thead>
+                        <row>
+                            <entry>Measure type</entry> 
+                            <entry>Angle</entry>
+                            <entry>Inst. View.</entry>
+                            <entry>Range</entry>
+                            <entry>Gr. Based</entry>
+                            <entry>Range</entry>
+                            <entry>GRASP</entry>
+                            <entry>Range</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <footnote id="fnmeas">
+                            <para>
+                                &thetas; refers to the solar zenith angle (for different measurements)
+                            </para>
+                        </footnote>
+                        <footnote id="fndecreasing">
+                            <para>
+                                decreasing values
+                            </para>
+                        </footnote>   
+                        <footnote id="fndecreasing">
+                            <para>
+                                decreasing values
+                            </para>
+                        </footnote>  
+                        <footnote id="fnppl">
+                            <para>
+                                The data of the polarized principal plane correspond always to fixed
+                                points in the sky and it is given for the instrument in so-called
+                                ground based coordinates.
+                            </para>
+                        </footnote>   
+                        <row>
+                            <entry morerows='1' valign='middle'>Direct sun</entry>
+                            <entry>&theta;</entry>
+                            <entry>&thetav; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&thetagb; = &thetas;</entry>
+                            <entry>[0&degree; -- 90&degree;]<footnoteref linkend="fnmeas" /></entry>
+                            <entry>&thetaG; = 180&degree; - &thetas;</entry>
+                            <entry>[180&degree; -- 90&degree;]<footnoteref linkend="fnmeas" /></entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry>&phiv; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&phigb; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&phiG; = 180&degree;</entry>
+                            <entry>[180&degree;]</entry>
+                        </row>
+                        <row>
+                            <entry morerows='1' valign='middle'>Almucantar</entry>
+                            <entry>&theta;</entry>
+                            <entry>&thetav; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&thetagb; = &thetas;</entry>
+                            <entry>[&thetas;]</entry>
+                            <entry>&thetaG; = 180&degree; - &thetas;</entry>
+                            <entry>[180&degree; -- &thetas;]</entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry>&phiv; = 3&degree;, 3.5&degree;, 4&degree;, 5&degree;, ...,
+                                90&degree;, ... 180&degree;</entry>
+                            <entry>[0&degree; - 180&degree;]</entry>
+                            <entry>&phigb; = 3&degree;, 3.5&degree;, 4&degree;, 5&degree;, ...,
+                                90&degree;, ... 180&degree;</entry>
+                            <entry>[0&degree; -- 180&degree;]</entry>
+                            <entry>&phiG; = 183&degree;, 183.5&degree;, 184&degree;,
+                                185&degree;, ... 270&degree;, ... 360&degree;</entry>
+                            <entry>[180&degree; -- 360&degree;]</entry>
+                        </row> 
+                        <row>
+                            <entry morerows='1' valign='middle'>
+                                   Principal plane measurement: Before the zenith  
+                            </entry>   
+                            <entry>&theta;</entry>
+                            <entry>&thetav; = -6&degree;, ... , -3&degree;, 3&degree;, &thetamax; &lt; &thetas; </entry>
+                            <entry>[-6&degree; -- (&thetamax; &lt; &thetas;)]</entry>
+                            <entry>&thetagb; = &thetas; + 6&degree; ... &thetas; + 3&degree;, &thetas; - 3&degree;, ... &thetas; - 6&degree;, &thetas; - &thetamax;</entry>
+                            <entry>[(&thetas; + 6&degree;) -- 0]<footnoteref linkend="fndecreasing" /></entry>
+                            <entry>&thetaG; = 180&degree; - &thetas; - 6&degree;, ... 
+                                180&degree; - &thetas; - 3&degree;,
+                                180&degree; - &thetas; + 3&degree;, ...
+                                180&degree; - &thetas; + &thetamax;
+                            </entry>
+                            <entry>[(180&degree; - &thetas; - 6&degree;) -- 180&degree;]</entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry>&phiv; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&phigb; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                            <entry>&phiG; = 180&degree;</entry>
+                             <entry>[180&degree;]</entry>
+                        </row>         
+
+                        <row>
+                            <entry morerows='1' valign='middle'>Principal plane measurement: After the zenith </entry>   
+                            <entry>&theta;</entry>
+                            <entry>&thetav; = &thetamin; &lt; &thetas; , ... 140&degree; or &thetamax; - &thetas; &gt; 90&degree;</entry>
+                            <entry>[(&thetamin; &lt; &thetas;) -- 140&degree;]</entry>
+                            <entry>&thetagb; = &thetamin; - &thetas; ... 140&degree; - &thetas; or &thetamax; - &thetas;</entry>
+                            <entry>[0&degree; -- 90&degree;]<footnoteref linkend="fndecreasing" /></entry>
+                            <entry>&thetaG; = 180&degree; + &thetas; - &thetamin;, ... 
+                                180&degree; + &thetas; - 140&degree;
+                                or 180&degree; + &thetas; - &thetamax;
+                            </entry>
+                            <entry>[180&degree; -- 90&degree;]<footnoteref linkend="fndecreasing" /></entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry>&phiv; = 0&degree;</entry>
+                            <entry>[180&degree;]</entry>
+                            <entry>&phigb; = 180&degree;</entry>
+                            <entry>[180&degree;]</entry>
+                            <entry>&phiG; = 0&degree;</entry>
+                            <entry>[0&degree;]</entry>
+                        </row>      
+                        <row>
+                            <entry morerows='1' valign='middle'>Polarized principal plane measurement:
+                    before the zenith<footnoteref linkend="fnppl" /></entry>   
+                            <entry>&theta;</entry>
+                            <entry></entry>
+                            <entry></entry>
+                            <entry>&thetagb; = 85&degree;, 80&degree;, 75&degree;, ...
+                                10&degree;, 5&degree;, 0&degree;</entry>
+                            <entry></entry>
+                            <entry>&thetaG; = 95&degree;, 100&degree;, 105&degree;, ...
+                                170&degree;, 175&degree;, 180&degree;</entry>
+                            <entry></entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry></entry>
+                            <entry></entry>
+                            <entry>&phigb; = 0&degree;</entry>
+                            <entry></entry>
+                            <entry>&phiG; = 180&degree;</entry>
+                            <entry></entry>
+                        </row> 
+
+                        <row>
+                            <entry morerows='1' valign='middle'>Polarized principal plane measurement:
+                    after the zenith<footnoteref linkend="fnppl" /></entry>   
+                            <entry>&theta;</entry>
+                            <entry></entry>
+                            <entry></entry>
+                            <entry>&thetagb; = 0&degree;, 5&degree;, 10&degree;, ...
+                                75&degree;, 80&degree;, 85&degree;</entry>
+                            <entry></entry>
+                            <entry>&thetaG; = 180&degree;, 175&degree;, 170&degree;, ...
+                                105&degree;, 100&degree;, 95&degree;</entry>
+                            <entry></entry>
+                        </row>
+                        <row>
+                            <entry>&phi;</entry>
+                            <entry></entry>
+                            <entry></entry>
+                            <entry>&phigb; = 180&degree;</entry>
+                            <entry></entry>
+                             <entry>&phiG; = 0&degree;</entry>
+                            <entry></entry>
+                        </row>                                                                                                                                                                                                                               
+                    </tbody>
+                </tgroup>
+            </table>
+            
+            <para>
+                In the case of nephelometer data angle definition is a bit different since only &theta; angle has to be defined, rest of the angles
+                will be ignored. To provide nephelometer data (phase matrix) the conversion to the &GRASP; geometry is done as follows:
+                <equation>
+                    <title>Conversion from &thetan; (nephelometer scattering angle) to &thetaG; (&GRASP;)</title>
+                    &thetaG; = 180&degree; - &thetan;
+                </equation>
+            </para>
+           
+        </sect2>
+        <sect2>
+            <title>How to prepare the photometer data</title>
+            <para>
+                Sunphotometers are widely used with &GRASP;. They take measurements of sky radiance and direct sun. Many inversion strategies can
+                be used to retrieve sunphotometer data but this section will explain how to define input data. The information that runs inside of 
+                &GRASP; has to be pre-pocessed in order to remove clouds an to calibrate and to normalize the data.
+            </para>
+            <para>
+                Following <xref linkend="sdata-format" /> the direct sun measurements can be described as AOD or TOD  defined in <xref linkend="tabletypesmeasurements" />
+                as measurements of type 11 or 12. At this point it is needed to take into account that if "ifgas" field is defined as 1 in the case of AOD no gaseous absorption optical depth will be accounted but in the case of TOD they will be subtracted. The gases also affect the radiance measurements but in lower magnitude.
+                In the case of TOD + radiances with ifgas=1, the same model will be applied to all measurements. If AOD is used some (minor) incongruences could come from the use of different models to calculate gases for AOD and for radiances.
+            </para>
+            <para>
+                Radiance measurements are defined with the constant MEAS_TYPE_I(41). Polarized measurements can be defined as Q,U (42, 43) or as polarization rate (44). It is also important to check how polarized data is going to be manipulated in the retrieval code based on inversion strategy defined in the settings file.
+            </para>
+        </sect2>
+        <sect2>
+            <title>How to prepare the lidar data</title>
+                <para>
+                    Note that all processing will be considering range corrected profile for one wavelength. 
+                    Procedure for other profiles from different wavelengths are exactly the same. 
+                    Range corrected profile implies that at least background noise was subtracted and altitude correction were applied to the
+                    raw signal but if it's possible to consider all other corrections (electrical noise and overlap
+                    correction, dead time correction, gluing analog and photon-counting signals and all 
+                    other your system may have) you should apply them.
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        Step 1. Background noise subtraction and range correction.
+                    </emphasis>
+                </para>
+                <para>
+                    Let <emphasis role="bold">B'</emphasis> be the estimation of the background noise.
+                    Usually <emphasis role="bold">B'</emphasis> is estimated as 
+                    <emphasis role="bold">P(Z<subscript>B</subscript>)</emphasis>, accumulated and averaged 
+                    around selected altitude <emphasis role="bold">Z<subscript>B</subscript>Z</emphasis>, 
+                    much higher than the maximum altitude of lidar extraction in step 2 (<emphasis role="bold">Z<subscript>max</subscript></emphasis>).
+                    For example with maximum altitude <emphasis role="bold">Z<subscript>max</subscript>=15km</emphasis>, 
+                    it is averaged around 30 km and accumulated for the whole period of lidar observation.
+                    The noise and range corrected signal will be:
+                 </para>
+                 <para>
+                    <emphasis role="bold">
+                       S(Z<subscript>i</subscript>) = (P(Z<subscript>i</subscript>)-B')*Z<subscript>i</subscript><superscript>2</superscript>
+                    </emphasis>
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        Step 2. Altitude range selection and signal cropping.
+                    </emphasis>
+                </para>
+                <para>
+                    The minimum <emphasis role="bold">Z<subscript>min</subscript></emphasis> and maximum
+                    <emphasis role="bold">Z<subscript>max</subscript></emphasis> altitudes are selected and the signal 
+                    is cropped, so <emphasis role="bold">Z<subscript>min</subscript>&lt;Z<subscript>i</subscript>&lt;Z<subscript>max</subscript></emphasis>.
+                    The minimum altitude should be selected as low as possible, preferably in the region where the overlap 
+                    correction could be correctly applied. The <emphasis role="bold">Z<subscript>max</subscript></emphasis> should be 
+                    selected from the following considerations: maximum altitude where the noise levels of lidar measurement are 
+                    acceptable and the amount of atmospheric aerosols is still noticeable. 
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        Step 3. Backscatter of molecular profile
+                    </emphasis>
+                </para>
+                <para>
+                    Backscatter profile calculated based on standard atmosphere model [1]:
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        &beta;<subscript>mol</subscript>(Z<subscript>i</subscript>,&lambda;) =
+                        N * &sigma;(&lambda;) * (P(Z<subscript>i</subscript>)/P<subscript>SA</subscript>)
+                        * (T<subscript>SA</subscript>/T(Z<subscript>i</subscript>)/)
+                    </emphasis>
+                </para>
+                <para>        
+                    where:
+                    <itemizedlist>
+                        <listitem>
+                            <emphasis role="bold">N </emphasis>molecular number density
+                        </listitem>  
+                        <listitem>
+                            <emphasis role="bold">&sigma;(&lambda;) </emphasis> total Rayleigh cross section per molecule 
+                            which analytical formula can be written like 
+                            <emphasis role="bold">
+                                &sigma;(&lambda;) = A * &lambda; <superscript>-B-C*&lambda;-D/&lambda;</superscript>
+                            </emphasis>
+                        </listitem>  
+                        <listitem>
+                            <emphasis role="bold">P<subscript>sa</subscript></emphasis> pressure of standard atmosphere model
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">T<subscript>sa</subscript></emphasis> temperature of standard atmosphere model
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">P(Z<subscript>i</subscript>)</emphasis> pressure profile of atmosphere
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">T(Z<subscript>i</subscript>)</emphasis> temperature profile of atmosphere
+                        </listitem>
+                    </itemizedlist>
+                </para>
+
+                <para>
+                    <emphasis role="bold">
+                        Step 4. Reducing the number of points in profiles
+                    </emphasis>
+                </para>
+                
+                <para>
+                    GARRLiC uses a logarithmical altitude scale with <emphasis role="bold">N<subscript>Z</subscript></emphasis>
+                    points to represent aerosol profiles in the atmosphere. For that we have to present all vectors (altitude 
+                    vector and profiles of lidar signal and molecular backscatter) in logarithmically equidistant manner.
+                </para>
+                <para>
+                    1. Move to logarithmic scale and find altitude step:
+                </para>
+                <para>
+                    logarithmic scale: 
+                    <emphasis role="bold">
+                        Z<subscript>i</subscript>
+                        <superscript>lg</superscript> = lg(Z<subscript>i</subscript>) 
+                    </emphasis> 
+                </para>
+                <para>
+                    step in log scale:
+                    <emphasis role="bold">
+                        &Delta;Z = Z<subscript>max</subscript>
+                        <superscript>lg</superscript> - Z<subscript>min</subscript><superscript>lg</superscript>/N<subscript>Z</subscript>
+                    </emphasis> 
+                </para>
+                <para>
+                    logarithmic altitude ranges (from 
+                    <emphasis role="bold">
+                        h<subscript>k</subscript>
+                    </emphasis> 
+                    to
+                    <emphasis role="bold">
+                        h<subscript>k+1</subscript>
+                    </emphasis>                      
+                    ) for averaging data in logarithmically equidistant manner, k = 1 .. N<subscript>z</subscript>:
+                    <emphasis role="bold">
+                        h<subscript>k</subscript> = Z<subscript>0</subscript>
+                        <superscript>lg</superscript> + (k - 1) * &Delta;Z
+                    </emphasis>
+                </para>
+  
+                <para>
+                    2. Average the data profiles
+                </para>
+  
+                <para>
+                    <emphasis role="bold">
+                        A<subscript>k</subscript> = (&Sigma;<subscript>j=1</subscript><superscript>n</superscript>
+                        A<subscript>j</subscript>(h<subscript>k</subscript>, h<subscript>k+1</subscript>) ) / n
+                    </emphasis>
+                </para>
+                
+                <para>       
+                    where: 
+                    <itemizedlist>
+                        <listitem>
+                            <emphasis role="bold">A</emphasis> altitude vector or profile of lidar signal or molecular backscatter
+                        </listitem>
+                        <listitem>
+                            <emphasis role="bold">n</emphasis> number of points inside logarithmic altitude ranges
+                        </listitem>
+                    </itemizedlist>
+                </para>
+  
+                <para>
+                    After such procedure number of points in three main vectors reduced to N<subscript>Z</subscript>
+                    points in logarithmically equidistant manner.
+                </para>
+  
+                <para>
+                    <emphasis>
+                        Hint: the altitude vectors for measurements at all wavelengths have to be the same. 
+                    </emphasis>
+                </para>
+
+  
+                <para>
+                    <emphasis role="bold">
+                        Step 5. Profile normalization
+                    </emphasis>
+                </para>
+  
+                <para>
+                    Values of lidar signal vary from instrument to instrument, from detector to detector that is why GARRLiC requires normalized lidar signal. To be consistent to molecular optical depth inside code profile of molecular backscatter have to be normalized too. Normalized lidar and backscatter profiles:
+                </para>
+  
+                <para>
+                    <emphasis role="bold">
+                        A'<subscript>k</subscript> = A<subscript>k</subscript> / &int;<subscript>Zmin</subscript><superscript>Zmax</superscript>
+                        A<subscript>k</subscript> dZ
+                    </emphasis>
+                </para>
+
+                <para>        
+                    where <emphasis role="bold">A</emphasis> represents profile of lidar signal or molecular backscatter.
+                </para>
+                <para>
+                    <emphasis>
+                        Caution: integration have to be done using meters in altitudes.
+                    </emphasis>
+                </para>
+                <para>
+                    At the end for each wavelength you have to have normalized lidar and backscatter profiles and altitude vector.
+                </para>
+                <para>
+                    <emphasis>
+                        References: Anthony Bucholtz, Rayleigh-scattering calculations for the terrestrial atmosphere, Optical Society of America, 1995.
+                    </emphasis>
+                </para>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Output module</title>  
+        <para>
+            The output module is responsible for managing results for each segment or entire tile and driving them to the correspond destination (file or screen).
+            There are two kinds of main output structure into &GRASP;: tile and segment. Segment output structure represents the output results obtained from the retrieval library. Then, core unit compact it and store it in a tile output structure, which contains the results of entire process.
+        </para>
+        <para>
+            Output module can be extended in the same way as input module. In the case of the output there are three kinds of extensions:
+            <itemizedlist>
+                <listitem>
+                    <emphasis role="bold">output segment function: </emphasis> it is called after retrieving a segment and is called with the results of that single segment.
+                </listitem>
+                <listitem>
+                    <emphasis role="bold">output current function: </emphasis> it is called after retrieving each segment but it is called with the partial tile processed until that moment. In each call to this function it gets a partial tile nearest to completion. Last call to that function will send the entire tile results.
+                </listitem>
+                <listitem>
+                    <emphasis role="bold">output tile function: </emphasis> at the end of the process a function is called sending to it the entire tile results. It can print a complete map of the process.
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            As the user can see, &GRASP; is very flexible in the way to work with the output. In a high optimized process it can be adapted directly to the format of the output database. By default, &GRASP; come with some ASCII output functions, which allow to print the results in a readable way (ASCII or specific &GRASP; format) into a file (using
+            stream library) or on the screen. Additional extensions can be added to get the output in different formats such us HDF, NetCDF, png plots...
+        </para>
+        <sect2 id="grasp-output">
+            <title>The list of &GRASP; output parameters</title>
+            <para>
+                The output from &GRASP; is quite complex and strongly dependent on the settings used. As it was discussed in <xref linkend="sect-iguess" />,
+                there are two kinds of output products: direct and derived. Direct results are the values directly inverted in the initial guess array, then
+                after obtaining them, forward model is called one more time to obtain the derived products. The list of direct and derived products obtained 
+                depends on the data and the inversion strategy selected (defined in the settings file). This chapter contain a complete list of products that can
+                be obtained with &GRASP; but it does not mean that all of then can be obtained with all inversions strategies.
+            </para>
+            <para>
+                In the internal &GRASP; output structures there are some products that are repeated between direct products structure (array with the
+                same shape as initial guess) and derived products. It is because that for some applications they are direct information, for others they are derived results. 
+                This depends on input data and inversion strategy defined in the settings file.
+            </para>   
+            <para>
+                Before defining the output we are going to define the size of some arrays. This information is needed to understand the list of the products.
+                For example, when a product such as AOD is defined as many times as wavelengths it is because the output will be wavelength dependent 
+                (a value for each wavelength):
+                <itemizedlist>
+                    <listitem>
+                        <emphasis role="bold">NW: </emphasis>Number of wavelengths
+                    </listitem>                      
+                    <listitem>
+                        <emphasis role="bold">NSD: </emphasis>Number of aerosol components
+                    </listitem>
+                    <listitem>
+                        <emphasis role="bold">NKNOISE: </emphasis>Number of noises defined
+                    </listitem>  
+                    <listitem>
+                        <emphasis role="bold">NPARS: </emphasis>Number of parameters to be retrieved
+                    </listitem>
+                                                       
+                </itemizedlist>           
+            </para>             
+
+            <para>
+                The following list includes all products that can be obtained using &GRASP;:
+                <itemizedlist>
+                    <listitem>Number of iterations (niter)</listitem>
+                    <listitem>Total final measurement fitting residual for multi-pixel retrieval (rest)</listitem>
+                    <listitem>Detailed (i.e., separated by the type of observation) final absolute measurement fitting residuals for segment (resat)</listitem>
+                    <listitem>Detailed (i.e., separated by the type of observation) final relative measurement residuals for segment (resrt)</listitem>
+                    <listitem>If SD (size distribution) retrieved in form of binned SD, the number of grid radii for SD (used to print output) (radius)</listitem>
+                    <listitem>If SD retrieved in form of binned SD, grid radii</listitem>
+                    <listitem>If the pre-calculated lognormal bins where used, the
+                        function describing each lognormal SD bin (used to print output) (SDL)</listitem>
+                    <listitem>Main output for each single pixel (for both single- and multiple-pixel retrievals):
+                        <itemizedlist>
+                            <listitem>Single pixel total residual (meas. + smoothness constraints) (res)</listitem>
+                            <listitem>Detailed absolute measurement residuals (resa[NKNOISE])</listitem>
+                            <listitem>Detailed relative measurement residuals (resr[NKNOISE])</listitem>
+                            <listitem>Retrieved aerosol and surface reflectance parameters (par[NPARS])</listitem>
+                            <listitem>Angstrom exponent (Aexp)</listitem>
+                            <listitem>For each wavelength:
+                                <itemizedlist>
+                                    <listitem>Spectral total aerosol extinction (extt)</listitem>
+                                    <listitem>Spectral total aerosol single scattering albedo (ssat)</listitem>
+                                    <listitem>Spectral total aerosol absorption extinction (aext)</listitem>
+                                </itemizedlist>
+                                If retrieved aerosol consist of several components:
+                                <itemizedlist>
+                                    <listitem>Spectral extinction for each component (ext[NSD])</listitem>
+                                    <listitem>Spectral single scattering albedo for each component (ssa[NSD])</listitem>
+                                    <listitem>Real part of refractive index for each aerosol component (mreal[NSD])</listitem>
+                                    <listitem>Imaginary part of refractive index for each component(mimag[NSD])</listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>If SD retrieved in form of binned SD, the optical properties can be calculated for fine and coarse modes, separated using chosen inflection radii:
+                        <itemizedlist>
+                            <listitem>Volume median radius (rv)</listitem>
+                            <listitem>Standard deviation (std)</listitem>
+                            <listitem>Concentration (cv)</listitem>
+                            <listitem>Effective radius (reff)</listitem>
+                            <listitem>Spectral extinction for each wavelength (ext[NW])</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Phase matrix parameters:
+                        <itemizedlist>
+                            <listitem>Number of scattering angles (nangle)</listitem>
+                            <listitem>Values of scattering angles (angles)</listitem>
+                            <listitem>For each pixel and for all the wavelengths:
+                                <itemizedlist>
+                                    <listitem>Phase matrix elements for each aerosol component ph11, ph12, ph22, ph33, ph34, ph44</listitem>
+                                    <listitem>Total aerosol phase matrix elements pht11, pht12, pht22, pht33, pht34, pht44</listitem>
+                                    <listitem>Lidar and depolarization ratios for each aerosol component (lr, dlpr)</listitem>
+                                    <listitem>Total aerosol lidar and depolarization ratios (lrt, dlprt)</listitem>
+                                </itemizedlist>
+	    
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>If chemical composition is retrieved, then for each pixel and each aerosol component:
+                        <itemizedlist>
+                            <listitem>Relative humidity (rh(NSD))</listitem>
+                            <listitem>Fraction of soluble (fslbl(NSD))</listitem>
+                            <listitem>Insoluble fractions of soot (fsoot(NSD))</listitem>
+                            <listitem>Insoluble fractions of iron (firon(NSD))</listitem>
+                            <listitem>Insoluble fractions of “quartz” (fslbl(NSD))</listitem>
+                            <listitem>Water fraction (fwtr(NSD))</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Surface reflectance parameters for each pixel and for each wavelength:
+                        <itemizedlist>
+                            <listitem>All parameters of BRDF</listitem>
+                            <listitem>All parameters of BPRDF</listitem>
+                            <listitem>Surface Albedo</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Lidar characteristics for each pixel:
+                        <itemizedlist>
+                            <listitem>Levels for vertical profiles</listitem>
+                            <listitem>Vertical profiles for retrieved aerosol components (avp(NSD))</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Lidar optical characteristics for each pixel and for each wavelength:
+                        <itemizedlist>
+                            <listitem>Extinction profiles (extv)</listitem>
+                            <listitem>SSA profiles (ssav)</listitem>
+                            <listitem>Lidar ratio profiles (lrv)</listitem>
+                            <listitem>Lidar depolarization profiles (ldprv)</listitem>
+                            <listitem>Retrieved lidar calibration coefficients (for lidar wavelength only)</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Fit of every measured characteristic for each pixel and for each wavelength</listitem>
+	
+                    <listitem>Error estimation for each pixel:
+                        <itemizedlist>
+                            <listitem>Standard deviations of the random errors of the retrieved parameter logarithms (~relative errors) (ERRP)</listitem>
+                            <listitem>Standard deviation of systematic errors of the retrieved parameter logarithms (BIASP)</listitem>
+                            <listitem>Standard deviations of the random errors of the retrieved extinction for each aerosol component (~relative errors) (ERR_ext)</listitem>
+                            <listitem>Standard deviations of systematic errors of the retrieved extinction for each aerosol component (BIAS_ext)</listitem>
+                            <listitem>Standard deviations of the random errors of the retrieved total extinction (~relative errors) (ERR_extt)</listitem>
+                            <listitem>Standard deviations of systematic errors of retrieved total extinction (BIAS_extt)</listitem>
+                            <listitem>Standard deviations of the random errors of the retrieved single scattering albedo for each aerosol component (~relative errors) (ERR_ssa)</listitem>
+                            <listitem>Standard deviations of systematic errors of retrieved single scattering albedo for each aerosol component  (BIAS_ssa)</listitem>
+                            <listitem>Standard deviations of the random errors of the of retrieved total single scattering albedo (~relative errors) (ERR_ssat)</listitem>
+                            <listitem>Standard deviations of systematic errors of the retrieved total single scattering albedo (BIAS_ssat)</listitem>
+                            <listitem>Standard deviations of the random errors of the of retrieved lidar ratio for each aerosol component  (ERR_lr)</listitem>
+                            <listitem>Standard deviations of systematic errors of the lidar ratio for each aerosol component  (BIAS_lr)</listitem>
+                            <listitem>Standard deviations of the random errors of the of retrieved depolarization ratio for each aerosol component  (ERR_dr)</listitem>
+                            <listitem>Standard deviations of systematic errors of the depolarization ratio for each aerosol component  (BIAS_dr)</listitem>
+	  
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Radiative forcing for each pixel:
+                        <itemizedlist>
+                            <listitem>The heights for forcing output (HLV)</listitem>
+                            <listitem>Broad band up-ward flux without aerosol at each height (BBUFX0)</listitem>
+                            <listitem>Broad band down-ward flux without aerosol at each height (BBDFX0)</listitem>
+                            <listitem>Broad band up-ward flux with aerosol at each height (BBUFXA)</listitem>
+                            <listitem>Broad band down-ward flux with aerosol at each height (BBDFXA)</listitem>
+                        </itemizedlist>
+                    </listitem>
+	
+                    <listitem>Estimations of aerosol particulate matter at the ground level (PM)</listitem>
+                    <listitem>Aerosol type for each pixel (requires that the optical properties 
+                        for fine and coarse modes are included in the calculated output)
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect2>
+    </sect1>
+    
+    <sect1>
+        <title>Forward model</title>
+        <para>
+            &GRASP; has several forward models and each of them are used (or not) depending on the application. 
+            For example, to retrieve nephelometer data just single scattering (particle properties) will be used.
+            For other applications &GRASP; has also a multiple scattering module (radiative transfer) and a lidar 
+            signal module.
+        </para>
+        <sect2>
+            <title>How to use the forward model: Derived products and reprocesing data</title>
+            <para>
+                As it was explained in <xref linkend="sect-iguess" /> section, the retrieval algorithm works
+                iteratively over an array of parameters (in its first definition is called the initial guess) until
+                it represents the best solution. This solution array has same shape as initial guess (the same 
+                parameters and defined in the same position). Once it is obtained a final call of the forward model
+                with the resulting array provides a complete list of output products.
+            </para>
+            <para>
+                For some applications it can be useful to use the forward model without inverting any data. It
+                can be done easily in &GRASP; with the use of the setting parameter 
+                retrieval.convergence.stop_before_performing_retrieval=true. When no retrieval is performed, just one call
+                of forward model is performed. If in the initial guess array the user has set an aerosol model, it will be used
+                inside of the forward model obtaining therefore an entire output structure, with information in all fields.
+            </para>
+            <para>
+                This procedure can be used also to reprocess some data. If output parameters of a retrieval are stored then,
+                they can be set as initial guess and then, running &GRASP; with the same settings except retrieval.convergence.stop_before_performing_retrieval=true
+                the entire output can be obtained again. This procedure can be used to reprocess data with many objectives
+                such us saving storage space (just save the output array of grasp and reprocess to obtain the rest if it is needed) or
+                obtaining extra products in the future.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Synthetic data</title>
+            <para>
+                The previous procedure can also help to simulate input data. In this case an aerosol model is set as initial guess and
+                the code works just in forward model. As input data is necessary to set an SDATA file with a valid geometry. Then, using
+                retrieval.debug.simulated_sdata_file parameter the user can set the path to the simulated filed. A SDATA file will be dump 
+                to that path where the geometry is the same and the measurements are filled with the output of 
+                forward model. Then, this SDATA file can be used to self-consistency tests, where synthetic data is retrieved.
+            </para>
+        </sect2>
+    </sect1>
+
+</chapter>

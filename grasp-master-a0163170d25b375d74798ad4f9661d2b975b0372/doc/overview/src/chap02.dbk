@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd">
+
+<chapter xmlns="http://docbook.org/ns/docbook" 
+         xmlns:xl="http://www.w3.org/1999/xlink"
+         xml:id="chap02">
+    <title>GRASP software package</title>
+  
+    <sect1>
+        <title>GRASP architecture</title>
+        <para>
+            <xref linkend="figure4" /> illustrates the architecture of the GRASP 
+            software package organization. This architecture deploy decoupled modules
+            completely independent between them, such as the scientific core or the 
+            settings module, and then, the controller module is the responsible for 
+            communications between them. The dashed boxes show the application-specific
+            modules (input / output drivers) that can be optionally added to the GRASP.
+        </para>
+        <para>
+            This design of the package was aimed to reduce coupling as much as possible
+            between independently developed subsystems and doing it extensible. As a 
+            result, the two most valuable aspects realized in the GRASP architecture are:
+        </para>
+        <orderedlist numeration="lowerroman">
+            <listitem>
+                the common interfaces were defined for the replaceable elements;
+            </listitem>
+            <listitem>
+                the modifications of scientific core, inevitable with its evolution, are
+                possible with no changes for the whole package.
+            </listitem>
+        </orderedlist>
+        <para>
+            <figure xml:id="figure4">
+                <title>The architecture of the GRASP software package</title>
+                <imagedata fileref="figures/GRASP_description/image4.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+            </figure>
+        </para>
+    </sect1>
+    <sect1>
+        <title>Input and retrieved data in GRASP</title>
+        <sect2>
+            <title>Measurements and retrieved parameters</title>
+            <para>
+                The measurements and retrieved parameters for grasp are a quite long list of 
+                available options. At same time, the list of measurements and retrieved
+                parameters change strongly depending on the application and inversion 
+                strategy selected. An example of this focused on PARASOL applications
+                can be found in Dubovik et al. (2011). Therefore, this
+                document refers to the inverted observations and retrieved properties using
+                terms: "input measurements/observations", "retrieved parameters/characteristics".
+                The details of application of GRASP algorithm to specific measurements are
+                expected to be clear for users from comments included in the input and text
+                of the source files. Examples and relevant scientific discussion can be 
+                found from referred articles. Additionally, the software package is distributed
+                together with some examples. We really encourage the reader, once the code is 
+                compiled and ready to be executed, to have a look to the examples and run them.
+            </para>
+        </sect2>
+        <sect2>
+            <title>GRASP inputs</title>
+            <para>
+                The inputs of GRASP contain the following information:
+                <itemizedlist>
+                    <listitem>
+                        <emphasis role="bold">the measurements,</emphasis>
+                    </listitem>
+                    <listitem>
+                        <emphasis role="bold">definition of unknowns</emphasis>
+                        (and forward model used) and
+                    </listitem>
+                    <listitem>
+                        <emphasis role="bold">retrieval setting and a priori constraints.</emphasis>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                It should be noted that the inputs not only include the actual observations 
+                that need to be inverted but also the information that drives many aspects
+                of the retrieval including "the exact forward model" and the assumptions used,
+                variety of a priori constraints used, the mathematical and logical procedures
+                used, etc. Though, such information is generally expected in the input for any
+                retrieval, the GRASP stands out from most of existing retrieval methods/codes
+                by the flexibility of the retrieval and versatility of its applicability.
+            </para>
+            <para>
+                The input GRASP is separated into two groups:
+                <itemizedlist>
+                    <listitem>
+                        <emphasis role="bold">"measurements"</emphasis> – includes the actual
+                        values of measurements and some information of their configurations;
+                    </listitem>
+                    <listitem>
+                        <emphasis role="bold">"retrieval settings"</emphasis> – includes all
+                        information about retrieval implementation: description of 
+                        the retrieved characteristics, all settings for forward simulations
+                        and numerical inversions, etc.
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                As shown in <xref linkend="figure5" /> if GRASP is employed for operational
+                processing the observations are provided by the control unit from the
+                <emphasis role="italica">data reader</emphasis>
+                and the user defines the retrieval using
+                <emphasis role="bold">YAML configuration file</emphasis>
+                .  If scientific core is run as standalone code, the input text files are used:
+                <emphasis role="bold">SDATA_INSTRUMENT.dat</emphasis>
+                – the file containing the observation data
+                <emphasis role="bold">INPUT_ INSTRUMENT.txt</emphasis>
+                – the file containing the retrieval configuration information. The
+                <emphasis role="bold">SDATA_INSTRUMENT.dat</emphasis>
+                input file can also be used with the control unit. This is useful option 
+                for the efforts on applying GRASP to a new type of data for the functionality
+                and sensitivity tests.
+            </para>
+            <para>
+                <figure xml:id="figure5">
+                    <title>The illustration of managing input data for GRASP software package.</title>
+                    <imagedata fileref="figures/GRASP_description/image5.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+        </sect2>
+        <sect2>
+            <title>GRASP input data structures</title>
+            <para>
+                The control unit provides the measurement to the retrieval via  
+                "SDATA measurement structure" prepared using specific data reader. 
+                The description of the structure is provided in <xref linkend="sdata-format" />
+                The configuration information is provided by the control unit from the
+                YAML configuration files described in <xref linkend="settings-file" />
+                The list of parameters and their explanations are provided in
+                <xref linkend="help" />. This information can be directly assessed by typing
+                "help" command.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Input text files for running Scientific core alone</title>
+            <para>
+                Retrieval library keeps its old capability of running as an
+                stand alone application. In this case, measurement description has
+                to be provided in sdata format (see <xref linkend="sdata-format" />).
+                In fact, this format also work when the entire system is executed because it was ported
+                from the scientific library to the entire system. The reason to port this
+                format is because it is a easy format for scientific community. 
+                When the entire system is executed,
+                a settings file in YAML format defines the inversion strategy. In the case
+                of just use the scientific core like an stand alone application a settings
+                file in ascii format has to be provided. This file has a fix place for each
+                parameter. In the scope of this guide is not described that file.
+                It is good to know that scientific module can be isolated and tested 
+                independently but it is only for development purposes. If the reader 
+                is interesting in know more details about that the technical documentation
+                can be reviewed 
+                (<link xl:href="http://www.grasp-open.com/tech-doc/">www.grasp-open.com/tech-doc</link>).
+                Note that, for general user, it is not recommended to run separately 
+                scientific library.
+            </para>
+        </sect2>
+    </sect1>
+    <sect1 id="scientific-algorithm">
+        <title>GRASP scientific core algorithm</title>
+        <sect2>
+            <title>The overall structure</title>
+            <para>
+                The structure of the scientific GRASP code is shown in <xref linkend="figure6" />.
+                The code and retrieval is organized as an interaction of the two main functionally
+                different modules: "Numerical Inversion" and "Forward model". The 
+                "Numerical Inversion" is the module that drives the whole retrieval, 
+                therefore it can be considered
+                as hierarchically main part of the core algorithm program that determines the
+                retrieval data flow. The "Forward model" implements simulations of the inverted
+                observations. The overall GRASP development concept emphasizes the
+                <emphasis role="bold">
+                    <emphasis role="italica">generalized</emphasis>
+                </emphasis>
+                structure of algorithm and the retrieval. This assumes that algorithm should
+                be versatile, i.e. applicable to variety of remote sensing observations, and
+                also that algorithm should allow some flexibility in choosing retrieval approaches,
+                i.e. choosing different assumptions of overall retrieval, different mathematical
+                procedures, different physical models for simulating observations, different
+                presentation of obtained results, etc. Therefore, both "Numerical Inversion"
+                and "Forward model" modules are adapted for implementing varieties of different
+                procedures. At the same time, the data flow interaction between these modules
+                is implemented and high tolerance of overall code to the modifications inside
+                of each module. The information transmitted from input "Observation definition"
+                and "Inversion settings" modules determine the actual regime of retrieval execution.
+            </para>
+            <para>
+                <figure xml:id="figure6">
+                    <title>General structure of the GRASP scientific algorithm  (Fig.3 in Dubovik et al. 2011)</title>
+                    <imagedata fileref="figures/GRASP_description/image6.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+            <para>
+                The data flow exchange between the "Numerical Inversion" and "Forward model"
+                modules, illustrated in Fig.6 includes the information about the following values:
+            </para>
+            <para>
+                <emphasis role="bold">
+                    <emphasis role="italica">f</emphasis>
+                </emphasis>
+                <emphasis role="bold">*</emphasis>
+                vector of inverted measurements,
+            </para>
+            <para>
+                <emphasis role="bold">
+                    <emphasis role="italica">f</emphasis>
+                </emphasis>
+                <emphasis role="bold">(</emphasis>
+                <emphasis role="bold">
+                    <emphasis role="italica">a</emphasis>
+                </emphasis>
+                <superscript>p</superscript>
+                <emphasis role="bold">)</emphasis>
+                vector of measurement fit at p-th iterations,
+            </para>
+            <para>
+                <emphasis role="bold">
+                    <emphasis role="italica">a</emphasis>
+                </emphasis>
+                <superscript>p</superscript>
+                <emphasis role="bold" />
+                vector of unknowns at p-th iteration (retrieved parameters).
+            </para>
+            <para>
+                The content of these vectors was described in the section describing input.
+            </para>
+            <para>
+                The scientific GRASP code is written in Fortran 90. In 
+                <link xl:href="http://www.grasp-open.com/tech-doc/">technical documentation</link>
+                there are descriptions about the structure of data flows,
+                source file structure and locations.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Forward model</title>
+            <para>
+                The "forward model" module in the code implements simulations of the 
+                inverted remote sensing observations. The GRASP "forward model" is 
+                rather universal, i.e. can simulate large variety of remote sensing observations 
+                (passive and active observations obtained from ground and space). Also
+                it consists from several distinct blocks (<xref linkend="figure4" />):
+                Aerosol single scattering, Surface reflectance and Radiative 
+                transfer calculations. These blocks are semi-independent in the 
+                sense that each block can be changed or entirely replaced with no
+                effect or minimal effect on other parts of "forward model" routine.
+                For example, GRASP "forward model" allows for the choice of physical
+                approaches/models used for simulating surface reflectance.
+            </para>
+            <para>
+                <figure xml:id="figure7">
+                    <title>General organization of Forward modeling in the algorithm</title>
+                    <imagedata fileref="figures/GRASP_description/image7.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+            <para>
+                Depending on the inverted data, only a part of the 
+                "forward model" can be used. The dashed lines in <xref linkend="figure7" />
+                indicate that only single scattering or surface reflectance calculations
+                can be used by the code if accounting for multiple scattering is not 
+                needed, as in the cases when measurements of spectral AOD, phase matrices
+                or lidar data are inverted. Moreover, the design assumes a possibility 
+                for users to add to the GRASP "forward model" other routines implementing
+                similar simulations. For example, the subroutine implementing radiative
+                transfer calculations can be replaced by a subroutine implementing another
+                method to account for multiple scattering. In the future several new 
+                modules are planed to be included in the "forward model", such as the
+                module for accurate modeling of the gaseous absorption, the module for
+                radiative transfer calculation for thermal infra red spectral range, etc.
+            </para>
+            <para>
+                In the GRASP code the "Forward model" is driven by a single subroutine
+                "forward_model_pixel_PHMX" located in the file "forw_model.f90" 
+                (see <link xl:href="http://www.grasp-open.com/tech-doc/">technical documentation</link>).
+                <emphasis role="bold">Aerosol single scattering</emphasis> properties
+                are simulated assuming aerosol as mixture of randomly oriented 
+                spheroids using of DLS spheroid package (Dubovik et al. 2006). 
+                This package can be provided as an independent program with some
+                descriptive documentation. <emphasis role="bold">Surface reflectance
+                BRDF and BPDF</emphasis> can be calculated using a variety of 
+                subroutines representing different models (see scientific description
+                in Dubovik et al. 2011 and directly in technical description included
+                in the GRASP code settings file).
+                <emphasis role="bold">Radiative transfer calculation</emphasis>
+                accounting for multiple scattering effects in GRASP is implemented by 
+                on-line radiative transfer calculations using Successive Order of 
+                Scattering method using the program developed by M. Herman (the method
+                is documented in the paper by Lenoble et al. 2007). The modules for
+                <emphasis role="bold">aerosol single scattering</emphasis>
+                and <emphasis role="bold">BRDF, BPDF</emphasis>
+                are easily extractable from the program and can be easily used with 
+                other radiative transfer codes if needed. In addition, some
+                <emphasis role="bold">input</emphasis>
+                parameters in the configuration file define the regimes of
+                <emphasis role="bold">radiative transfer calculation</emphasis>
+                implementations. Specifically, a number of trade-offs between accuracy
+                and speed can be used including the possibilities of changing the number
+                of terms M used in the expansion of the phase matrix into Legendre polynomials,
+                the number of terms N used in Gaussian quadrature for zenithal integration,
+                number of numerical layers in vertical atmosphere properties integrations, etc.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Numerical Inversion</title>
+            <para>
+                The "numerical inversion" is functionally main and logistically the most
+                complex part of the GRASP that drives the data flow of code. The 
+                description of the algorithm and details of the approach are given in
+                the scientific papers listed in the Section 1. Here only we provide 
+                only short description sufficient for the understanding the structure
+                and organization of <emphasis role="bold">GRASP Scientific Core</emphasis>.
+            </para>
+            <para>
+                The program includes two main "layers" (parts):
+                <emphasis role="bold">Single-pixel inversion</emphasis> and
+                <emphasis role="bold">Multi-pixel inversion</emphasis>.
+            </para>
+            <sect3>
+                <title>Single pixel inversion</title>
+                <para>
+                    The structure of single-pixel inversion is illustrated in 
+                    <xref linkend="figure8" />. It includes the following main operations:
+                    <orderedlist numeration="lowerroman">
+                        <listitem>
+                            <para>
+                                <emphasis role="italica">Modeling observations</emphasis>
+                                <emphasis role="bold">
+                                    <emphasis role="italica">f</emphasis>
+                                </emphasis>
+                                (
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                )
+                                <emphasis role="italica">for state vector p-th approximation</emphasis>
+                                <emphasis role="italica">(for p=0, initial guess is used);</emphasis>
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <emphasis role="italica">Calculation of matrices of first derivatives</emphasis>
+                                <emphasis role="bold">K</emphasis>
+                                <subscript>p</subscript>
+                                <emphasis role="italica">Jacobians;</emphasis>
+                                </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Forming p-th Normal System: 
+                                <emphasis role="bold">A</emphasis>
+                                <subscript>p</subscript>
+                              &Delta;
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                =  &Nabla; &Psi;
+                                <superscript>p</superscript>
+                                , where
+                                <emphasis role="bold">A</emphasis>
+                                <subscript>p</subscript>
+                                Fisher matrix; &Psi;(
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                )  residual; &Nabla; &Psi;
+                                <superscript>p</superscript>
+                                gradient of &Psi; (
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                ).
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Solving Normal System to determine &Delta;
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                , and correcting the solution approximation
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p+1</superscript>
+                                =
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                <emphasis role="italica">t</emphasis>
+                                &Delta;
+                                <emphasis role="bold">
+                                    <emphasis role="italica">a</emphasis>
+                                </emphasis>
+                                <superscript>p</superscript>
+                                so that: &Psi;
+                                <superscript>p</superscript>
+                                - &Psi;
+                                <superscript>p+1</superscript>
+                                &gt; 0;
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Repeating steps
+                                <emphasis role="bold">
+                                    <emphasis role="italica">i - iv</emphasis>
+                                </emphasis>
+                                until &Delta; &Psi; = &Psi;
+                                <superscript>p</superscript>
+                                - &Psi;
+                                <superscript>p+1</superscript>
+                                changes significantly i.e. until &Delta; &Psi; / &Psi;
+                                <superscript>p</superscript>
+                                &lt; &epsiv;
+                            </para>
+                        </listitem>
+                    </orderedlist>
+                </para>
+                
+                <para>
+                    <figure xml:id="figure8">
+                        <title>The organization of GRASP Numerical Inversion: Single-Pixel Scenari</title>
+                        <imagedata fileref="figures/GRASP_description/image8.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                    </figure>
+                </para>
+            </sect3>
+            <sect3>
+                <title>Multiple pixel inversion</title>
+                <para>
+                    The multi-pixel retrieval approach proposed by Dubovik 
+                    et al. (2011) is illustrated in <xref linkend="figure9" />. This is new 
+                    and very promising retrieval concept when a large group of "pixels" 
+                    (instantaneous set of satellite data over one location) is inverted simultaneously.
+                    This approach allows for significant enhancement of atmosphere properties
+                    retrievals from remote sensing imagery by means of using additional a priori
+                    information about "correlation" retrieved properties in different pixels of
+                    the inverted group. In addition, this principle allows for combining different
+                    sets of coordinated observations even if they are not perfectly co-incident 
+                    and co-located (see Dubovik et al. 2014).
+                </para>
+                <para>
+                    <figure xml:id="figure9">
+                        <title>The organization of GRASP Numerical Inversion: Single-Pixel Scenario</title>
+                        <imagedata fileref="figures/GRASP_description/image9.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                    </figure>
+                </para>
+                <para>
+                    The multi-pixel scenario retrieval was implemented in the
+                    code with the idea of achieving maximum benefits from the similarities in
+                    the mathematical and logistical operations between the singleand multipixel
+                    retrievals. As a result, the multi-pixel retrieval, that is rather complex
+                    procedure compare to conventional single-pixel retrieval, was realized by
+                    implementing only rather limited modifications of the program that practically
+                    do not increase calculation time (per pixel) and do not change (do not complicate)
+                    the code organization.
+                </para>
+                <para>
+                    The structure of multi-pixel inversion is illustrated in <xref linkend="figure9" /> for a
+                    <emphasis role="italica">segment, i.e. group of N inverted pixels</emphasis>
+                    . It includes the following operations in addition to those realized for 
+                    single-pixel retrieval scenario:
+                </para>
+                <orderedlist numeration="lowerroman">
+                    <listitem>
+                        <para>
+                            A loop implementing steps
+                            <emphasis role="bold">
+                                <emphasis role="italica">i – iii</emphasis>
+                            </emphasis>
+                            (of single-pixel procedure) for N pixels and forming N single-pixel Normal Systems
+                            <emphasis role="bold">A</emphasis>
+                            <subscript>i,</subscript>
+                            <subscript>p</subscript>
+                            &Delta;
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <subscript>i</subscript>
+                            <superscript>p</superscript>
+                            <emphasis role="italica">=</emphasis>
+                            &Nabla; &Psi;
+                            <subscript>i</subscript>
+                            <superscript>p</superscript>
+                            ;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Forming single Normal System for the
+                            <emphasis role="italica">tile</emphasis>
+                            of N pixels by arranging N single-pixel Normal Systems into a sparse diagonal
+                            matrix structure and adding the matrix
+                            <emphasis role="bold">&Omega;</emphasis>
+                            <subscript>inter</subscript>
+                            defined using a priori inter-pixel smoothness constraints;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Forming p-th Normal System:</para>
+                        <para>
+                            <emphasis role="bold">A</emphasis>
+                            <subscript>p</subscript>
+                      &Delta;
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            =  &Nabla; &Psi;
+                            <superscript>p</superscript>
+                            ,
+                        </para>
+                        <para>
+                            where
+                            <emphasis role="bold">A</emphasis>
+                            <subscript>p</subscript>
+                            Fisher matrix; &Psi; (
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            )  residual; &Nabla; &Psi;
+                            <superscript>p</superscript>
+                            gradient of &Psi; (
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            ).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Solving Normal System for the
+                            <emphasis role="italica">tile</emphasis>
+                            of N pixels to determine &Delta;
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            , and correcting the solution approximation
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p+1</superscript>
+                            =
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            <emphasis role="italica">t</emphasis>
+                            &Delta;
+                            <emphasis role="bold">
+                                <emphasis role="italica">a</emphasis>
+                            </emphasis>
+                            <superscript>p</superscript>
+                            so that: &Psi;
+                            <superscript>p</superscript>
+                            - &Psi;
+                            <superscript>p+1</superscript>
+                            &gt; 0;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Repeating steps
+                            <emphasis role="bold">
+                                <emphasis role="italica">i – iv</emphasis>
+                            </emphasis>
+                            until change of residual &Delta; &Psi; = &Psi;
+                            <superscript>p</superscript>
+                            - &Psi;
+                            <superscript>p+1</superscript>
+                            is significant i.e. until &Delta; &Psi; / &Psi;
+                            <superscript>p</superscript>
+                            &lt; &epsiv;
+                        </para>
+                    </listitem>
+                </orderedlist>
+                <para>
+                    <figure xml:id="figure10">
+                        <title>The organization of GRASP Numerical Inversion: Multi-Pixel Scenari</title>
+                        <imagedata fileref="figures/GRASP_description/image10.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                    </figure>
+                </para>
+            </sect3>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>GRASP Control Unit</title>
+        <para>
+            The control unit is a set of "service" programs that brings the application
+            of the scientific GRASP algorithm to the operational level, first of all 
+            in the context of the processing of the data from satellite missions, such
+            as PARASOL. It also provides a number of convenient for user features for
+            applying GRASP to the observation and significantly reduces and simplifies
+            the efforts in the development of new GRASP applications.
+        </para>
+        <para>
+            The control unit addresses a number of practical aspects:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    The original
+                    <emphasis role="bold">GRASP scientific</emphasis>
+                    core has been designed as a standalone application for processing a limited
+                    amount of observations both in spatial and temporal extent. However, integration
+                    of this original program to operational processing of remote sensing observation,
+                    such as global satellite observations, required significant efforts on refactoring
+                    the scientific module and adapting it for operational data production environment.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    The data preparation for GRASPmulti-pixel retrieval in 
+                    processing satellite images is more complex than for classic operational 
+                    retrievals, since the number of level-1 inputs needed for one level-2 output
+                    may range from a few days to several weeks. Correspondingly, the system 
+                    must be able to load the significant volume of data without exhausting the
+                    available memory. Also, a compromise between the spatial and temporal extent
+                    of multi-pixel retrieval application has to be found in order to satisfy 
+                    the available memory constraints and processing time requirements.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Though performance of GRASP algorithm is under constant improvement, 
+                    the GRASP is more complex code and generally slower than most of conventional
+                    retrieval approaches. Therefore, a possibility of simultaneous retrievals
+                    is desirable for benefiting from parallelization of observation processing.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    The level of input data preprocessing for GRASPmulti-pixel retrieval is 
+                    significantly higher because inverted tails of (satellite) observations 
+                    to be composed from observations acquired at different times should 
+                    characterize the same grid of geo locations. Therefore, some kind of 
+                    regridding is generally required in addition to common data preprocessing
+                    (application of cloud mask, gas corrections, etc.).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    The GRASP is versatile algorithm that has the potential 
+                    to perform retrievals from diverse remote sensing observations and their
+                    combinations sensors, ranging from the ground-based photometers, radiometers
+                    and lidars to imagers onboard satellites. Therefore, adaptation of the GRASP
+                    algorithm for diverse observations should be always foreseeing and one of 
+                    the control unit main objectives is to split the direct operations with 
+                    scientific algorithm and the operations related with preparation of specific
+                    observations.
+                </para>
+            </listitem>
+        </itemizedlist>
+        
+        <para>
+            The <emphasis role="bold">control unit</emphasis>
+            manages all the system interactions with the processing environment. It 
+            loads the configuration settings. It is also responsible for receiving events
+            from the system and provides the control commands for the application 
+            (the connection with the user interface). The control unite consists of 
+            the following unites (see <xref linkend="figure4" />):
+        </para>
+        <sect2>
+            <title>Configuration manager</title>
+            <para>
+                One of the first responsibilities of the controller is to load the configuration
+                settings for the processing (production settings and scientific settings,
+                such as initial guesses, number of parameters for the forward model etc). The
+                <emphasis role="italica">configuration manager</emphasis>
+                provides the possibility to deal with all the settings, including both the
+                production and scientific ones, in one unique way. In the development of 
+                the control unit this approach was considered as a strategic one even though
+                the production settings and scientific settings are of entirely different 
+                nature, since they do not intervene at the same levels.
+            </para>
+            <para>
+                The configuration management is a key part of the developed system because
+                the user usage experience depends on it. This module describe the usage 
+                interface, how to work with the code to achieve results. In addition, for
+                developing this module it was necessary to understand, to document and to
+                organize all the possible options (different behaviors) of the complex 
+                retrieval code. Moreover, some refactoring of the scientific package has
+                been done for realizing the configuration management concept.
+            </para>
+            <para>It should be noted, that since the configuration manager controls the 
+                behavior of the control unit, as well the peripheral elements as the scientific
+                input settings, it is likely to be a subject to any change in the interface of
+                the other subsystems (especially for the scientific package is it evolves).
+            </para> 
+        </sect2>
+        <sect2>
+            <title>Controller Module</title>
+            <para>
+                The GRASP executable results from the compilation of controller module
+                which contains the main routine of the system. As illustrated in 
+                <xref linkend="figure11" /> the controller directs the processing of the data:
+                <itemizedlist>
+                    <listitem>
+                        gets orders and other events from the runtime interface
+                    </listitem>
+                    <listitem>
+                        performs actions in response to the events
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <figure xml:id="figure11">
+                    <title>The illustration of the data processing by the Controller</title>
+                    <imagedata fileref="figures/GRASP_description/image11.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+            <para>
+                The controller is responsible for making all the parts of the  control
+                unit work together. While it receives events from the runtime interface,
+                it takes actions and delegates most of its work to other modules of the 
+                control unit, such as the input and output drivers, and certainly to the
+                scientific package.
+            </para>
+            <para>
+                There are two main workflows implemented in the controller. In sequential
+                version the controller will retrieve a tile (a block of data which can be
+                decomposed in many segments which are minimum instrument data running inside
+                the retrieval) segment by segment sequentially. In the parallel version of
+                the controller it can retrieve many segments at same time using MPI technology.
+                The parallelization technology allows the controller to send jobs to different
+                cores in the system obtaining a lower total processed time.
+            </para>
+        </sect2>
+        <sect2>    
+            <title>Abstract input and output drivers</title>
+            <para>
+                These sub-systems are responsible for preparing the input data for the 
+                scientific module and gathering output data in the unified "abstract" 
+                format that not dependent on the particular application and is managed 
+                in unified manner by the GRASP scientific core. The creation of these 
+                sub-systems within control unit assure the versatile  and "generalized" 
+                character of GRAPS algorithm allowing the system to be extended for 
+                specific purposes.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Concrete input and output data drivers</title>
+            <para>
+                These sub-systems can be considered as peripheral sub-systems since they
+                can be replaced in the context of every specific application. The
+                <emphasis role="bold">concrete input data drivers</emphasis>
+                are responsible for loading of the satellite (e.g. PARASOL, MERIS) or 
+                ground-based (e.g. photometer or lidar) data loading. The rest of the 
+                system should never communicate directly with the loading driver but always
+                with the abstract input bridge. The GRASP multi-pixel retrieval scenario 
+                uses multi-temporal data organized in the so-called segments,
+                while the native formats of input data may be in the form of many 
+                independent files (orbits for a given period, ancillary data, etc). 
+                Therefore, it is the role of the concrete input data drivers to obtain 
+                the data in the native format, gather them in a single, easy-to-use 
+                object tile, and to present them as if they came from a single data source.
+                Also, the input drivers may include some preprocessing of the data, such 
+                as atmospheric gaseous correction for satellite data, application of 
+                calibration, etc.
+            </para>
+            <para>
+                The <emphasis role="bold">concrete output data drivers</emphasis>
+                are responsible for the scientific retrieval output products storage. 
+                They can be declined in several output formats, depending on the needs 
+                of the users and of the applications, and also on the requirements of 
+                the data centers: HDF, NetCDF, GIS databases, etc. The design of the 
+                control unit assures that the rest of the system does not interact 
+                directly with a concrete output driver, but with an abstract output 
+                bridge that delegates the action of writing to a concrete driver. 
+                This is because all storage formats are not adapted to all data sources
+                and to all applications. In addition, the control unit system allows a 
+                straightforward replacement of the storage module by another one if the
+                GRASP retrieval is adapted to a new application or if an instrument is 
+                changed in the developed application.
+            </para>
+        </sect2>
+    
+        <sect2>
+            <title>GRASP file organization</title>
+            <para>
+                Following list shows the GRASP source files organization. The code
+                is classified into folders. The folders are represented by bold letters
+                in following scheme, followed with an explanation about what it contains.
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">build:</emphasis>
+                            Compiled executabled. It appear after compile the code.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">doc:</emphasis>
+                            Technical and user documentation of the software package. 
+                            The lines that the reader is reading in this moment are
+                            stored in raw format in this folder.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">examples:</emphasis>
+                            Some examples of retrieving instrument data
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">libs:</emphasis>
+                            Bridges to some libraries (facades)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">src</emphasis>
+                            Source code of GRASP software
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">controller:</emphasis>
+                                    contains the source files used by the controller 
+                                    main program responsible for organizing the calls
+                                    to all the modules of the system.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">global:</emphasis>
+                                    contain the source files of some functionalities
+                                    that can be use by different submodules of GRASP.
+                                    This code is GRASP dependent (so it can not be placed
+                                    in "libs" folder) but is general enough for be used
+                                    by the entire system.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">input:</emphasis>
+                                    contains the source files used by input abstract
+                                    driver the module responsible for handling input
+                                    data and injecting them into scientific unit (retrieval
+                                    algorithm) functions. This module can be extended
+                                    by adding input concrete driver which can include
+                                    two additional two kind of functions: specific 
+                                    instrument drivers that are function that are called
+                                    for loading data from specific instrument and 
+                                    "transformers" that are the functions called after 
+                                    reading the input and that call scientific unit and 
+                                    transform the input data for scientific core GRASP 
+                                    algorithm.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">output:</emphasis>
+                                    contains the source files used by output abstract
+                                    driver the module responsible for handling retrieval
+                                    output by. For example, the module creates a tile 
+                                    output based on single-segment outputs. This module 
+                                    can be extended by output concrete driver that may 
+                                    include different functions:
+                                    1) 
+                                    <emphasis role="bold">
+                                        output segment functions
+                                    </emphasis>
+                                    the functions that 
+                                    receive the output from a segment (provided 
+                                    by output abstract driver ) and can use it 
+                                    for extracting and printing target information;
+                                    2) 
+                                    <emphasis role="bold">
+                                        output tile functions
+                                    </emphasis>
+                                    these functions are call 
+                                    at the end of the process (once the retrieval 
+                                    information was received by output abstract 
+                                    driver ) in order to print the output for the 
+                                    entire tile;
+                                    3) 
+                                    <emphasis role="bold">
+                                        output current functions
+                                    </emphasis>
+                                     these functions can 
+                                    be called after processing a segment (once the
+                                    retrieval information was received by output
+                                    abstract driver ) but the retrieval results 
+                                    for entire tile will receive tile output 
+                                    information as an argument. This approach can 
+                                    be used for printing current status of retrieval
+                                    for tile before finish the complete retrieval 
+                                    process.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">retrieval:</emphasis>
+                                    source files used by scientific unit
+                                </para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">constants_set:</emphasis>
+                                            different sets of constants which define main array sizes used in the code. The use of this constants allows to optimize the memory used by GRASP for different applications.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">inversion:</emphasis>
+                                            fortran functions related to numerical inversion.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">forward_model:</emphasis>
+                                            fortran files for computation of modeled measurements (forward model)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">interfaces:</emphasis>
+                                            routines that provide data preparation, validation and exchange between different submodules of scientific module
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">external_interfaces:</emphasis>
+                                            definition of connections of the code with some external software (mainly superLU solver). 
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">utilities:</emphasis>
+                                            general routines used in many different submodules of the scientific code such us print routines. 
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis role="bold">internal_files:</emphasis>
+                                            kernels used for computing particle single scattering properties by the forward model part of the code
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis role="bold">settings:</emphasis>
+                                    contains the source files used by the used 
+                                    by configuration unit that defines the settings
+                                    for the calls to all the modules of the system.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect2>
+        <sect2>
+            <title>External Libraries used by GRASP code</title>
+            <para>
+                The GRASP software packed has allows the performance 
+                optimization of both the scientific retrieval and the control unit by 
+                utilization of the external standard libraries that are not distributed 
+                as a part of GRAPS Open Code but that can improve the performance of some
+                aspects of the GRASP code. These software packages are available from 
+                the Internet open access and can be downloaded by the users directly 
+                with no charge. <xref linkend="figure13" /> shows the utilization of 
+                standard software libraries in GRASP.
+            </para>
+            <para>
+                <figure xml:id="figure13">
+                    <title>The structure of the utilization of public standard libraries in the GRASP code</title> 
+                    <para>
+                        (green color indicates the optional libraries, violet color 
+                        indicates the optional but highly desirable libraries, the 
+                        reddish color indicates that currently mandatory for control unit 
+                        now, but that will be separated from the code before GRASP open 
+                        release). The licenses of each library are indicated in parenthesis.
+                    </para>
+                    <imagedata fileref="figures/GRASP_description/image13.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+            <para>The following main libraries are used by GRASP:</para>
+            <para>
+                <emphasis role="bold">mpi library:</emphasis>
+                the control unit has the optional feature of parallelizing segment process
+                using mph technology. The various mpi libraries can be used. Correspondingly
+                the (each one with different licenses) so the user has can choose the 
+                implementation of mpi technology using the selected software that may have
+                different performance and license.
+            </para>
+            <para>
+                <emphasis role="bold">lib csv:</emphasis>
+                this library helps to parse the databases prepared in CSV (Comma-Separated
+                Values) format that is used in some input concrete drivers. This library 
+                is not needed if a specific compilation is used (that depends on the concrete
+                data and driver used).
+            </para>
+            <para>
+                <emphasis role="bold">grib api:</emphasis>
+                this library is needed to read the grib
+                format that is used for reading climatology information in concrete satellite
+                data drivers.
+            </para>
+            <para>
+                <emphasis role="bold">hdf4:</emphasis>
+                this library is used to read/write files in hdf4 format. It is used in some
+                output optional GRASP functions. Using a specific compilation (removing these
+                output functions) the code can be run without using these libraries.
+            </para>
+            <para>
+                <emphasis role="bold">solver</emphasis>
+                : the software package optimized for solving linear systems. Such solver 
+                can significantly improve the performance of GRASP in certain situations 
+                since GRASP scientific core performs retrieval sequentially solving a number
+                of linear systems. For example, when the multi-pixel retrieval is performed,
+                the GRASP scientific core the solved linear systems, that can be of very 
+                large dimension and have pronounced sparse structure. The code was adapted 
+                and tested for using such libraries as SuperLU, ViennaCL, and MUMPS. At the
+                same, the solution of any linear system using GRASP internal routine.
+            </para>
+            <para>
+                <emphasis role="bold">GLib:</emphasis>
+                this is GNU C library containing a set of tools for programing in C. 
+                Specifically, it is used by yaml settings library (which source code
+                is part of GRASP settings module) helping to read YAML files (using lib 
+                yaml dependency) and translate them into C structures. In that process 
+                GLib is used to define internal tree structures.
+            </para>
+            <para>
+                <emphasis role="bold">lib yaml:</emphasis>
+                this is low level library to parse yaml format files.
+            </para>
+        </sect2>
+    </sect1>
+</chapter>

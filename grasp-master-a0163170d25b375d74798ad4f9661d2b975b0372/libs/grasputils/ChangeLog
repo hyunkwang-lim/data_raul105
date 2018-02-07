@@ -1,0 +1,23 @@
+2014-06-11 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* grasputils version 0.4.8
+	* src/allocator.c: allocator_set_record(): a test on input argument has been fixed (irecord compared with num_alloc_records instead of num_valid_records)
+	* src/allocator.c: get_record_offset(): an assertion has been fixed (test <= replaced with <)
+
+2014-03-07 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* grasputils version 0.4.5
+	* debug.h: execinfo.h is not available on Cygwin,
+        add a preprocessor test for preventing compilation failure 
+
+2014-01-07 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* grasputils version 0.3.4
+	* time_utils.c: fixed a missing include statement (string.h)
+	* ChangeLog: changed the order of entries
+
+2013-10-22 F. Ducos <fabrice.ducos@univ-lille1.fr>
+        * grasputils version 0.2.0
+        * settings.[ch] now obsolete (will be removed soon)
+        * driver_settings.[ch] replace settings.[ch]
+        * new files: logging.[ch]
+
+2013-09-21 F. Ducos <fabrice.ducos@univ-lille1.fr>
+        * grasputils version 0.1.0

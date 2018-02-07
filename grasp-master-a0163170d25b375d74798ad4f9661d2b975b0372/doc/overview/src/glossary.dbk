@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd">
+
+<glossary xmlns='http://docbook.org/ns/docbook'>
+  <title>Glossary</title>
+
+  <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+  
+  <glossdiv><title>C</title>
+  
+  <glossentry xml:id="cell">
+    <glossterm>Cell</glossterm>
+    <glossdef>
+      <para>A spatial extent of neighbouring pixels (e.g. 2x2 or 5x5 pixels). The base of a segment.</para>
+      <glossseealso otherterm="segment">Segment</glossseealso>
+      <glossseealso otherterm="pixel">Pixel</glossseealso>
+      <glossseealso otherterm="tile">Tile</glossseealso>
+    </glossdef>
+  </glossentry>
+  
+  </glossdiv>
+
+  <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+  <glossdiv><title>P</title>
+  
+  <glossentry xml:id="pixel">
+    <glossterm>Pixel</glossterm>
+    <glossdef>
+      <para>A picture element. The smallest unit of acquisition.</para>
+      <glossseealso otherterm="cell">Cell</glossseealso>
+      <glossseealso otherterm="segment">Segment</glossseealso>
+      <glossseealso otherterm="tile">Tile</glossseealso>
+    </glossdef>
+  </glossentry>
+  
+  </glossdiv>  
+
+  <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+  <glossdiv><title>S</title>
+  
+  <glossentry xml:id="segment">
+    <glossterm>Segment</glossterm>
+    <glossdef>
+      <para>A temporal stack of cells. The processing unit of the &GRASP; algorithm.</para>
+      <glossseealso otherterm="cell">Cell</glossseealso>
+      <glossseealso otherterm="pixel">Pixel</glossseealso>
+      <glossseealso otherterm="tile">Tile</glossseealso>
+    </glossdef>
+  </glossentry>
+  
+  </glossdiv>
+  
+   <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+   <glossdiv><title>T</title>
+   
+   <glossentry xml:id="tile">
+     <glossterm>Tile</glossterm>
+     <glossdef>
+       <para>A set of neighbouring segments, that can be loaded together in memory. The processing unit of the &GRASP; framework.</para>
+       <glossseealso otherterm="cell">Cell</glossseealso>
+       <glossseealso otherterm="pixel">Pixel</glossseealso>
+       <glossseealso otherterm="segment">Segment</glossseealso>
+     </glossdef>
+   </glossentry>
+   
+   </glossdiv>
+   
+</glossary>

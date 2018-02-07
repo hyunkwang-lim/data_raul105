@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# Copyright 2016 CNRS & Universite Lille 1. All rights reserved.
+# Licensed under the GRASP Open Source License V1.0 (see LICENSE file)
+
+# Authors: F. Ducos & D. Fuertes
+# <fabrice.ducos@univ-lille1.fr>
+# <david.fuertes@univ-lille1.fr>
+# Laboratoire d'Optique Atmospherique
+# version: 2015-02-10
+
+appname=$(basename $0)
+grasp_dir=$(dirname $0)
+num_jobs=1
+use_valgrind=0
+
+if [ ! -f $grasp_dir/grasp_app ]
+then
+    echo "ERROR: grasp_app object is not compiled"
+    exit -1
+fi
+
+function display_usage() {
+echo "usage: $appname [OPTIONS] <settings_file.yml>|help"
+echo ""
+echo "OPTIONS:"
+if [ "@USE_MPI@" == "on" ] ; then
+    echo "  -j <n>   launches grasp with n jobs. n must be greater than 1 (there will be one master process and n-1 worker processes)"
+else
+    echo "  -V       use valgrind"
+fi
+
+}
+
+
+function is_number() {
+  re='^[0-9]+$'
+  [[ $1 =~ $re ]] && return 0
+  return 1
+}
+
+export LD_LIBRARY_PATH=@ADDITIONAL_DEPENDENCIES_PATH@/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$LD_LIBRARY_PATH # for MacOSX only, ignored (but harmless) on other systems
+
+while getopts ":Vj:" opt
+do
+case $opt in
+    j) num_jobs=$OPTARG
+       if ! is_number "$num_jobs" ; then
+         echo "$appname: wrong argument for the -j option: $OPTARG (not a number)" 1>&2
+         exit 1
+       fi
+       if [ $num_jobs -lt 2 ] ; then
+         echo "$appname: wrong argument for the -j option: $OPTARG (it accepts 2 jobs or more)" 1>&2
+         exit 1
+       fi ;;
+    V) use_valgrind=1 ;;
+    ?) echo "illegal option -$OPTARG" 1>&2 ; exit 1 ;;
+    esac
+done # while getopts
+
+shift $(( OPTIND - 1 ))
+
+if [ $# -eq 0 ] ; then
+  $grasp_dir/grasp_app 1>&2
+  echo 1>&2
+  display_usage 1>&2
+  exit 0
+fi
+
+if [ $1 = 'help' ] ; then
+  $grasp_dir/grasp_app help
+  exit 0
+fi
+
+if [ $num_jobs -lt 2 ] ; then
+  if [ "@USE_MPI@" == "on" ] ; then
+    echo "$appname: grasp was built with mpi, you need to specify at least 2 jobs with the -j option." 1>&2
+    exit 1
+  fi
+
+  if [ "$use_valgrind" == 1 ] ; then
+    exec valgrind $grasp_dir/grasp_app "$@"
+  else
+    exec $grasp_dir/grasp_app "$@"
+  fi
+else
+  if [ "@USE_MPI@" == "on" ] ; then
+    mpiexec -n $num_jobs $grasp_dir/grasp_app "$@"
+  else
+    echo "$appname: grasp was not built with mpi, you can't use the -j option." 1>&2
+    exit 1
+  fi
+fi
+
+exit 0
+

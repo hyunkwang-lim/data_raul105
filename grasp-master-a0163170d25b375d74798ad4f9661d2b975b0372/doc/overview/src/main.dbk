@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd">
+
+<book version="5.0" lang="en"
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xl="http://www.w3.org/1999/xlink">
+  
+  <info>
+    <title>
+    The GRASP Package. An overview.
+    </title>
+    <titleabbrev>GRASP</titleabbrev>
+    <subtitle>General Retrieval of Aerosol and Surface Properties</subtitle>
+    <!-- <subtitle>second line of subtitle if needed</subtitle> -->
+  
+    <authorgroup>
+
+      <author> 
+	<firstname>Oleg</firstname> 
+	<surname>Dubovik</surname> 
+	<email>oleg.dubovik@univ-lille1.fr</email> 
+	<affiliation>
+	    <orgname>Laboratoire d'Optique Atmosphérique</orgname> 
+	</affiliation> 
+      </author>
+      
+      <author>
+	<firstname>Fabrice</firstname>
+        <surname>Ducos</surname>
+        <email>fabrice.ducos@univ-lille1.fr</email>
+        <affiliation>
+	<orgname>Laboratoire d'Optique Atmosphérique</orgname>
+        </affiliation>
+      </author>
+
+      <author> 
+	<firstname>David</firstname> 
+	<surname>Fuertes</surname> 
+	<email>david.fuertes@grasp-sas.com</email> 
+	<affiliation>
+	    <orgname>GRASP SAS</orgname> 
+	</affiliation> 
+      </author>
+
+    </authorgroup>
+
+    <edition>version 0.6</edition>
+    <pubdate><?dbtimestamp format="d B Y"?></pubdate>
+    <copyright>
+      <year><?dbtimestamp format="Y"?></year>
+      <holder></holder>
+    </copyright>
+    
+   <releaseinfo>
+
+   <para>
+     <mediaobject>
+      <textobject role="html">
+      A printable version of this document can be obtained here: <link xl:href="docgrasp.pdf" /> 
+      </textobject>
+
+      <textobject role="fo">
+      A browsable, and possibly more up-to-date, version of this document can be obtained here: 
+      <screen><link xl:href="http://www.grasp-open.com/doc" /></screen>
+      </textobject>
+    </mediaobject>
+   </para>
+
+   <para>
+        This document describes an overview of the GRASP project, its goals and its architecture. If you want to contribute to the development, you may be more interested in the <link xl:href="http://www.grasp-open.com/tech-doc">technical documentation</link>.
+   </para>
+   
+   <para>
+        The source code of this documentation is in same repository than &GRASP; open algorithm. If you want to contribute with your corrections please, check how to do it in <link xl:href="http://www.grasp-open.com/tech-doc/chap02.php#chap020201">User documentation chapter</link>.
+   </para>   
+   </releaseinfo>
+  </info>
+  
+  <xi:include href="preface.dbk" />
+  <xi:include href="chap01.dbk" />
+  <xi:include href="chap02.dbk" />
+  <xi:include href="chap03.dbk" />
+  <xi:include href="chap04.dbk" />
+  <xi:include href="biblio.dbk" />
+  <xi:include href="glossary.dbk" />
+</book>
+

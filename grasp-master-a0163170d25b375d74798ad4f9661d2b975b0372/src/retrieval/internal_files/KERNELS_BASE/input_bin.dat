@@ -1,0 +1,1017 @@
+2 4 1 1 2           ! key,keyEL,keySUB,keyLS,key_RD1
+0.05 15.0 0.2 4.    ! rgmin, rgmax, wlmin, wlmax
+1.33 1.65 0.0005 0.1  ! xnmin,xnmax,xkmin,xkmax
+6 1 6               ! NWL number of wavelengths (key=0,NWL=1), RN(NWL) and RK(NWL); LB1 & LE1
+0.443 0.490 0.565 0.6752 0.8702 1.020 : PARASOL WL(NWL) wavelengths
+1.56 1.56 1.56 1.56 1.56 1.56 1.56        ! RN(NWL)
+0.0029 0.0029 0.0029 0.0029 0.0029 0.0029 0.0029    ! RK(NWL)
+1 3 1               ! key_SD, ID, NMD
+0.04 0.4 0.12 0.4 0.6 2.32 ! CM(1),SM(1),RMM(1)(mkm),CM(2),SM(2),RMM(2)(mkm)Solar-Vil. (key = 0)
+9 1. 1. 1. 1. 1. 1. 1. 1. 1.     ! KC (key = 1or2), RC2
+1.  0.07    0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.10072 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.14491 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.20850 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.3     0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.6     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  1.1292  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  2.1253  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  4.0     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+22                           ! KN
+ 5.00000E-2  3.636746667E-3
+ 6.56037E-2  1.27650341E-2
+ 8.60768E-2  2.825477906E-2
+ 0.112939    3.943919018E-2
+ 0.148184    3.472143412E-2
+ 0.194429    1.932093687E-2
+ 0.255105    7.050227374E-3
+ 0.334716    2.947342116E-3
+ 0.439172    5.879985634E-3
+ 0.576226    1.799305901E-2
+ 0.756052    4.640357196E-2
+ 0.991995    9.759383649E-2
+ 1.30157     0.167227194
+ 1.70776     0.233451143
+ 2.24070     0.265515089
+ 2.93996     0.246029273
+ 3.85745     0.185732767
+ 5.06126     0.114233799
+ 6.64074     5.724075064E-2
+ 8.71314     2.336790785E-2
+ 11.4323     7.772107143E-3
+ 15.0        2.106020227E-3
+PARASOL_n22k16_35
+PARASOL_n22k16_35_bin9_wl6
+2
+1.      0.000001
+2.986   0.13237
+181                       ! KM
+0.                        ! ANGLE(KM)
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.
+20.
+21.
+22.
+23.
+24.
+25.
+26.
+27.
+28.
+29.
+30.
+31.
+32.
+33.
+34.
+35.
+36.
+37.
+38.
+39.
+40.
+41.
+42.
+43.
+44.
+45.
+46.
+47.
+48.
+49.
+50.
+51.
+52.
+53.
+54.
+55.
+56.
+57.
+58.
+59.
+60.
+61.
+62.
+63.
+64.
+65.
+66.
+67.
+68.
+69.
+70.
+71.
+72.
+73.
+74.
+75.
+76.
+77.
+78.
+79.
+80.
+81.
+82.
+83.
+84.
+85.
+86.
+87.
+88.
+89.
+90.
+91.
+92.
+93.
+94.
+95.
+96.
+97.
+98.
+99.
+100.
+101.
+102.
+103.
+104.
+105.
+106.
+107.
+108.
+109.
+110.
+111.
+112.
+113.
+114.
+115.
+116.
+117.
+118.
+119.
+120.
+121.
+122.
+123.
+124.
+125.
+126.
+127.
+128.
+129.
+130.
+131.
+132.
+133.
+134.
+135.
+136.
+137.
+138.
+139.
+140.
+141.
+142.
+143.
+144.
+145.
+146.
+147.
+148.
+149.
+150.
+151.
+152.
+153.
+154.
+155.
+156.
+157.
+158.
+159.
+160.
+161.
+162.
+163.
+164.
+165.
+166.
+167.
+168.
+169.
+170.
+171.
+172.
+173.
+174.
+175.
+176.
+177.
+178.
+179.
+180.
+2                            ! NRATN
+kernels_100
+kernels_299
+
+************************
+
+35
+  0.00
+  2.60
+  3.46
+  5.20
+  6.93
+  8.66
+ 10.39
+ 12.12
+ 15.57
+ 17.30
+ 21.61
+ 25.90
+ 30.19
+ 42.94
+ 59.57
+ 67.65
+ 75.52
+ 83.12
+ 97.18
+108.94
+117.05
+120.00
+125.00
+130.00
+135.00
+140.00
+147.50
+154.30
+165.00
+167.70
+170.00
+172.50
+175.00
+177.50
+180.00
+********************* 
+83
+  0.00
+  1.71
+  3.93
+  6.16
+  8.39
+ 10.63
+ 12.86
+ 15.10
+ 17.33
+ 19.57
+ 21.80
+ 24.04
+ 26.28
+ 28.51
+ 30.75
+ 32.98
+ 35.22
+ 37.45
+ 39.69
+ 41.93
+ 44.16
+ 46.40
+ 48.63
+ 50.87
+ 53.11
+ 55.34
+ 57.58
+ 59.81
+ 62.05
+ 64.29
+ 66.52
+ 68.76
+ 70.99
+ 73.23
+ 75.47
+ 77.70
+ 79.94
+ 82.17
+ 84.41
+ 86.65
+ 88.88
+ 90.00
+ 91.12
+ 93.35
+ 95.59
+ 97.83
+100.06
+102.30
+104.53
+106.77
+109.01
+111.24
+113.48
+115.71
+117.95
+120.19
+122.42
+124.66
+126.89
+129.13
+131.37
+133.60
+135.84
+138.07
+140.31
+142.55
+144.78
+147.02
+149.25
+151.49
+153.72
+155.96
+158.20
+160.43
+162.67
+164.90
+167.14
+169.37
+171.61
+173.84
+176.07
+178.29
+180.00
+*********************
+
+2 4 1 2           ! key,key_RD,keyEL,keySUB,key_RD1
+0.05 15.0 0.2 4.    ! rgmin, rgmax, wlmin, wlmax
+1.33 1.6 0.001 0.1  ! xnmin,xnmax,xkmin,xkmax
+7 1 4               ! NWL number of wavelengths (key=0,NWL=1), RN(NWL) and RK(NWL); LB1 & LE1
+0.443 0.51 0.64 0.865 1.38 1.64 2.130           ! WL(NWL) wavelengths
+1.56 1.56 1.56 1.56 1.56 1.56 1.56        ! RN(NWL)
+0.0029 0.0029 0.0029 0.0029 0.0029 0.0029 0.0029    ! RK(NWL)
+1 3 1               ! key_SD, ID, NMD
+0.04 0.4 0.12 0.4 0.6 2.32 ! CM(1),SM(1),RMM(1)(mkm),CM(2),SM(2),RMM(2)(mkm)Solar-Vil. (key = 0)
+5 1. 1. 1. 1. 1. 1. 1. 1. 1.     ! KC (key = 1or2), RC2
+1.  0.1     0.35   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.1732  0.35   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.3     0.35   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  1.      0.5    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  2.9     0.5    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)    
+22                           ! KN
+ 5.00000E-2  3.636746667E-3
+ 6.56037E-2  1.27650341E-2
+ 8.60768E-2  2.825477906E-2
+ 0.112939    3.943919018E-2
+ 0.148184    3.472143412E-2
+ 0.194429    1.932093687E-2
+ 0.255105    7.050227374E-3
+ 0.334716    2.947342116E-3
+ 0.439172    5.879985634E-3
+ 0.576226    1.799305901E-2
+ 0.756052    4.640357196E-2
+ 0.991995    9.759383649E-2
+ 1.30157     0.167227194
+ 1.70776     0.233451143
+ 2.24070     0.265515089
+ 2.93996     0.246029273
+ 3.85745     0.185732767
+ 5.06126     0.114233799
+ 6.64074     5.724075064E-2
+ 8.71314     2.336790785E-2
+ 11.4323     7.772107143E-3
+ 15.0        2.106020227E-3
+PARASOL_35_bin
+PARASOL_35_bin
+2
+1.      0.000001
+2.986   0.13237
+35
+  0.00
+  2.60
+  3.46
+  5.20
+  6.93
+  8.66
+ 10.39
+ 12.12
+ 15.57
+ 17.30
+ 21.61
+ 25.90
+ 30.19
+ 42.94
+ 59.57
+ 67.65
+ 75.52
+ 83.12
+ 97.18
+108.94
+117.05
+120.00
+125.00
+130.00
+135.00
+140.00
+147.50
+154.30
+165.00
+167.70
+170.00
+172.50
+175.00
+177.50
+180.00
+
+NWL=7 bin=9 ***************
+
+2 1 4 1            ! key,key_RD,keyEL,keySUB
+0.05 15.0 0.2 4.    ! rgmin, rgmax, wlmin, wlmax
+1.33 1.6 0.001 0.1  ! xnmin,xnmax,xkmin,xkmax
+7 1 4               ! NWL number of wavelengths (key=0,NWL=1), RN(NWL) and RK(NWL); LB1 & LE1
+0.443 0.51 0.64 0.865 1.38 1.64 2.130           ! WL(NWL) wavelengths
+1.56 1.56 1.56 1.56 1.56 1.56 1.56        ! RN(NWL)
+0.0029 0.0029 0.0029 0.0029 0.0029 0.0029 0.0029    ! RK(NWL)
+1 3 1               ! key_SD, ID, NMD
+0.04 0.4 0.12 0.4 0.6 2.32 ! CM(1),SM(1),RMM(1)(mkm),CM(2),SM(2),RMM(2)(mkm)Solar-Vil. (key = 0)
+9 1. 1. 1. 1. 1. 1. 1. 1. 1.     ! KC (key = 1or2), RC2
+1.  0.07    0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.10072 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.14491 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.20850 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.3     0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.6     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  1.1292  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  2.1253  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  4.0     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+22                           ! KN
+ 5.00000E-2  3.636746667E-3
+ 6.56037E-2  1.27650341E-2
+ 8.60768E-2  2.825477906E-2
+ 0.112939    3.943919018E-2
+ 0.148184    3.472143412E-2
+ 0.194429    1.932093687E-2
+ 0.255105    7.050227374E-3
+ 0.334716    2.947342116E-3
+ 0.439172    5.879985634E-3
+ 0.576226    1.799305901E-2
+ 0.756052    4.640357196E-2
+ 0.991995    9.759383649E-2
+ 1.30157     0.167227194
+ 1.70776     0.233451143
+ 2.24070     0.265515089
+ 2.93996     0.246029273
+ 3.85745     0.185732767
+ 5.06126     0.114233799
+ 6.64074     5.724075064E-2
+ 8.71314     2.336790785E-2
+ 11.4323     7.772107143E-3
+ 15.0        2.106020227E-3
+PARASOL_35_bin
+PARASOL_35_bin
+2
+1.      0.000001
+2.986   0.13237
+35
+  0.00
+  2.60
+  3.46
+  5.20
+  6.93
+  8.66
+ 10.39
+ 12.12
+ 15.57
+ 17.30
+ 21.61
+ 25.90
+ 30.19
+ 42.94
+ 59.57
+ 67.65
+ 75.52
+ 83.12
+ 97.18
+108.94
+117.05
+120.00
+125.00
+130.00
+135.00
+140.00
+147.50
+154.30
+165.00
+167.70
+170.00
+172.50
+175.00
+177.50
+180.00
+
+NWL=4 bin=9 ***************
+
+2 1 4 1            ! key,key_RD,keyEL,keySUB
+0.05 15.0 0.2 4.    ! rgmin, rgmax, wlmin, wlmax
+1.33 1.6 0.001 0.1  ! xnmin,xnmax,xkmin,xkmax
+4 1 4               ! NWL number of wavelengths (key=0,NWL=1), RN(NWL) and RK(NWL); LB1 & LE1
+0.44 0.6732 0.8702 1.020     0.44 0.55           ! WL(NWL) wavelengths
+1.56 1.56 1.56 1.56 1.56        ! RN(NWL)
+0.0029 0.0029 0.0029 0.0029     ! RK(NWL)
+1 3 1               ! key_SD, ID, NMD
+0.04 0.4 0.12 0.4 0.6 2.32 ! CM(1),SM(1),RMM(1)(mkm),CM(2),SM(2),RMM(2)(mkm)Solar-Vil. (key = 0)
+9 1. 1. 1. 1. 1. 1. 1. 1. 1.     ! KC (key = 1or2), RC2
+1.  0.07    0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.10072 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.14491 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.20850 0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.3     0.25   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.6     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  1.1292  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  2.1253  0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  4.0     0.4    ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+22                           ! KN
+ 5.00000E-2  3.636746667E-3
+ 6.56037E-2  1.27650341E-2
+ 8.60768E-2  2.825477906E-2
+ 0.112939    3.943919018E-2
+ 0.148184    3.472143412E-2
+ 0.194429    1.932093687E-2
+ 0.255105    7.050227374E-3
+ 0.334716    2.947342116E-3
+ 0.439172    5.879985634E-3
+ 0.576226    1.799305901E-2
+ 0.756052    4.640357196E-2
+ 0.991995    9.759383649E-2
+ 1.30157     0.167227194
+ 1.70776     0.233451143
+ 2.24070     0.265515089
+ 2.93996     0.246029273
+ 3.85745     0.185732767
+ 5.06126     0.114233799
+ 6.64074     5.724075064E-2
+ 8.71314     2.336790785E-2
+ 11.4323     7.772107143E-3
+ 15.0        2.106020227E-3
+PARASOL_35_bin
+PARASOL_35_bin
+2
+1.      0.000001
+2.986   0.13237
+35
+  0.00
+  2.60
+  3.46
+  5.20
+  6.93
+  8.66
+ 10.39
+ 12.12
+ 15.57
+ 17.30
+ 21.61
+ 25.90
+ 30.19
+ 42.94
+ 59.57
+ 67.65
+ 75.52
+ 83.12
+ 97.18
+108.94
+117.05
+120.00
+125.00
+130.00
+135.00
+140.00
+147.50
+154.30
+165.00
+167.70
+170.00
+172.50
+175.00
+177.50
+180.00
+
+
+
+2 1 6 0            ! key,key_RD,keyEL,keySUB
+0.05 15.0 0.2 4.    ! rgmin, rgmax, wlmin, wlmax
+1.33 1.6 0.001 0.1  ! xnmin,xnmax,xkmin,xkmax
+2 1 2               ! NWL number of wavelengths (key=0,NWL=1), RN(NWL) and RK(NWL); LB1 & LE1
+0.44 0.55           ! WL(NWL) wavelengths
+1.56 1.56           ! RN(NWL)
+0.0029 0.0029       ! RK(NWL)
+1 3 1               ! key_SD, ID, NMD
+0.04 0.4 0.12 0.4 0.6 2.32 ! CM(1),SM(1),RMM(1)(mkm),CM(2),SM(2),RMM(2)(mkm)Solar-Vil. (key = 0)
+2 0.04 0.4          ! KC (key = 1or2), RC2(KC) (key = 2)
+0.04  0.12  0.4  0.4   2.32  0.6 ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+0.4   2.32  0.6  0.04  0.12  0.4 ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+22                           ! KN
+ 5.00000E-2  3.636746667E-3
+ 6.56037E-2  1.27650341E-2
+ 8.60768E-2  2.825477906E-2
+ 0.112939    3.943919018E-2
+ 0.148184    3.472143412E-2
+ 0.194429    1.932093687E-2
+ 0.255105    7.050227374E-3
+ 0.334716    2.947342116E-3
+ 0.439172    5.879985634E-3
+ 0.576226    1.799305901E-2
+ 0.756052    4.640357196E-2
+ 0.991995    9.759383649E-2
+ 1.30157     0.167227194
+ 1.70776     0.233451143
+ 2.24070     0.265515089
+ 2.93996     0.246029273
+ 3.85745     0.185732767
+ 5.06126     0.114233799
+ 6.64074     5.724075064E-2
+ 8.71314     2.336790785E-2
+ 11.4323     7.772107143E-3
+ 15.0        2.106020227E-3
+KERNEL_n22_bin1
+KERNEL_n22_bin2
+2                  ! KR    from Oleg's paper             
+1.0     1.        
+2.986   1.        
+181                       ! KM
+0.                        ! ANGLE(KM)
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.
+20.
+21.
+22.
+23.
+24.
+25.
+26.
+27.
+28.
+29.
+30.
+31.
+32.
+33.
+34.
+35.
+36.
+37.
+38.
+39.
+40.
+41.
+42.
+43.
+44.
+45.
+46.
+47.
+48.
+49.
+50.
+51.
+52.
+53.
+54.
+55.
+56.
+57.
+58.
+59.
+60.
+61.
+62.
+63.
+64.
+65.
+66.
+67.
+68.
+69.
+70.
+71.
+72.
+73.
+74.
+75.
+76.
+77.
+78.
+79.
+80.
+81.
+82.
+83.
+84.
+85.
+86.
+87.
+88.
+89.
+90.
+91.
+92.
+93.
+94.
+95.
+96.
+97.
+98.
+99.
+100.
+101.
+102.
+103.
+104.
+105.
+106.
+107.
+108.
+109.
+110.
+111.
+112.
+113.
+114.
+115.
+116.
+117.
+118.
+119.
+120.
+121.
+122.
+123.
+124.
+125.
+126.
+127.
+128.
+129.
+130.
+131.
+132.
+133.
+134.
+135.
+136.
+137.
+138.
+139.
+140.
+141.
+142.
+143.
+144.
+145.
+146.
+147.
+148.
+149.
+150.
+151.
+152.
+153.
+154.
+155.
+156.
+157.
+158.
+159.
+160.
+161.
+162.
+163.
+164.
+165.
+166.
+167.
+168.
+169.
+170.
+171.
+172.
+173.
+174.
+175.
+176.
+177.
+178.
+179.
+180.
+*********************
+c **************************************************************** c
+c **                                                            ** c
+c ** INPUT:                                                     ** c
+c **                                                            ** c 
+c **   key  = 0 - calculate opt.characteristics from original   ** c
+c **              kernels 'Rke...'                              ** c
+c **          1 - read original kernels, create WL kernels      ** c
+c **              and save them in dirname_N  and calculate     ** c
+c **              opt.characteristics                           ** c
+c **          2 - read WL kernels and calculate                 ** c
+c **              opt.characteristics                           ** c
+c **   key_RD =1 - volume mixture of spheroids                  ** c
+c **           2 - surface area  mixture of spheroids           ** c
+c **                                                            ** c
+c **   keyEL=  1 - calculate F11                                ** c
+c **           2 - F11,F12                                      ** c
+c **           3 - F11,F12,F22                                  ** c
+c **           4 - F11,F12,F22,F33                              ** c
+c **           5 - F11,F12,F22,F33,F34                          ** c
+c **           6 - F11,F12,F22,F33,F34,F44                      ** c
+c **   keyPRN=0 - do not print test and warning information     ** c
+c **                                                            ** c
+c **   rgmin,rgmax &                                            ** c 
+c **   wlmin,wlmax - min,max radii and wlmin,wlmax wavelengths  ** c
+c **                 that are used to recalculate grid radii for** c
+c **                 fixed kernels. New input file              ** c
+c **                'grid1.dat.new' will be created if key=1    ** c
+c **                 or key_org=1. Use key_grid1 to choose      ** c
+c **                 'grid1.dat' or 'grid1.dat.new' will be read** c
+c **                 for further calculations                   ** c  
+c **   xnmin,xnmax &                                            ** c
+c **   xkmin,xkmax - min,max parts of refractive index to be    ** c
+c **                 used to calculate WL kernels (key=1)       ** c
+c **   NWL  - number of wavelengths (key=0,NWL=1)               ** c
+c **          (NWL(key=2)=NWL(key=1))                           ** c
+c **   LB1 & LE1 - indices of wavelengths (work with key=2)     ** c
+c **               from 1:NWL (NWL for kernels pre calculated   ** c
+c **               with key=1)                                  ** c
+c **   WL(NWL)   - wavelengths                                  ** c
+c **   RN(NWL)   - real part of the refractive index            ** c
+c **   RK(NWL)   - imaginary part of the refractive index       ** c
+c **   KC        - number size distributions (LogNormal)        ** c
+c **               (key=1or2)                                   ** c
+c **   RC(KC),XRM(KC),XSM(KC) size distribution function        ** c
+c **                         (LogNormal) parameters:            ** c
+c **   RC   - concentration                                     ** c 
+c **   XRM  - median radius                                     ** c
+c **   XSM  - standard deviation                                ** c
+c **   key_SD=0 - read Size Distribution table (dV/dlnR)        ** c
+c **         =1 - calculate Size Distribution for grid radii    ** c
+c **              using Log Normal function                     ** c
+c **   ID    - dimension of d(...)/dlnR                         ** c
+c **       = 0 - number                                         ** c
+c **       = 1 - radius                                         ** c
+c **       = 2 - area                                           ** c
+c **       = 3 - volume                                         ** c
+c **   NMD   - number of modes (up to 2)                        ** c
+c **   KN   - number of grid radii                              ** c
+c **   grid(KN) - grid radii                                    ** c
+c **   SD(KN)   - size distribution for grid radii              ** c
+c **   (CM(i),SM(i),RMM(i),i=1,NMD) - size distribution (key=0) ** c
+c **   function (LogNormal) parameters:                         ** c
+c **                         CM - concentration                 ** c
+c **                         SM - standard deviation            ** c
+c **                         RMM - median radius                ** c
+c **   distname_O - original kernel directory name              ** c
+c **   distname_N - WL kernel directory name                    ** c
+c **   KR  - number of axis ratios                              ** c
+c **   R(KR)  - grid axis ratios                                ** c
+c **   RD(KR) - axis ratio distribution for grid axis ratios    ** c
+c **   KM   - number of scattering angles                       ** c
+c **   ANGLE(KM) - scattering angles                            ** c
+c **                                                            ** c
+c ** OUTPUT:                                                    ** c
+c **                                                            ** c
+c **   ext     - extinction                                     ** c
+c **   albedo  - albedo                                         ** c
+c **   f... - scattering matrix elements                        ** c
+c **************************************************************** c
+25                  ! KR    from Oleg's paper             
+0.3349  0.13237        0.066185    
+0.3669  0.13005        0.065025
+0.4019  0.12727        0.063635
+0.4403  0.1241         0.06205  
+0.4823  0.11744        0.05872
+0.5283  0.1067         0.05335
+0.5787  0.095525       0.0477625
+0.6339  0.085906       0.042953
+0.6944  0.080641       0.0403205
+0.7607  0.             0.
+0.8333  0.             0.
+0.9129  0.             0.
+1.      0.             0.
+1.0954  0.             0.
+1.2     0.             0.
+1.3145  0.             0.
+1.44    0.080641       0.0403205
+1.5774  0.085906       0.042953
+1.728   0.095525       0.0477625
+1.8929  0.1067         0.05335
+2.0736  0.11744        0.05872
+2.2715  0.1241         0.06205
+2.4883  0.12727        0.063635
+2.7258  0.13005        0.065025
+2.986   0.13237        0.066185
+
+25                  ! KR    from Oleg's paper             
+0.3349  0.066185    
+0.3669  0.065025
+0.4019  0.063635
+0.4403  0.06205  
+0.4823  0.05872
+0.5283  0.05335
+0.5787  0.0477625
+0.6339  0.042953
+0.6944  0.0403205
+0.7607  0.
+0.8333  0.
+0.9129  0.
+1.      0.
+1.0954  0.
+1.2     0.
+1.3145  0.
+1.44    0.0403205
+1.5774  0.042953
+1.728   0.0477625
+1.8929  0.05335
+2.0736  0.05872
+2.2715  0.06205
+2.4883  0.063635
+2.7258  0.065025
+2.986   0.066185
+
+22 0.3637E-02 0.1277E-01 0.2825E-01 0.3944E-01 0.3472E-01 0.1932E-01 0.7050E-02 0.2947E-02 0.5880E-02 0.1799E-01 0.4640E-01 0.9759E-01 0.1672E+00 0.2335E+00 0.2655E+00 0.2460E+00 0.1857E+00 0.1142E+00 0.5724E-01 0.2337E-01 0.7772E-02 0.2106E-02    ! KC (key = 1or2), RC2(KC) (key = 2)
+1.  5.00000E-2  0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  6.56037E-2  0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  8.60768E-2  0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.112939    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.148184    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.194429    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.255105    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.334716    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.439172    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.576226    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.756052    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.991995    0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  1.30157     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  1.70776     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  2.24070     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  2.93996     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  3.85745     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  5.06126     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  6.64074     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  8.71314     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  11.4323     0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  15.0        0.1358   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+
+1.  5.00000E-2  0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  6.56037E-2  0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  8.60768E-2  0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.112939    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.148184    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.194429    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.255105    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.334716    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.439172    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.576226    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  0.756052    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  0.991995    0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  1.30157     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  1.70776     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  2.24070     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  2.93996     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  3.85745     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  5.06126     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  6.64074     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  8.71314     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+1.  11.4323     0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1)   
+1.  15.0        0.2716   ! RC1(NMD,KC) XRM(NMD,KC) XSM(NMD,KC)  (1:NMD)  (key = 1) 
+2
+1.0     1.   
+2.986   1.        

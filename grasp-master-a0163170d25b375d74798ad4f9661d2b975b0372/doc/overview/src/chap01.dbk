@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd">
+
+<chapter xmlns="http://docbook.org/ns/docbook" 
+         xmlns:xl="http://www.w3.org/1999/xlink"
+         xml:id="chap01">
+    <title>Introduction</title>
+
+    <para>
+        This document provides an introductive description of GRASP
+        software package for general user. At the same time, it is expected that the 
+        users interested in the package is familiar with the field of atmospheric remote 
+        sensing and has, at least, basic of understanding of the problematic. The document
+        does not include the details description of scientific algorithm. The 
+        relevant scientific content can be found in publication following the 
+        citations provided in the text below. This document does not include the
+        elaborated technical details either (for developers). That information is expected
+        to be found from GRASP technical documentation provided on line 
+        (<link xl:href="http://www.grasp-open.com/tech-doc/">www.grasp-open.com/tech-doc</link>).  
+        This description is aimed to explain how to handle the software package 
+        and orient the qualified user regarding actions needed for adapting the 
+        software to a specific application and for contributing into evolution 
+        and the improvement of the GRASP software and overall concept. Additionally,
+        for extra services such us code adaptations, specific developments
+        or code optimization for specfic purposes, GRASP SAS company can 
+        be contacted (<link xl:href="http://www.grasp-sas.com">www.grasp-sas.com/tech-doc</link>).
+    </para>
+    <sect1>
+        <title>Scientific background and heritage</title>
+        <para>
+            GRASP (Generalized Retrieval of Aerosol and Surface Properties), 
+            introduced by Dubovik et al. (2014), is the first unified algorithm 
+            and a software package developed for retrieving atmospheric properties
+            from wide variety of remote sensing observations including satellite,
+            ground-based and airborne passive and active measurements of 
+            atmospheric radiation and their combinations.
+        </para>
+        <para>
+            GRASP relies on the heritage of retrieval advances 
+            [Dubovik and King, 2000, Dubovik et al. 2000, 2002a,b. 2009] 
+            implemented for AERONET (see Holben et al., 1998) a worldwide network
+            of over 300 radiometer sites that generate the data used to validate 
+            nearly all satellite observations of atmospheric aerosols. The AERONET
+            retrievals derive detailed aerosol properties (Dubovik et al. 2002a) 
+            including absorption, providing information of vital importance for 
+            reducing uncertainty in assessments of climate change. The concept of
+            GRASP was proposed in the recent efforts by Dubovik et al. (2011) to
+            develop the algorithm for improved aerosol retrieval from the French
+            Space Agency’s PARASOL imager (see Tanre et al. 2011) over bright surfaces
+            like deserts where high surface reflectance dwarfs the signal from 
+            aerosols. In these efforts several principles used in AERONET retrieval
+            concept were used and applied for PARASOL satellite retrieval. Then, 
+            in return, several new features of newly developed PARASOL retrieval 
+            by Dubovik et al. (2011) appeared to be useful for improving ground-based 
+            measurements interpretation by combining observations of radiometer 
+            and lidar [Lopatin et al., 2013]. Finally, the structure of the algorithm
+            was adapted to convenient and efficient application with diverse 
+            remote sensing observations and their combinations.
+        </para>
+    </sect1>
+    <sect1>
+        <title>Generalized aspects of GRASP algorithm and package</title>
+        <para>
+            The important feature of the GRASP is that both the core scientific 
+            algorithms and the whole package are based on several generalization 
+            principles with the idea of developing a scientifically rigorous, 
+            versatile, practically efficient, transparent, and accessible algorithm.
+        </para>
+        <para>
+            There several “layers” of complimentary generalizations used in the 
+            GRASP designs, that are outlined in the diagram shown in <xref linkend="figure1" />
+        </para>
+        <para>
+            <figure xml:id="figure1">
+                <title>Structure of the GRASP software package</title>
+                <imagedata fileref="figures/GRASP_description/image1.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+            </figure>
+        </para>
+        <sect2>
+            <title>Generalized approach of numerical inversion</title>
+            <para>
+                The corner stone of the GRASP is the used approach for implementing
+                numerical inversion that is highly elaborated and is highly abstract
+                in the sense that, in principle, it not linked in any way to 
+                specific measurement type. Here are the key elements of the 
+                inversion approach employed the GRASP:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            The main part of inversion concept formulated for inverting
+                            abstract "indirect measurements" independent of the physical nature;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            The used mathematical inversion formalism (Dubovik 2004, 
+                            Dubovik et al.  2011, etc.) complementarily unites advantages
+                            of a variety of practical inversion approaches of known 
+                            mathematical inversion procedures;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            The specific numerical procedure is defined as Multi-Term 
+                            LSM (Least Square Method) statistically optimized fitting 
+                            of "positively redundant
+                            <footnote>
+                                <para>
+                                    i.e. formally redundant in the sense that the 
+                                    number of inverted observations exceeds the 
+                                    number of retrieved parameters
+                                </para>
+                            </footnote>
+                            set of observations". The Multi-Term LSM follows general
+                            Least Square concept, however it explicitly considers 
+                            all inverted data (both the actual observations and used
+                            a priori constraints) as "observations" known with different
+                            levels of accuracies. As a result the concept is highly 
+                            practical:
+                            <orderedlist numeration="loweralpha">
+                                <listitem>
+                                    <para>
+                                        it benefits from numerous known fundamental 
+                                        developments relevant to LSM (i.e. no need to
+                                        invent new fundamental principles of optimized
+                                        inversion);
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        the methodology is highly suitable for inverting
+                                        combined data (both observations and a priori 
+                                        constraints).
+                                    </para>
+                                </listitem>
+                            </orderedlist>
+                        </para>
+                    </listitem>
+                </itemizedlist> 
+            </para>
+        </sect2>
+        <sect2>
+            <title>Practical generalization of the algorithm for atmospheric remote sensing</title>
+            <para>
+                Though the numerical inversion is highly abstract of the measurement
+                type, and can be applied to any indirect measurements, the GRASP 
+                package was developed for application in the field of atmospheric
+                remote sensing with pursuing the following generalization ideas:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Making GRASP instrument-independent algorithm, as a 
+                            result GRASP can be applied to ground-based, satellite
+                            and airborne, passive and active measurements and the
+                            spectral, angular, polarization, etc. specifications can
+                            be changed flexibility within applicability of GRASP 
+                            "forward model";
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Implementing "forward modeling" simulation of the 
+                            measurements using accurate approach with minimum 
+                            dependence of the algorithm on the a priori assumptions
+                            (atmospheric radiation is calculated on-line with not
+                            using look-up-tables);
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Applicable to the combined data from the same instrument:
+                            i.e., the data can be obtained both in the exactly same
+                            location at different observation times or/and at 
+                            different (e.g. neighboring) locations at the same or
+                            different time moments;
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Applicable to multi-instrument retrievals, i.e. both
+                            single observations and extended data sets of observations
+                            by different instrument can be processed simultaneously
+                            (in highly synergetic way). Since the remote sensing
+                            observation (especially from space) are often composing
+                            images, Dubovik et al. (2011) proposed improving retrieval
+                            using <emphasis role="bold">multi-pixel</emphasis>
+                            principle when a group of pixels is inverted simultaneously
+                            under additional inter-pixel constraints. This principle
+                            was realized using rigorous approach of inversion 
+                            optimization (see more explanations below and related
+                            articles) and may significantly improve the retrieval
+                            results. However, applying multi-pixel retrieval requires
+                            specific elaborated data preparation. Therefore, the 
+                            additional "service" pieces of software were developed
+                            as part GRASP package that significantly simplified 
+                            practical application of the GRASP multi-pixel approach
+                            to real observations. Thus, GRASP realizes processing of 
+                            global (or regional) time series of instrument observations
+                            as illustrated in <xref linkend="figure2" />. The entire 
+                            image is divided by user into geo-located grid composed 
+                            by rather large data sets that called "tiles", each tile
+                            is composed by "segments"  groups of adjacent segments 
+                            of the observation "pixels". Correspondingly, GRASP can
+                            be set to process: (i) only one pixel, (ii) only one 
+                            segment, (iii) tiles, i.e group of segments.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <figure xml:id="figure2">
+                    <title>Structure of the GRASP software package</title>
+                    <imagedata fileref="figures/GRASP_description/image2.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+                </figure>
+            </para>
+        </sect2>
+        <sect2>
+            <title>Adaptation of GRASP for general user</title>
+            <para>
+                In addition to elaborated theoretical concepts (numerical inversion
+                approach, modeling of atmospheric radiation and image processing 
+                approach) GRASP was designed with idea of making convenient "research
+                tool" that can be used by user possessing general knowledge in 
+                remote sensing retrieval but not familiar with the details of source
+                code routines. Therefore, the following user oriented principles 
+                were realized in GRASP:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Possibility for user to construct custom retrieval using
+                            GRASP, i.e. user set up the inversion of the same observations
+                            in many different ways by choosing:
+                            <itemizedlist>
+                                <listitem>
+                                    different sets (in terms of number and type) of the retrieved and a priori known (and/or even fixed) parameters;
+                                </listitem>
+                                <listitem>
+                                    different approaches in making forward simulations;
+                                </listitem>
+                                <listitem>
+                                    different assumption for noise distribution in the inverted data;
+                                </listitem>
+                                <listitem>
+                                    different sets of a priori constraints for retrieved parameters;
+                                </listitem>
+                                <listitem>
+                                    different standard procedures used in numerical inversion (i.e. for solving linear systems);
+                                </listitem>
+                                <listitem>
+                                    different approaches for data processing: inverting each pixel independently, inverting large images (see Fig.2), combining available independent co-incident and/or co-located observations;
+                                </listitem>
+                                <listitem>
+                                    etc.
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            User independence of specific program realization, 
+                            because the management of GRASP inputs is done using
+                            command lines, not symbols, that represent the "names" of parameters or procedures and can be understood by a user that has general knowledge in the atmospheric retrieval.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Concept of GRASP software package</title>
+        <para>
+            The key component of the software package is the
+            <emphasis role="bold">scientific GRASP core</emphasis>
+            . This is a code that implements actual inversion of remote sensing observations
+            following the retrieval procedure assumed by scientific algorithm. Initially,
+            <emphasis role="bold">the scientific GRASP core</emphasis>
+            was used directly for processing observations by reading the input data 
+            from files and providing retrieval output on the screen or/and in the file.
+            However, in order to achieve the highly optimized processing of large volumes
+            of data, such as, satellite observations, the scientific GRASP core has 
+            been complemented by the development of
+            <emphasis role="bold">the control unit</emphasis>
+            – software package that manages the preparations of observations, 
+            implementation of actual retrievals by scientific code and the output of
+            results. The utilization of the control unit allows an implementation of
+            the retrieval without generating intermediate input/output files and a 
+            number of other optimizations of applying scientific core
+            <emphasis role="bold">.</emphasis>
+            In other words the communication of user or processing routing with the 
+            scientific core passes via the control unit as illustrated in <xref linkend="figure3" />.
+        </para>
+        <para>
+            <figure xml:id="figure3">
+                <title>Structure of the GRASP software package</title>
+                <imagedata fileref="figures/GRASP_description/image3.png" scalefit="1" width="100%" contentdepth="100%" align="center" />
+            </figure>
+        </para>
+        <para>
+            Such set up of the scientific package was designed for simplifying the
+            processing of large satellite images by GRASP. Thus, while original GRASP
+            scientific core could provide the retrieval for only one pixel or segment
+            (see <xref linkend="figure2" />), using the control unit manages application
+            of retrieval to the groups of segments (a tile). This approach provided a 
+            number of conveniences in employing GRASP for processing the actual 
+            observations. Indeed, now the GRASP can read directly a raw data archive
+            and perform data preparation on the fly and without generating intermediate
+            files. The code can manage large volumes of data: the control unit organizes
+            input data, implements multiple calls of the scientific core, obtains the
+            output for all archive, may manage the display of the results, etc.
+        </para>
+        <para>
+            In addition, the development of the control unit resulted in many convenient
+            features of managing scientific core not only at the level of processing of the
+            tiles of observation data and also in implementing the retrievals of the
+            segments and even single pixels. For example, the input texts files were
+            replaced by settings files in YAML format that significantly improved the
+            user-interface:
+            <itemizedlist>
+                <listitem>
+                    all inputs can be provided a standard format instead of a specific
+                    one developed only for GRASP;
+                </listitem>
+                <listitem>
+                    the settings are driven by the text commands that can be organized
+                    in any order (only the content is important);
+                </listitem>
+                <listitem>
+                    information redundancy was decreased because structure and size 
+                    of arrays are automatically adapted to the input defined by user.
+                </listitem>
+                <listitem>
+                    All settings are auto-documented: every parameter has a description
+                    directly in the code that can be viewed calling help command.
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            It should be noted that the current version of the GRASP software conserves
+            the possibility of running scientific core without using the control unit.
+            While this option may be of some interest for the GRASP developers, 
+            the utilization of entire package (including control unit) is the recommended
+            approach for general GRASP users.
+        </para>
+    </sect1>
+</chapter>
+      
+      
+      

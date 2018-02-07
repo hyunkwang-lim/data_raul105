@@ -1,0 +1,51 @@
+#content .tabs,
+#content .tabs2,
+#content .tabs3 {
+    background: #FFDBB9;
+    width: 100%;
+    z-index: 101;
+    font-size: 13px;
+}
+
+#content .tabs2 {
+    font-size: 10px;
+}
+#content .tabs3 {
+    font-size: 9px;
+}
+
+#content .tablist {
+    margin: 0;
+    padding: 0;
+    display: table;
+}
+
+#content .tablist li {
+    float: left;
+    display: table-cell;
+    line-height: 36px;
+    list-style: none;
+}
+
+#content .tablist a {
+    display: block;
+    padding: 0 20px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    outline: none;
+}
+
+#content .tabs3 .tablist a {
+    padding: 0 10px;
+}
+
+#content .tablist a:hover {
+    background-color: #FFC387;
+    color: #545353;
+}
+
+#content .tablist li.current a {
+    background-color: #F28920;
+    color: white;
+}

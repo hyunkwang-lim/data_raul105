@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE chapter SYSTEM "common_entities.dtd">
+
+<chapter xmlns="http://docbook.org/ns/docbook" 
+  xmlns:xl="http://www.w3.org/1999/xlink"
+  xml:id="chap02">
+  <title>The SDATA format</title>
+  &DRAFT;
+  <sect1>
+    <title>Introduction</title>
+     
+    <para>
+    First paragraph.
+    </para>
+    
+    <para>
+      <table frame="all"><title>Un tableau</title>
+      <tgroup cols="6" align="left" colsep="1" rowsep="1">
+	<thead>
+	  <row>
+	    <entry>Nom</entry>
+	    <entry>Prenom</entry>
+	    <entry>Telephone</entry>
+	    <entry>EMail</entry>
+	    <entry>Num Service</entry>
+	    <entry>Role</entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row>
+	    <entry>Kay</entry>   
+	    <entry>Michael</entry>
+	    <entry>0122334455</entry>
+	    <entry>mk@saxon.org</entry>
+	    <entry>1</entry>
+	    <entry>XSLT and Co</entry>
+	    </row><row>
+	    <entry>Stallman</entry>
+	    <entry>Richard</entry>
+	    <entry>1111111111</entry>
+	    <entry/>
+	    <entry>2</entry>
+	    <entry>Fondateur du projet GNU et de la FSF</entry>
+	  </row>
+	</tbody>
+      </tgroup>
+      </table>
+      
+    </para>
+	
+    <para>Liste à puces</para>
+    <itemizedlist>
+      <listitem><para>item a</para></listitem>
+      <listitem><para>item b</para></listitem>
+    </itemizedlist>
+
+    <para>Liste ordonnée</para>
+    <orderedlist>
+      <listitem><para>item a</para></listitem>
+      <listitem><para>item b</para></listitem>
+    </orderedlist>
+  
+    <para>Exemple de sortie console :</para>
+    <screen>
+$ cat bin/makeHtml.sh
+java -classpath /home/kpu/xsl/saxon/lib/saxon.jar 
+com.icl.saxon.StyleSheet -o $2 
+$1 /home/kpu/xsl/stylesheets/docbook-xsl-1.60.1/xhtml/docbook.xsl
+$ makeHtml.sh selection-elts.docbook selection-elts.html
+$
+    </screen>
+
+    <para>Un exemple de note.</para> 
+    
+    <note><title>Envoi de message</title>
+    <para>L'instruction suivante :</para>
+    <programlisting>
+      hello.exprimeToi();
+    </programlisting>
+    <para>Se lit de plusieurs façons, en voici deux équivalentes :</para>
+    <orderedlist>
+      <listitem><para>
+   <emphasis>J'invoque la méthode</emphasis> <literal>exprimeToi</literal> de l'objet référencé par la variable <literal>hello</literal>.
+      </para></listitem>
+      <listitem><para>
+	<emphasis>J'envoie le message </emphasis> <literal>exprimeToi</literal> à l'objet référencé par la variable <literal>hello</literal>.
+      </para></listitem>
+    </orderedlist>
+    </note>
+    
+    <para>Un exemple de remarque importante.</para> 
+    <important><title>Brevet logiciel</title>
+    <para>La créativité en danger. S'informer <ulink url="http://swpat.ffii.org/index.fr.html#intro">ici</ulink>.</para>
+    </important>
+
+  </sect1>
+</chapter>
+

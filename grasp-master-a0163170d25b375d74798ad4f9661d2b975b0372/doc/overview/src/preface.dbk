@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE preface SYSTEM "common_entities.dtd">
+
+<preface xmlns="http://docbook.org/ns/docbook" 
+  xmlns:xl="http://www.w3.org/1999/xlink"
+  xml:id="foreword">
+  
+  <title>Foreword</title>
+
+  <section>
+    <title>Caveat</title>
+    <para>
+        This document is under development and the date to be finish is not expected.
+        To write a documentation is a hard task and usually the code evolves quicker 
+        than the documentation. We are doing a big effort to document all details of the
+        software. While the project will mature, new chapters will be draft
+        and old ones will be revised in order to stay as close as
+        possible in sync with the actual realization. Please, keep tuned and check
+        regularly the news in this document.
+        Also, remember that the source code of the documentation is in same repository
+        that GRASP software allowing everybody to contribute to this document. If you
+        are interesting in contribute making corrections or adding new text we
+        will be very glad of receive your suggestions. In that case, please, have a 
+        look to the technical documentation to know how to contribute 
+        (<link xl:href="http://www.grasp-open.com/tech-doc/">www.grasp-open.com/tech-doc</link>).
+    </para>
+  </section>
+    
+  <section>
+    <title>What you will find in this document</title>
+    <itemizedlist>
+        <listitem>
+            A general vision of scientific algorithm
+        </listitem> 
+        <listitem>
+            A general vision of software arquitecure
+        </listitem>
+        <listitem>
+            How to compile the code including description of prerequisites
+        </listitem>
+        <listitem>
+            How to run the code including a general vision about how it works
+        </listitem>
+        <listitem>
+            References to other documents, especially to the detailed
+            documentation of the major components of the system when it is
+            available or scientific papers.
+        </listitem>    
+    </itemizedlist>
+  </section>
+  
+  <section>
+    <title>What you won't find in this document</title>
+    <itemizedlist>
+      <listitem>
+          A detailed description of the scientific algorithm, one
+          refers to &DUBOVIK2011; for more information.
+      </listitem>
+      <listitem>
+          A detailed description of each module, routine or
+          data structure being part of the production system. For developers,
+          technical documentation is provided as another documentation. Please, 
+          have a look to: <link xl:href="http://www.grasp-open.com/tech-doc/">www.grasp-open.com/tech-doc</link>
+      </listitem>
+      <listitem>
+          A documentation of all extensions of the software. Each extension
+          has to have its own documentation. Here it is described only main
+          GRASP package and only if an extension provide a very important feature
+          which is widely used it can be described here exceptionally.
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Versioning</title>
+    <para>
+        GRASP software born many years ago. In 2013, the developement team started the tag releases
+        with following format vXX.YY.ZZ where XX is the number of major version, YY is 
+        the number of minor version and ZZ the revision. This nomenclature system is valid 
+        from first stable version (v1.0.0) that at the moment of write this lines it does not
+        exist yet. Beta versions (v0.YY.ZZ) will follow more flexible rules of naming and
+        it each name will be decided by the developer team taking into account if a version
+        introduce new important features, break the compatibility with previous versions, etc.
+        For most curious people, first GRASP tag was v0.2.0 and it was not public yet. The
+        code started to be publicly available from the version v0.7.0 and regularly, developer
+        team releases the latest developments with really innovative features.
+    </para>
+  </section>
+</preface>
+
+ 

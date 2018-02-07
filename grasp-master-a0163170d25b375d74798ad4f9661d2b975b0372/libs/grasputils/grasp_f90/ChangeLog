@@ -1,0 +1,25 @@
+2014-01-09 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* version 0.2.6:
+	* get_sizeof_time_t.c: the previous fix was not sufficient for 64-bit machines. Fixed that.
+
+2014-01-06 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* version 0.2.5:
+	* get_sizeof_time_t.c: fixed a warning on a printf statement
+
+2013-11-30 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* version 0.2.4:
+	* upgrade to allow for installation of several installations of
+	the library depending on the Fortran compiler. The library will
+	be installed in different subfolders depending on the compiler.
+
+2013-11-30 F. Ducos <fabrice.ducos@univ-lille1.fr>
+	* version 0.2.3:
+	* mod_c_utils.f90: all c_int variables converted to c_size_t
+	* mod_time_utils.f90: convert_string_to_time now makes a local
+	copy of its fortran string argument for safe passing to C.
+
+2013-11-29 F. Ducos <fabrice.ducos@univ-lille1.fr>
+        * version 0.2.2: the size of time_t is not anymore assumed.
+	It is determined by the tool get_sizeof_time_t at build time.
+
+
